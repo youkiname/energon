@@ -11,6 +11,7 @@ use App\Http\Controllers\TaskController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\TaskController as PlannerController;
 use App\Http\Controllers\AlertController;
 use App\Http\Controllers\SettingController;
@@ -22,41 +23,6 @@ use App\Models\Event;
 
 Route::get('/', function () {
     return redirect('/companies');
-});
-
-Route::get('/alpine', function () {
-    //$company = Company::find(1)->first();
-
-    /*$task = Task::find(1)->first();
-    $task->deadline_at = Carbon::createFromFormat('d.m.Y', '11.04.2020');
-    $task->save();*/
-
-    //$event->attachable()->associate($contact);
-    //$event->save();
-
-    //$string = 'ООО ООО "ГЕНЕРАЛЬНЫЙ ПРОЕКТ"';
-
-    //$string = mb_substr($string, (mb_stripos($string, '"')+1), -1);
-
-    //$utcOffset = 'UTC+3';
-
-    //$timezone = new DateTimeZone($utcOffset);
-
-    //ddd($timezone);
-
-    //$timezone = timezone_name_from_abbr(null, $utcOffset * 3600, TRUE);
-    //$dateTime = new DateTime();
-    //$dateTime->setTimeZone(new DateTimeZone($timezone));
-    //$timezone = $dateTime->format('T');
-
-    //$user = auth()->user();
-    //$user->role_id = 1;
-    //$user->save();
-
-    //return $user->role->name;
-    $date = '2021-11-15 15:42';
-    $datetime = Carbon::createFromFormat('Y-m-d H:i', $date)->toDateTimeString();
-    return $datetime;
 });
 
 Route::middleware(['auth'])->group(function () {
@@ -104,6 +70,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/users/trash', [UserController::class, 'trash'])->name('users.trash');
         Route::post('/users/{user}/restore', [UserController::class, 'restore'])->name('users.restore');
         Route::resource('users', UserController::class);
+
+        Route::resource('roles', RoleController::class);
 
         Route::resource('tasks', PlannerController::class);
 

@@ -7,6 +7,7 @@ use App\Models\Task;
 use App\Models\User;
 use App\Models\TaskStatus;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class TaskController extends Controller
 {
@@ -37,7 +38,8 @@ class TaskController extends Controller
         $datetime = null;
         if($request->deadline) {
             $str = $request->deadline . ' ' . $request->deadline_time;
-            $datetime = Carbon::createFromFormat('Y-m-d H:i', $str)->toDateTimeString();
+            // $datetime = Carbon::createFromFormat('Y-m-d H:i', $str)->toDateTimeString();
+            $datetime = Carbon::now();
         }
 
         $task = Task::create([

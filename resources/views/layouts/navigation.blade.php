@@ -16,8 +16,8 @@
         </ul>
         <div class="profile_a">
             <div class="profile-name">
-                <b>Username</b>
-                <span>RoleName</span>
+                <b>{{ auth()->user()->name }}</b>
+                <span>{{ auth()->user()->role }}</span>
             </div>
             <div class="profile-image sys-profile-image">
                 <x-profile-image :photo="Auth::user()->photo" />
