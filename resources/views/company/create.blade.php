@@ -1,11 +1,11 @@
-<x-app-layout title="Новый контрагент" wrapper_css="wrapper-create">
+<x-app-layout title="Добавление контрагента" wrapper_css="wrapper-create">
 
     <x-slot name="header">
         <div class="content-box__back-line">
             <div class="container">
                 <a href="{{ route('companies.index') }}" class="back">Назад</a>
                 <div class="form-contragent-top">
-                    <div class="title">Новый контрагент</div>
+                    <div class="title">Добавление контрагента</div>
                 </div>
             </div>
         </div>
@@ -53,6 +53,10 @@
                         <div class="sys-form-company_col">
                             <label for="legal">Правовая форма</label>
                             <input type="text" id="legal" name="legal" value="{{ old('legal') }}">
+                        </div>
+                        <div class="sys-form-company_col">
+                            <label for="city">Город</label>
+                            <input type="text" id="city" name="city" value="{{ old('city') }}">
                         </div>
                         <div class="sys-form-company_col">
                             <label for="address">Адрес</label>
@@ -180,10 +184,59 @@
                             value="{{ old('equipment') }}">
                         </div>
                     </div>
-                    <div class="sys-form-company-buttons">
-                        <button class="sbtn sbtn-blue" type="submit">Добавить организацию</button>
-                        <button class="sbtn sbtn-white" type="button">Отмена</button>
-                        <div class="message-form message-error message-inline" style="display: none" id="errMessage"></div>
+                    <div class="personal-form">
+                        <div class="personal-form__top">
+                            <b>Сотрудник # 1</b>
+                            <a href="javascript:void(0)" class="add-card"><span>Добавить сотрудника</span><i></i></a>
+                        </div>
+                        <div class="personal-box">
+                            <div class="contragent-form__item">
+                                <label for="">Должность</label>
+                                <input type="text">
+                            </div>
+                            <div class="contragent-form__item">
+                                <label for="">Имя</label>
+                                <input type="text">
+                            </div>
+                            <div class="contragent-form__item">
+                                <label for="">Фамилия</label>
+                                <input type="text">
+                            </div>
+                            <div class="contragent-form__item">
+                                <label for="">Отчество</label>
+                                <input type="text">
+                            </div>
+                        </div>
+
+                        <div class="personal-phones">
+                            <div class="contragent-form__item">
+                                <label for="">Рабочий телефон</label>
+                                <input type="tel">
+                            </div>
+                            <div class="contragent-form__item">
+                                <label for="">Рабочий телефон # 2</label>
+                                <input type="tel">
+                                <a href="#" class="remove"></a>
+                            </div>
+                            <a href="javascript:void(0)" class="add-card"><span>Добавить</span><i></i></a>
+                        </div>
+
+                        <div class="personal-mails">
+                            <div class="contragent-form__item">
+                                <label for="">Рабочий e-mail</label>
+                                <input type="email">
+                            </div>
+                            <a href="javascript:void(0)" class="add-card"><span>Добавить</span><i></i></a>
+                        </div>
+                        
+                        <div class="form-btns sys-form-company-buttons">
+                            <button type="submit" class="btn-blue">Добавить</button>
+                            <button class="sbtn sbtn-white" type="button">Отмена</button>
+                            <div class="message-form message-ok">Контрагент успешно добавлен</div>
+                            <div class="message-form message-error">Ошибка</div>
+                            <div class="message-form message-lock">Фирма занята</div>
+                            <div class="message-form message-error message-inline" style="display: none" id="errMessage"></div>
+                        </div>
                     </div>
                 </form>
             </div>

@@ -5,10 +5,10 @@
             <div class="container">
                 <h1>Контрагенты</h1>
                 <a href="{{ route('companies.create') }}" class="sys-header-button">
-                    <span>Добавить организацию</span><img src="img/plus-blue.svg" alt="">
+                    <span>Добавить контрагента</span><img src="img/plus-blue.svg" alt="">
                 </a>
                 <div class="filters">
-                    <livewire:company.search />
+                    @include('livewire.company.search')
                     <div class="filters-right">
                         <div class="select-box">
                             <span>Статус:</span>
@@ -20,8 +20,7 @@
                                 @endforeach
                             </select>
                         </div>
-
-                        <livewire:company.abc />
+                        @include('livewire.company.abc')
                     </div>
                 </div>
             </div>
