@@ -6,9 +6,7 @@
         </h4>
 
         <form action="{{ route('admin.users.store') }}" method="post" enctype="multipart/form-data">
-
             @csrf
-
             <div class="mb-3 row">
                 <label for="userName" class="col-sm-2 col-form-label">Имя пользователя:</label>
                 <div class="col-sm-5 ">
