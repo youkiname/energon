@@ -1,6 +1,9 @@
-<x-admin-layout title="Создание пользователя">
+@extends('layouts.admin')
 
-    <div class="app">
+@section('title', "Создание пользователя")
+
+@section('content')
+<div class="app">
         <h4 class="mb-4">
             <a href="{{ route('admin.users.index') }}">Пользователи</a> / Создать пользователя
         </h4>
@@ -102,5 +105,4 @@
         </form>
 
     </div>
-
-</x-admin-layout>
+@endsection

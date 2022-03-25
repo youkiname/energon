@@ -1,5 +1,8 @@
-<x-admin-layout title="Детальная информация о пользователе {{ $user->name }}">
+@extends('layouts.admin')
 
+@section('title', "Детальная информация о пользователе {{ $user->name }}")
+
+@section('content')
     <div class="app">
         <h4 class="mb-4">
             <a href="{{ route('admin.users.index') }}">Пользователи</a> / {{ $user->name }}
@@ -38,4 +41,4 @@
 
     </div>
 
-</x-admin-layout>
+@endsection

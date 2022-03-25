@@ -1,5 +1,8 @@
-<x-admin-layout title="Новая задача">
+@extends('layouts.admin')
 
+@section('title', "Новая задача")
+
+@section('content')
     <div class="app">
         <h4 class="mb-4">
             <a href="{{ route('admin.tasks.index') }}">Задачи</a> / Новая задача
@@ -107,4 +110,4 @@
 
     </div>
 
-</x-admin-layout>
+@endsection

@@ -1,16 +1,8 @@
-<x-app-layout title="Настройки" wrapper_css="wrapper-vn">
+@extends('layouts.app')
 
-    <x-slot name="header">
-        <div class="content-box__back-line">
-            <div class="container-compatibility">
-                <a href="{{ route('companies.index') }}" class="back">Назад</a>
-                <div class="form-contragent-top">
-                    <div class="title">Настройки</div>
-                </div>
-            </div>
-        </div>
-    </x-slot>
+@section('title', "Настройки")
 
+@section('content')
     <div class="container-compatibility">
         @if (session()->has('success'))
             <div class="settings-success">
@@ -42,5 +34,4 @@
 
         <link rel="stylesheet" href="{{ asset('css/settings.css') }}">
     </div>
-
-</x-app-layout>
+@endsection

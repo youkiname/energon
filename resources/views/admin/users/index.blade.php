@@ -1,5 +1,8 @@
-<x-admin-layout title="Список пользователей">
+@extends('layouts.admin')
 
+@section('title', "Список пользователей")
+
+@section('content')
     <div class="app">
         <h4 class="mb-4">
             Пользователи
@@ -57,4 +60,4 @@
         </table>
     </div>
 
-</x-admin-layout>
+@endsection

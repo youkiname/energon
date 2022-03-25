@@ -1,5 +1,8 @@
-<x-admin-layout title="Задачи">
+@extends('layouts.admin')
 
+@section('title', "Задачи")
+
+@section('content')
     <div class="app">
         <h4 class="mb-4">
             Задачи
@@ -92,4 +95,4 @@
 
     </div>
 
-</x-admin-layout>
+@endsection

@@ -1,5 +1,8 @@
-<x-app-layout title="Уведомления" wrapper_css="wrapper-vn">
+@extends('layouts.app')
 
+@section('title', "Уведомления")
+
+@section('content')
     <x-slot name="header">
         <div class="content-box__back-line">
             <div class="container-compatibility">
@@ -48,5 +51,4 @@
 
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     </div>
-
-</x-app-layout>
+@endsection

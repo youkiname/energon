@@ -1,5 +1,8 @@
-<x-app-layout title="Новый контакт" wrapper_css="wrapper-create">
+@extends('layouts.app')
 
+@section('title', "Новый контакт")
+
+@section('content')
     <x-slot name="header">
         <div class="content-box__back-line">
             <div class="container">
@@ -27,5 +30,4 @@
             }
         </script>
     </x-slot>
-
-</x-app-layout>
+@endsection

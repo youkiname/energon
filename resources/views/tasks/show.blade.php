@@ -1,13 +1,8 @@
-<x-app-layout title="Задача: {{ $task->name }}" wrapper_css="wrapper-vn">
+@extends('layouts.app')
 
-    <x-slot name="header">
-        <div class="content-box__back-line">
-            <div class="container">
-                <a href="{{ url()->previous() }}" class="back">Назад</a>
-            </div>
-        </div>
-    </x-slot>
+@section('title', "Задача: {{ $task->name }}")
 
+@section('content')
     <div class="content-box__info-item">
         <div class="container">
             <div class="message-box">
@@ -110,29 +105,4 @@
             </div>
         </div>
     </div>
-
-    <x-slot name="scripts">
-        <script>
-            autosize(document.querySelectorAll('textarea'));
-
-            function removeTask() {
-                Swal.fire({
-                    title: 'Вы уверены?',
-                    text: 'Задача будет перемещена в корзину.',
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Удалить',
-                    cancelButtonText: 'Отмена'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        $('#removeTask').submit();
-                    }
-                });
-            }
-
-        </script>
-    </x-slot>
-
-</x-app-layout>
+@endsection

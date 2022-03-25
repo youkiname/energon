@@ -1,5 +1,8 @@
-<x-app-layout title="Детальный просмотр: {{ $company->name }}" wrapper_css="wrapper-vn">
+@extends('layouts.app')
 
+@section('title', "Детальный просмотр: {{ $company->name }}")
+
+@section('content')
     <x-slot name="header">
         <div class="content-box__back-line">
             <div class="container">
@@ -106,4 +109,4 @@
         </script>
     </x-slot>
 
-</x-app-layout>
+@endsection

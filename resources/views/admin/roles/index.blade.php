@@ -1,5 +1,8 @@
-<x-admin-layout title="Список ролей">
+@extends('layouts.admin')
 
+@section('title', "Список ролей")
+
+@section('content')
     <div class="app">
         <h4 class="mb-4">
             Роли
@@ -40,4 +43,4 @@
         </table>
     </div>
 
-</x-admin-layout>
+@endsection

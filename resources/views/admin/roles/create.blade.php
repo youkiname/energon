@@ -1,14 +1,15 @@
-<x-admin-layout title="Создание роли">
+@extends('layouts.admin')
 
+@section('title', "Создание роли")
+
+@section('content')
     <div class="app">
         <h4 class="mb-4">
             <a href="{{ route('admin.roles.index') }}">Роли</a> / Создать роль
         </h4>
 
         <form action="{{ route('admin.roles.store') }}" method="post" enctype="multipart/form-data">
-
             @csrf
-
             <div class="mb-3 row">
                 <label for="roleName" class="col-sm-2 col-form-label">Название:</label>
                 <div class="col-sm-5 ">
@@ -24,9 +25,6 @@
                     <button type="submit" class="btn btn-primary">Добавить роль</button>
                 </div>
             </div>
-
         </form>
-
     </div>
-
-</x-admin-layout>
+@endsection

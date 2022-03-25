@@ -1,5 +1,8 @@
-<x-app-layout title="Редактировать: {{ $contact->name }}" wrapper_css="wrapper-create">
+@extends('layouts.app')
 
+@section('title', "Редактировать: {{ $contact->name }}")
+
+@section('content')
     <x-slot name="header">
         <div class="content-box__back-line">
             <div class="container">
@@ -29,4 +32,4 @@
         </script>
     </x-slot>
 
-</x-app-layout>
+@endsection

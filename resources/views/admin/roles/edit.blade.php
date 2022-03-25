@@ -1,10 +1,12 @@
-<x-admin-layout title="Детальная информация о роли {{ $role->name }}">
+@extends('layouts.admin')
 
+@section('title', "Детальная информация о роли {{ $role->name }}")
+
+@section('content')
     <div class="app">
         <h4 class="mb-4">
             <a href="{{ route('admin.roles.index') }}">Роли</a> / {{ $role->name }}
         </h4>
-
         <ul class="nav nav-tabs">
             <li class="nav-item">
                 <a class="nav-link text-danger" data-toggle="confirmation" data-title="Вы уверены?"
@@ -20,7 +22,6 @@
                 </form>
             </li>
         </ul>
-
         <form action="{{ route('admin.roles.update', ['role' => $role]) }}" method="post" enctype="multipart/form-data">
             @csrf
             @method('put')
@@ -39,11 +40,7 @@
                     <button type="submit" class="btn btn-primary">Сохранить</button>
                 </div>
             </div>
-
         </form>
-
-        
-
     </div>
 
-</x-admin-layout>
+@endsection

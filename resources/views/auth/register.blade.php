@@ -1,5 +1,5 @@
 @extends('layouts.guest')
-@section('pagetitle', 'Регистрация')
+@section('title', 'Регистрация')
 
 @section('content')
     <div class="container">

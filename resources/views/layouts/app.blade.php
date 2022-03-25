@@ -3,10 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="shortcut icon" href="img/favicon/favicon.ico" type="image/x-icon">
-    <link rel="icon" sizes="16x16" href="img/favicon/favicon-16x16.png" type="image/png">
-    <link rel="icon" sizes="32x32" href="img/favicon/favicon-32x32.png" type="image/png">
+    <base href="{{ url('/') }}" />
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <meta name="description" content="Описание">
+    <meta name="keywords" content="Ключевые слова">
+    <link rel="shortcut icon" href="./img/favicon/favicon.ico" type="image/x-icon">
+    <link rel="icon" sizes="16x16" href="./img/favicon/favicon-16x16.png" type="image/png">
+    <link rel="icon" sizes="32x32" href="./img/favicon/favicon-32x32.png" type="image/png">
+    
     <link rel="apple-touch-icon-precomposed" href="img/favicon/apple-touch-icon-precomposed.png">
     <link rel="apple-touch-icon" href="img/favicon/apple-touch-icon.png">
     <link rel="apple-touch-icon" sizes="57x57" href="img/favicon/apple-touch-icon-57x57.png">
@@ -20,35 +24,42 @@
     <link rel="apple-touch-icon" sizes="167x167" href="img/favicon/apple-touch-icon-167x167.png">
     <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon-180x180.png">
     <link rel="apple-touch-icon" sizes="1024x1024" href="img/favicon/apple-touch-icon-1024x1024.png">
+
     <link rel="stylesheet" href="css/vendor.min.css">
     <link rel="stylesheet" href="css/style.css">
-    <title>@yield('title') - {{ config('app.name') }}</title>
-</head>
-<body>
-<div class="wrapper">
-    <div class="wrap-form">
-        <a href="{{ url('/') }}" class="logo">
-            <img src="{{ asset('img/logo-forms.png') }}" alt="">
-        </a>
-        @yield('content')
-    </div>
-</div>
+    <title>@yield('title', config('app.name'))</title>
 
-<script src="{{ asset('js/vendor.min.js') }}"></script>
-<script src="{{ asset('js/main.js') }}"></script>
-<script>
-    $('body').on('click', '.pass-show', function(e) {
-        e.preventDefault();
-        if ($(this).hasClass('active')) {
-            $(this).removeClass('active');
-            $(this).closest('div').find('input[type="text"]').attr('type', 'password');
-        } else {
-            $(this).addClass('active');
-            $(this).closest('div').find('input[type="password"]').attr('type', 'text');
-        }
-    });
-</script>
-@yield('scripts')
+<body>
+    <div class="wrapper">
+        @include('components.navigation')
+
+        <div class="content-box">
+            <div class="content-box__back-line">
+                <div class="container">
+                    <a href="{{ url()->previous() }}" class="back">Назад</a>
+                </div>
+            </div>
+            @yield('content')
+        </div>
+
+        <footer class="footer">
+            <div class="container"></div>
+        </footer>
+    </div>
+
+    <script src="js/vendor.min.js"></script>
+    <script src="js/main.js"></script>
+    {{ $scripts ?? '' }}
+
+    <script>
+        window.addEventListener('swal:modal', event => {
+            Swal.fire({
+                title: event.detail.message,
+                text: event.detail.text,
+                icon: event.detail.type,
+            })
+        });
+    </script>
 
 </body>
 </html>

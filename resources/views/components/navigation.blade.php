@@ -14,30 +14,32 @@
                 Статистика
             </x-nav-link>
         </ul>
-        <div class="profile_a">
+        <div class="profile">
             <div class="profile-name">
                 <b>{{ auth()->user()->name }}</b>
                 <span>{{ auth()->user()->role->name }}</span>
             </div>
-            <div class="profile-image sys-profile-image">
+            <div class="profile-image">
                 <x-profile-image :photo="Auth::user()->photo" />
             </div>
             <div class="profile-hide">
-                <a href="{{ route('alerts.index') }}" class="note-link">Уведомления</a>
-                <a href="{{ route('contacts.index') }}" class="contact-book">Контакты</a>
+                <a href="{{ route('contacts.index') }}" class="lk-link">Личный кабинет</a>
                 <a href="{{ route('settings.index') }}" class="settings-link">Настройки</a>
+                <a href="{{ route('alerts.index') }}" class="note-link">Уведомления</a>
                 @if(auth()->user()->role_id == 1)
-                <a href="{{route('admin.index')}}" class="lk-link sys-admin-link">Управление</a>
+                <a href="{{ route('admin.index') }}" class="lk-link sys-admin-link">Управление</a>
                 @endif
                 <a href="{{ route('logout') }}" class="log-out-link"
                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                    Выйти
+                   Выход
                 </a>
 
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                     @csrf
                 </form>
             </div>
+            
         </div>
     </div>
+
 </header>

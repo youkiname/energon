@@ -1,5 +1,8 @@
-<x-app-layout title="Редактирование: {{ $company->name }}" wrapper_css="wrapper-edit">
+@extends('layouts.app')
 
+@section('title', "Редактирование: {{ $company->name }}")
+
+@section('content')
     <x-slot name="header">
         <div class="content-box__back-line">
             <div class="container">
@@ -192,5 +195,5 @@
             $('.datepick').datepicker({});
         </script>
     </x-slot>
-
-</x-app-layout>
+    
+@endsection
