@@ -14,8 +14,6 @@ class ContactController extends Controller
 {
     public function index()
     {
-        // TODO: Оптимизировать tailwind.css
-
         return view('contact.index');
     }
 

@@ -53,21 +53,4 @@ class CompanyCreateRequest extends FormRequest
             'company_potentiality' => 'потенциал',
         ];
     }
-
-    /*public function withValidator($validator)
-    {
-        $validator->after(function ($validator) {
-            $newCompanyData = $validator->validated();
-            $newCompany = Company::where('ssn', $newCompanyData['ssn'])->firstOr(['*'], function () {
-                return false;
-            });
-            if($newCompany) {
-                if($newCompany->user == $this->user()) {
-                    $validator->errors()->add('duplicate', 'Duplicated company for user');
-                } elseif(!empty($newCompany->user)) {
-                    $validator->errors()->add('duplicate', 'Duplicated company for another user');
-                }
-            }
-        });
-    }*/
 }

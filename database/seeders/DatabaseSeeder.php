@@ -8,6 +8,7 @@ use App\Models\CompanyType;
 use App\Models\CompanyPurchase;
 use App\Models\CompanyStatus;
 use App\Models\Potentiality;
+use App\Models\Role;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,6 +19,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        Role::create([
+            'name' => 'admin'
+        ]);
+        Role::create([
+            'name' => 'role2'
+        ]);
+        Role::create([
+            'name' => 'role3'
+        ]);
+
         CompanyType::create([
             'name' => "Тип контрагента 1",
         ]);
@@ -39,13 +50,13 @@ class DatabaseSeeder extends Seeder
         ]);
 
         CompanyStatus::create([
-            'name' => "Статус 1",
+            'name' => "Проработка",
         ]);
         CompanyStatus::create([
-            'name' => "Статус 2",
+            'name' => "В работе",
         ]);
         CompanyStatus::create([
-            'name' => "Статус 3",
+            'name' => "В ожидании",
         ]);
 
         Potentiality::create([
@@ -57,5 +68,5 @@ class DatabaseSeeder extends Seeder
         Potentiality::create([
             'name' => "Низкий",
         ]);
-    }
+    } 
 }
