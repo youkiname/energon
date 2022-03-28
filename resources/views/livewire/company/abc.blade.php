@@ -1,5 +1,4 @@
 <div x-data="{letter: ''}" x-init="$watch('letter', value => changeLetter(value))">
-    {{-- A good traveler has no fixed plans and is not intent upon arriving. --}}
     <div class="btn-abc"></div>
     <div class="alfavite">
         <div class="alfavite-box">
