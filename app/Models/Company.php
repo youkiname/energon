@@ -11,6 +11,10 @@ class Company extends Model
 
     public $timestamps = false;
 
+    protected $attributes = array(
+        'description' => '',
+    );
+
     protected $fillable = [
         'name',
         'ssn',
