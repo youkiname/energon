@@ -6,7 +6,8 @@
         <a href="{{ route('companies.create') }}" class="btn-new-event"><span>Добавить контрагента</span><img src="img/plus-blue.svg" alt=""></a>
         <div class="filters">
             <div class="search">
-                <input type="search" id="search" placeholder="Поиск">
+                <input type="search" id="search" placeholder="Поиск"
+                wire:model="searchValue">
             </div>
             <div class="filters-right">
                 <div class="select-box">
@@ -23,7 +24,7 @@
                 <div class="alfavite">
                     <div class="alfavite-box">
                         @foreach($letters as $char)
-                        <a href="#">{{ $char }}</a>
+                        <a href="javascript: void(0);" onclick="setSearchValue('{{$char}}')">{{ $char }}</a>
                         @endforeach
                     </div>
                 </div>
@@ -63,6 +64,11 @@
             Livewire.emit('changeStatusId', $("#company_status").val())
         });
     });
+
+    function setSearchValue(value) {
+        $("#search").val(value)
+        Livewire.emit('changeSearchValue', value)
+    }
     
 </script>
 </div>

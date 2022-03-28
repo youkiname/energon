@@ -12,9 +12,14 @@ class CompanyList extends Component
     public $companies = [];
     public $statuses = [];
     public $statusId = 0;
+    public $searchValue = "";
+
     private $allStatusId = 0;
 
-    protected $listeners = ['changeStatusId' => 'changeStatusId'];
+    protected $listeners = [
+        'changeStatusId' => 'changeStatusId',
+        'changeSearchValue' => 'changeSearchValue',
+    ];
 
     public function mount()
     {
@@ -29,17 +34,27 @@ class CompanyList extends Component
     }
 
     public function refreshCompanies() {
-        if ($this->statusId == $this->allStatusId) {
-            $this->companies = Company::orderBy('name', 'ASC')->get();
-            return;
+        $searchTerm = '%' . $this->searchValue . '%';
+        $sqlQuery = Company::whereRaw("UPPER(name) LIKE ?", ['%' . mb_strtoupper($searchTerm) . '%']); 
+
+        if ($this->statusId != $this->allStatusId) {
+            $sqlQuery = $sqlQuery->where('company_status_id', $this->statusId);
         }
-        $this->companies = Company::where('company_status_id', $this->statusId)
-        ->orderBy('name', 'ASC')
-        ->get();
+
+        $this->companies = $sqlQuery->orderBy('name', 'ASC')->get();
     }
 
     public function changeStatusId($id) {
         $this->statusId = intval($id);
+        $this->refreshCompanies();
+    }
+
+    public function changeSearchValue($value) {
+        $this->searchValue = $value;
+        $this->refreshCompanies();
+    }
+
+    public function updatedSearchValue($value) {
         $this->refreshCompanies();
     }
 }
