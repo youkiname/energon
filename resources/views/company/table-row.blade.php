@@ -1,6 +1,6 @@
 <div class="table-tr">
     <div class="table-td">
-        <b>ОАО</b>
+        <b>{{ $company->legal }}</b>
         <span>{{ $company->name }}</span>
     </div>
     <div class="table-td">

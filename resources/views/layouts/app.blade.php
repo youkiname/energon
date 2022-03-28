@@ -27,8 +27,9 @@
 
     <link rel="stylesheet" href="css/vendor.min.css">
     <link rel="stylesheet" href="css/style.css">
+    @livewireStyles
     <title>@yield('title', config('app.name'))</title>
-
+</head>
 <body>
     <div class="wrapper">
         @include('components.navigation')
@@ -47,6 +48,7 @@
         </footer>
     </div>
 
+    @livewireScripts
     <script src="js/vendor.min.js"></script>
     <script src="js/main.js"></script>
     {{ $scripts ?? '' }}

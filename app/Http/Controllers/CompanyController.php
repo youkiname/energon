@@ -28,7 +28,7 @@ class CompanyController extends Controller
 
     public function index()
     {
-        return view('company.index', ['companies' => Company::all()]);
+        return view('company.index');
     }
 
     public function create()
