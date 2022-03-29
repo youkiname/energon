@@ -143,7 +143,14 @@ $(function () {
 
 });
 
+function isHidden(el) {
+    return (el.offsetParent === null)
+}
+
 $('.plans-request .btn-blue').click(function (e) {
+    if ($('.plans-request-form').is(":visible")) {
+        return
+    }
     e.preventDefault();
     $('.plans-request-info').hide();
     $('.plans-request-form').show();

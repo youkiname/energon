@@ -13,11 +13,6 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\TaskController as PlannerController;
 use App\Http\Controllers\AlertController;
 use App\Http\Controllers\SettingController;
-use App\Models\Company;
-use App\Models\City;
-use App\Models\Task;
-use App\Models\Comment;
-use App\Models\Event;
 
 Route::get('/', function () {
     return redirect('/companies');
@@ -49,7 +44,6 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/events/add', [EventController::class, 'store'])
         ->name('events.add');
 
-    Route::post('tasks/{task}/go', [TaskController::class, 'go'])->name('tasks.go');
     Route::resource('tasks', TaskController::class);
 
     Route::get('stats', function () {
