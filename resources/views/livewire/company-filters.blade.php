@@ -36,17 +36,17 @@
             </div>
         </div>
     </div>
-</div>
-<script>
-    document.addEventListener('DOMContentLoaded', function(){
-        $("#company_status").on('change', function() {
-            Livewire.emit('changeStatusId', $("#company_status").val())
+    <script>
+        document.addEventListener('DOMContentLoaded', function(){
+            $("#company_status").on('change', function() {
+                Livewire.emit('changeStatusId', $("#company_status").val())
+            });
         });
-    });
 
-    function setSearchValue(value) {
-        $("#search").val(value)
-        Livewire.emit('changeSearchValue', value)
-    }
-    
-</script>
+        function setSearchValue(value) {
+            $("#search").val(value)
+            Livewire.emit('changeSearchValue', value)
+        }
+    </script>
+</div>
+

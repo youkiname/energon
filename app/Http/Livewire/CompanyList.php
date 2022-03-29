@@ -30,7 +30,7 @@ class CompanyList extends Component
 
     public function refreshCompanies() {
         $searchTerm = '%' . $this->searchValue . '%';
-        $sqlQuery = Company::whereRaw("UPPER(name) LIKE ?", ['%' . mb_strtoupper($searchTerm) . '%']); 
+        $sqlQuery = Company::whereRaw("UPPER(name) LIKE ?", [mb_strtoupper($searchTerm)]); 
 
         if ($this->statusId != $this->allStatusId) {
             $sqlQuery = $sqlQuery->where('company_status_id', $this->statusId);
