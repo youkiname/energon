@@ -4,13 +4,10 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Company;
-use App\Models\CompanyStatus;
 
 class CompanyList extends Component
 {
-    public $letters = [];
     public $companies = [];
-    public $statuses = [];
     public $statusId = 0;
     public $searchValue = "";
 
@@ -23,9 +20,7 @@ class CompanyList extends Component
 
     public function mount()
     {
-        $this->letters = mb_str_split('АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ');
         $this->companies = Company::all();
-        $this->statuses = CompanyStatus::all();
     }
 
     public function render()
@@ -51,10 +46,6 @@ class CompanyList extends Component
 
     public function changeSearchValue($value) {
         $this->searchValue = $value;
-        $this->refreshCompanies();
-    }
-
-    public function updatedSearchValue($value) {
         $this->refreshCompanies();
     }
 }
