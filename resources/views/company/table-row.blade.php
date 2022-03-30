@@ -8,16 +8,16 @@
         <span>{{ $company->city }}</span>
     </div>
     <div class="table-td">
-        <b>Генеральный директор</b>
-        <span>Максимов Кадим Назимович</span>
+        <b>{{ $company->employee->position }}</b>
+        <span>{{ $company->employee->getFullName() }}</span>
     </div>
     <div class="table-td">
         <b>Рабочий телефон</b>
-        <span><a href="tel:+79102807901">+7 910 280 79 01</a></span>
+        <span><a href="tel:{{ $company->employee->phone->phone }}">{{ $company->employee->phone->phone }}</a></span>
     </div>
     <div class="table-td">
         <b>Рабочий e-mail</b>
-        <span><a href="mailto:f1981@rambler.ru">f1981@rambler.ru</a></span>
+        <span><a href="mailto:{{ $company->employee->email->email }}">{{ $company->employee->email->email }}</a></span>
     </div>
     <div class="table-td">
         <b>ИНН</b>
