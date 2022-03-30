@@ -28,7 +28,7 @@
         <span>{{ $company->companyType->name }}</span>
     </div>
     <div class="table-td">
-        <a href="javascript:void(0)" class="table-tr-btn"></a>
-        <a href="#" class="del">{{ $company->status->name }}</a>
+        <a href="#" class="table-tr-btn"></a>
+        <a href="{{ route('companies.show', ['company' => $company]) }}" class="del">{{ $company->status->name }}</a>
     </div>
 </div>
