@@ -29,7 +29,7 @@ class TaskController extends Controller
         $task = Task::create([
             'title' => $request->title,
             'description' => $request->description,
-            'priority' => 0,
+            'priority' => $request->input_priority,
             'date' => $date,
             'start_time' => $request->start_time,
             'end_time' => $request->end_time,

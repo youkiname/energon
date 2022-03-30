@@ -34,14 +34,14 @@
                             <div class="form-request__item">
                                 <label for="">Приоритет</label>
                                 <div class="priority-box">
-                                    <label class="priority priority-middle" for="middle">
-                                        <input type="radio" name="input-priorites" id="middle"> <span><i></i></span>
-                                    </label>
                                     <label class="priority priority-low" for="low">
-                                        <input type="radio" name="input-priorites" id="low"> <span><i></i></span>
+                                        <input type="radio" name="input_priority" id="low" value="0" checked> <span><i></i></span>
+                                    </label>
+                                    <label class="priority priority-middle" for="middle">
+                                        <input type="radio" name="input_priority" id="middle" value="1"> <span><i></i></span>
                                     </label>
                                     <label class="priority priority-high" for="high">
-                                        <input type="radio" name="input-priorites" id="high"> <span><i></i></span>
+                                        <input type="radio" name="input_priority" id="high" value="2"> <span><i></i></span>
                                     </label>
                                 </div>
                             </div>
@@ -69,7 +69,15 @@
                         <div class="title">{{ $day }}</div>
                         @foreach($dailyTasks as $task)
                         <div class="date-notes">
-                            <div class="date-note-item green">
+                            <div class="date-note-item 
+                            @if($task->priority == 0)
+                            green
+                            @elseif($task->priority == 1)
+                            yellow
+                            @else
+                            red
+                            @endif
+                            ">
                                 <div class="time">
                                     <div class="time-start">{{ $task->start_time }}</div>
                                     <div class="time-finish">{{ $task->end_time }}</div>
