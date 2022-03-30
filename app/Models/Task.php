@@ -19,7 +19,8 @@ class Task extends Model
         'title',
         'description',
         'priority',
-        'start_date',
-        'end_date'
+        'date',
+        'start_time',
+        'end_time'
     ];
 }

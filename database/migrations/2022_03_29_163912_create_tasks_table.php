@@ -18,8 +18,9 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
             $table->smallInteger('priority');
-            $table->dateTime('start_date');
-            $table->dateTime('end_date');
+            $table->date('date');
+            $table->time('start_time');
+            $table->time('end_time');
         });
     }
 

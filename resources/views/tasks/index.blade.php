@@ -28,14 +28,20 @@
                             </div>
                             <div class="form-request__item">
                                 <label for="description">Описание</label>
-                                <textarea name="" id="description" name="description"></textarea>
+                                <textarea id="description" name="description"></textarea>
                             </div>
                             <div class="form-request__item">
                                 <label for="">Приоритет</label>
                                 <div class="priority-box">
-                                    <label class="priority priority-middle" for="middle"><input type="radio" name="input-priorites" id="middle"> <span><i></i></span></label>
-                                    <label class="priority priority-low" for="low"><input type="radio" name="input-priorites" id="low"> <span><i></i></span></label>
-                                    <label class="priority priority-high" for="high"><input type="radio" name="input-priorites" id="high"> <span><i></i></span></label>
+                                    <label class="priority priority-middle" for="middle">
+                                        <input type="radio" name="input-priorites" id="middle"> <span><i></i></span>
+                                    </label>
+                                    <label class="priority priority-low" for="low">
+                                        <input type="radio" name="input-priorites" id="low"> <span><i></i></span>
+                                    </label>
+                                    <label class="priority priority-high" for="high">
+                                        <input type="radio" name="input-priorites" id="high"> <span><i></i></span>
+                                    </label>
                                 </div>
                             </div>
                             <div class="form-request__item">
@@ -57,14 +63,15 @@
             <div class="plans-box__right">
                 <a href="javascript:void(0)" class="add-card"><span>Добавить</span><i></i></a>
                 <div class="dates-plans scrollbar-outer">
+                @foreach($tasks as  $day=>$dailyTasks)
                     <div class="date-plan-item">
-                    @foreach($tasks as $task)
-                        <div class="title">16 Марта</div>
+                        <div class="title">{{ $day }}</div>
+                        @foreach($dailyTasks as $task)
                         <div class="date-notes">
                             <div class="date-note-item green">
                                 <div class="time">
-                                    <div class="time-start">{{ $task->start_date }}</div>
-                                    <div class="time-finish">{{ $task->end_date }}</div>
+                                    <div class="time-start">{{ $task->start_time }}</div>
+                                    <div class="time-finish">{{ $task->end_time }}</div>
                                 </div>
                                 <div class="date-note-desc">
                                     <div class="name-note">{{ $task->title }}</div>
@@ -72,8 +79,9 @@
                                 </div>
                             </div>
                         </div>
-                    @endforeach
+                        @endforeach
                     </div>
+                @endforeach
                 </div>
             </div>
         </div>
