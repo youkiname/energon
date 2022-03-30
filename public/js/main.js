@@ -156,6 +156,15 @@ $('.plans-request .btn-blue').click(function (e) {
     $('.plans-request-form').show();
 });
 
+$('.plans-box__right .add-card').click(function (e) {
+    if ($('.plans-request-form').is(":visible")) {
+        document.getElementById('new-task-form').submit()
+        return
+    }
+    $('.plans-request-info').hide();
+    $('.plans-request-form').show();
+});
+
 
 $('.new-event-box__top a').click(function (e) {
     e.preventDefault();

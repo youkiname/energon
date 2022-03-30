@@ -20,7 +20,8 @@
 
                     <div class="plans-request-form">
                         <div class="title">Добавить</div>
-                        <form action="{{ route('tasks.store') }}" method="POST" class="form-request" enctype="multipart/form-data">
+                        <form action="{{ route('tasks.store') }}" method="POST" 
+                        id="new-task-form" class="form-request" enctype="multipart/form-data">
                             @csrf
                             <div class="form-request__item">
                                 <label for="title">Заголовок</label>
