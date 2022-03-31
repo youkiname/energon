@@ -66,7 +66,6 @@ class CompanyController extends Controller
             'specification_number' => 0,
             'request_number' => '',
             'order_number' => '',
-            'order_date' => '',
             'order_sum' => 0,
             'manager_premium' => 0,
             'working_hours' => 0,
@@ -111,19 +110,7 @@ class CompanyController extends Controller
         $company->company_potentiality_id = $request->company_potentiality;
 
         $company->save();
-
-        CompanyDetails::where('company_id', $company->id)
-        ->update([
-            'contract_number' => $request->contract_number,
-            'specification_number' => $request->specification_number,
-            'request_number' => $request->request_number,
-            'order_number' => $request->order_number,
-            'order_date' => $request->order_date,
-            'order_sum' => $request->order_sum,
-            'manager_premium' => $request->manager_premium,
-            'working_hours' => $request->working_hours,
-            'equipment_type' => $request->equipment_type,
-        ]);
+        $this->updateDetails($request, $company);
 
         return redirect()->route('companies.show', ['company' => $company])->with([
             'success' => 'Организация успешно изменена.'
@@ -159,5 +146,17 @@ class CompanyController extends Controller
                 'email' => $email,
             ]);
         }
+    }
+
+    private function updateDetails(Request $request, Company $company) {
+        $updatingFields = [];
+        foreach($company->details->getAttributes() as $attribute => $value) {
+            if(!is_null($request->input($attribute))) {
+                $updatingFields[$attribute] = $request->input($attribute);
+            }
+        }
+
+        CompanyDetails::where('company_id', $company->id)
+        ->update($updatingFields);
     }
 }

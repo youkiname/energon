@@ -20,7 +20,7 @@ return new class extends Migration
             $table->integer('specification_number');
             $table->string('request_number');
             $table->string('order_number');
-            $table->date('order_date');
+            $table->date('order_date')->nullable();
             $table->integer('order_sum');
             $table->integer('manager_premium');
             $table->integer('working_hours');
