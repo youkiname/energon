@@ -8,6 +8,7 @@ use App\Models\Contact;
 use Illuminate\Http\Request;
 use App\Models\City;
 use App\Models\Company;
+use App\Models\CompanyDetails;
 use App\Models\CompanyPurchase;
 use App\Models\CompanyStatus;
 use App\Models\CompanyType;
@@ -59,6 +60,19 @@ class CompanyController extends Controller
             'address' => $request->address,
         ]);
 
+        CompanyDetails::create([
+            'company_id' => $newCompany->id,
+            'contract_number' => '',
+            'specification_number' => 0,
+            'request_number' => '',
+            'order_number' => '',
+            'order_date' => '',
+            'order_sum' => 0,
+            'manager_premium' => 0,
+            'working_hours' => 0,
+            'equipment_type' => ''
+        ]);
+
         $this->storeEmployee($request, $newCompany);
 
         return redirect()->route('companies.show', ['company' => $newCompany])->with([
@@ -74,12 +88,46 @@ class CompanyController extends Controller
 
     public function edit(Company $company)
     {
-        return view('company.edit', ['company' => $company]);
+        $this->templateData['company'] = $company;
+        return view('company.edit', $this->templateData);
     }
 
     public function update(Request $request, Company $company)
     {
-        //
+        $request->validate([
+            'ssn' => ['required', 'string', 'max:13'],
+            'city' => ['required', 'string'],
+            'address' => ['required', 'string'],
+        ]);
+
+        $company->ssn = $request->ssn;
+        $company->city = $request->city;
+        $company->address = $request->address;
+        $company->description = $request->description;
+
+        $company->company_type_id = $request->company_type;
+        $company->company_purchase_id = $request->company_purchase;
+        $company->company_status_id = $request->company_status;
+        $company->company_potentiality_id = $request->company_potentiality;
+
+        $company->save();
+
+        CompanyDetails::where('company_id', $company->id)
+        ->update([
+            'contract_number' => $request->contract_number,
+            'specification_number' => $request->specification_number,
+            'request_number' => $request->request_number,
+            'order_number' => $request->order_number,
+            'order_date' => $request->order_date,
+            'order_sum' => $request->order_sum,
+            'manager_premium' => $request->manager_premium,
+            'working_hours' => $request->working_hours,
+            'equipment_type' => $request->equipment_type,
+        ]);
+
+        return redirect()->route('companies.show', ['company' => $company])->with([
+            'success' => 'Организация успешно изменена.'
+        ]);
     }
 
     public function destroy($id)

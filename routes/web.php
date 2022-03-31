@@ -20,24 +20,8 @@ Route::get('/', function () {
 
 Route::middleware(['auth'])->group(function () {
     
-
-    Route::get('/companies/check-available', [CompanyController::class, 'check'])
-        ->middleware(['auth'])->name('companies.check');
-
     Route::resource('companies', CompanyController::class)
         ->middleware(['auth']);
-
-    Route::get('companies/{company}/contacts', [CompanyController::class, 'contacts'])
-        ->middleware(['auth'])->name('companies.contacts');
-
-    Route::get('companies/{company}/tasks', [CompanyController::class, 'tasks'])
-        ->middleware(['auth'])->name('companies.tasks');
-
-    Route::get('companies/{company}/bundle', [CompanyController::class, 'bundle'])
-        ->name('companies.bundle');
-
-    Route::post('companies/{company}/bundle', [CompanyController::class, 'binding'])
-        ->name('companies.binding');
 
     Route::resource('contacts', ContactController::class);
 

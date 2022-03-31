@@ -46,7 +46,7 @@
                         </a>
                         <div class="btn-el-items">
                             <a href="#" class="btn-el btn-del"></a>
-                            <a href="#" class="btn-el btn-edit"></a>
+                            <a href="{{ route('companies.edit', ['company'=>$company]) }}" class="btn-el btn-edit"></a>
                         </div>
                     </div>
 
@@ -94,7 +94,7 @@
                     </a>
                     <div class="btn-el-items">
                         <a href="#" class="btn-el btn-del"></a>
-                        <a href="#" class="btn-el btn-edit"></a>
+                        <a href="{{ route('companies.edit', ['company'=>$company]) }}" class="btn-el btn-edit"></a>
                     </div>
                 </div>
             </div>
@@ -104,39 +104,39 @@
             <div class="elem-line__content">
                 <div>
                     <span>№ Договора</span>
-                    <b>48-654321</b>
+                    <b>{{ $company->details->contract_number }}</b>
                 </div>
                 <div>
                     <span>№ Спецификации</span>
-                    <b>678</b>
+                    <b>{{ $company->details->specification_number }}</b>
                 </div>
                 <div>
                     <span>№ Заявки</span>
-                    <b>26П-УК72УЕ</b>
+                    <b>{{ $company->details->request_number }}</b>
                 </div>
                 <div>
                     <span>№ Заказа</span>
-                    <b>876340-7923</b>
+                    <b>{{ $company->details->order_number }}</b>
                 </div>
                 <div>
                     <span>Дата заказа</span>
-                    <b>10.03.2021</b>
+                    <b>{{ $company->details->order_date }}</b>
                 </div>
                 <div>
                     <span>Сумма заказов</span>
-                    <b>231</b>
+                    <b>{{ $company->details->order_sum }}</b>
                 </div>
                 <div>
                     <span>% Премии менеджера</span>
-                    <b>10</b>
+                    <b>{{ $company->details->manager_premium }}</b>
                 </div>
                 <div>
                     <span>Кол-во рабочих часов</span>
-                    <b>78</b>
+                    <b>{{ $company->details->working_hours }}</b>
                 </div>
                 <div>
                     <span>Тип оборудования</span>
-                    <b>Description</b>
+                    <b>{{ $company->details->equipment_type }}</b>
                 </div>
             </div>
             <div class="btn-more-box">
@@ -147,7 +147,7 @@
                 </a>
                 <div class="btn-el-items">
                     <a href="#" class="btn-el btn-del"></a>
-                    <a href="#" class="btn-el btn-edit"></a>
+                    <a href="{{ route('companies.edit', ['company'=>$company]) }}" class="btn-el btn-edit"></a>
                 </div>
             </div>
         </div>

@@ -28,6 +28,11 @@ class Company extends Model
         'description'
     ];
 
+    public function details()
+    {
+        return $this->hasOne(CompanyDetails::class);
+    }
+
     public function employee()
     {
         return $this->hasOne(Employee::class);
