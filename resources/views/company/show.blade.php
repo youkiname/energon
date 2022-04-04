@@ -263,7 +263,59 @@
             <div class="elem-item" id="tab_2">
                 <div class="elem-item-title">Сотрудники</div>
                 @include('company.employees-list', ['employees' => $company->employees])
+                <form action="{{ route('employee.store') }}" class="contragent-form" 
+                method="post" enctype="multipart/form-data" id="employee-form"
+                style="display: none;">
+                    @csrf
+                    @method('post')
+                    <input type="hidden" name="company_id" value="{{ $company->id }}">
 
+                    <div class="personal-form__top">
+                        <b>Новый сотрудник</b>
+                    </div>
+                    <div class="personal-box">
+                        <div class="contragent-form__item">
+                            <label for="employee_position">Должность</label>
+                            <input type="text" id="employee_position" name="employee_position">
+                        </div>
+                        <div class="contragent-form__item">
+                            <label for="employee_first_name">Имя</label>
+                            <input type="text" id="employee_first_name" name="employee_first_name">
+                        </div>
+                        <div class="contragent-form__item">
+                            <label for="employee_last_name">Фамилия</label>
+                            <input type="text" id="employee_last_name" name="employee_last_name">
+                        </div>
+                        <div class="contragent-form__item">
+                            <label for="employee_patronymic">Отчество</label>
+                            <input type="text" id="employee_patronymic" name="employee_patronymic">
+                        </div>
+                    </div>
+
+                    <div class="personal-phones" id="personal-phones">
+                        <div class="contragent-form__item">
+                            <label for="employee_phone">Рабочий телефон</label>
+                            <input type="tel" id="employee_phone" name="employee_phone[]">
+                        </div>
+                        <div class="contragent-form__item">
+                            <label for="employee_phone">Рабочий телефон # 2</label>
+                            <input type="tel" id="employee_phone" name="employee_phone[]">
+                            <a href="javascript:void(0)" class="remove"></a>
+                        </div>
+                        <a id="add-new-phone-btn" href="javascript:void(0)" class="add-card"><span>Добавить</span><i></i></a>
+                    </div>
+                    
+                    <div class="personal-mails" id="personal-mails">
+                        <div class="contragent-form__item">
+                            <label for="employee_email">Рабочий e-mail</label>
+                            <input type="email" id="employee_email" name="employee_email[]">
+                        </div>
+                        <a id="add-new-email-btn" href="javascript:void(0)" class="add-card"><span>Добавить</span><i></i></a>
+                    </div>
+                    <div class="form-btns">
+                        <button type="submit" class="btn-blue">Добавить</button>
+                    </div>
+                </div>
 
                 <div class="elem-item-title">Связанные организации</div>
                 <div class="elem-item-list">
@@ -517,4 +569,47 @@
         </div>
     </div>
 </div>
+<script>
+    var employeePhonesAmount = 2;
+    var employeeEmailsAmount = 1;
+
+
+    document.addEventListener('DOMContentLoaded', function(){
+        let addNewPhoneButton = document.getElementById('add-new-phone-btn');
+        addNewPhoneButton.onclick = function() {
+            employeePhonesAmount += 1;
+            $("#personal-phones").append(`
+            <div class="contragent-form__item">
+                <label for="employee_phone">Рабочий телефон #${employeePhonesAmount}</label>
+                <input type="tel" id="employee_phone" name="employee_phone[]">
+                <a href="javascript:void(0)" class="remove"></a>
+            </div>
+            `);
+        };
+        
+        let addNewEmailButton = document.getElementById('add-new-email-btn');
+        addNewEmailButton.onclick = function() {
+            employeeEmailsAmount += 1;
+            $("#personal-mails").append(`
+            <div class="contragent-form__item">
+                <label for="employee_email">Рабочий e-mail #${employeeEmailsAmount}</label>
+                <input type="email" id="employee_email" name="employee_email[]">
+                <a href="javascript:void(0)" class="remove"></a>
+            </div>
+            `);
+        };
+
+        $(document).on('click', '.remove', function () {
+            $(this).parents('div.contragent-form__item').remove();
+        });
+
+        $('#add-new-employee-btn').click(function() {
+            if ($('#employee-form').is(":visible")) {
+                return
+            }
+            $('#employee-form').show();
+            $('#add-new-employee-btn').hide();
+        });
+    });
+</script>
 @endsection

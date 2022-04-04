@@ -23,6 +23,12 @@ class Employee extends Model
         return $this->first_name . ' ' . $this->last_name . ' ' . $this->patronymic;
     }
 
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
+    }
+
+
     public function phone()
     {
         return $this->hasOne(EmployeePhone::class);
@@ -33,6 +39,11 @@ class Employee extends Model
         return $this->hasMany(EmployeePhone::class);
     }
 
+    public function deletePhones()
+    {
+        EmployeePhone::where('employee_id', $this->id)->delete();
+    }
+
     public function email()
     {
         return $this->hasOne(EmployeeEmail::class);
@@ -41,5 +52,10 @@ class Employee extends Model
     public function emails()
     {
         return $this->hasMany(EmployeeEmail::class);
+    }
+
+    public function deleteEmails()
+    {
+        EmployeeEmail::where('employee_id', $this->id)->delete();
     }
 }

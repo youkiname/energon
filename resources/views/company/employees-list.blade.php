@@ -26,12 +26,17 @@
                 <span></span>
             </a>
             <div class="btn-el-items">
-                <a href="#" class="btn-el btn-del"></a>
-                <a href="#" class="btn-el btn-edit"></a>
+                <form action="{{ route('employee.destroy', ['employee' => $employee]) }}"
+                      method="post" id="employeeDelete{{ $employee->id }}">
+                    @csrf
+                    @method('DELETE')
+                    <a href="javascript:void(0)" class="btn-el btn-del" onclick="document.getElementById('employeeDelete{{ $employee->id }}').submit()"></a>
+                </form>
+                <a href="{{ route('employee.edit', ['employee'=>$employee]) }}" class="btn-el btn-edit"></a>
             </div>
         </div>
     </div>
     @endforeach
 
-    <a href="javascript:void(0)" class="add-card"><span>Добавить</span><i></i></a>
+    <a href="javascript:void(0)" class="add-card" id="add-new-employee-btn"><span>Добавить</span><i></i></a>
 </div>

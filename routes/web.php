@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\EventController;
@@ -22,6 +23,9 @@ Route::middleware(['auth'])->group(function () {
     
     Route::resource('companies', CompanyController::class)
         ->middleware(['auth']);
+
+    Route::resource('employee', EmployeeController::class)
+    ->middleware(['auth']);
 
     Route::resource('contacts', ContactController::class);
 

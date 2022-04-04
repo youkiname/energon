@@ -4,16 +4,6 @@
 
 @section('content')
 @include('components.decor-images')
-@if(Session::has('success'))
-    <div class="alert alert-success">
-        {{ Session::get('success') }}
-    </div>
-@endif
-@if(Session::has('error'))
-    <div class="alert alert-error">
-        {{ Session::get('error') }}
-    </div>
-@endif
 <div class="form-contragent-wrap">
     <div class="container">
         <form action="{{ route('companies.store') }}" method="post" 
