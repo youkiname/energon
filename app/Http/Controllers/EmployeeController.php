@@ -21,7 +21,8 @@ class EmployeeController extends Controller
             'position' => ['required', 'string'],
             'first_name' => ['required', 'string'],
             'last_name' => ['required', 'string'],
-            'patronymic' => ['required', 'string'],
+            'phone.*' => ['required', 'string'],
+            'email.*' => ['required', 'string'],
         ]);
 
         $employee->position = $request->position;
@@ -39,6 +40,14 @@ class EmployeeController extends Controller
     }
 
     public function store(Request $request) {
+        $request->validate([
+            'employee_position' => ['required', 'string'],
+            'employee_first_name' => ['required', 'string'],
+            'employee_last_name' => ['required', 'string'],
+            'employee_phones.*' => ['required', 'string'],
+            'employee_emails.*' => ['required', 'string'],
+        ]);
+
         $company = Company::find($request->input('company_id'));
         $employee = Employee::create([
             'company_id' => $company->id,
@@ -48,7 +57,7 @@ class EmployeeController extends Controller
             'patronymic' => $request->employee_patronymic,
         ]);
 
-        foreach($request->input('employee_phone') as $key => $phone) {
+        foreach($request->input('employee_phones') as $key => $phone) {
             EmployeePhone::create([
                 'company_id' => $company->id,
                 'employee_id' => $employee->id,
@@ -56,7 +65,7 @@ class EmployeeController extends Controller
             ]);
         }
 
-        foreach($request->input('employee_email') as $key => $email) {
+        foreach($request->input('employee_emails') as $key => $email) {
             EmployeeEmail::create([
                 'company_id' => $company->id,
                 'employee_id' => $employee->id,
@@ -71,6 +80,10 @@ class EmployeeController extends Controller
     public function destroy(Employee $employee)
     {
         $company = $employee->company;
+        if($company->employeesCount() == 1) {
+            return redirect()->route('companies.show', ['company' => $company])
+            ->withErrors(['msg' => 'Компания должна иметь хотя бы одного сотрудника']);
+        }
         $employee->delete();
         return redirect()->route('companies.show', ['company' => $company]);
     }

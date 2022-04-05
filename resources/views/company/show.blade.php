@@ -265,7 +265,7 @@
                 @include('company.employees-list', ['employees' => $company->employees])
                 <form action="{{ route('employee.store') }}" class="contragent-form" 
                 method="post" enctype="multipart/form-data" id="employee-form"
-                style="display: none;">
+                style="@if (!$errors->any()) display: none; @endif">
                     @csrf
                     @method('post')
                     <input type="hidden" name="company_id" value="{{ $company->id }}">
@@ -294,12 +294,12 @@
 
                     <div class="personal-phones" id="personal-phones">
                         <div class="contragent-form__item">
-                            <label for="employee_phone">Рабочий телефон</label>
-                            <input type="tel" id="employee_phone" name="employee_phone[]">
+                            <label for="employee_phones">Рабочий телефон</label>
+                            <input type="tel" name="employee_phones[]">
                         </div>
                         <div class="contragent-form__item">
-                            <label for="employee_phone">Рабочий телефон # 2</label>
-                            <input type="tel" id="employee_phone" name="employee_phone[]">
+                            <label for="employee_phones">Рабочий телефон # 2</label>
+                            <input type="tel" name="employee_phones[]">
                             <a href="javascript:void(0)" class="remove"></a>
                         </div>
                         <a id="add-new-phone-btn" href="javascript:void(0)" class="add-card"><span>Добавить</span><i></i></a>
@@ -307,8 +307,8 @@
                     
                     <div class="personal-mails" id="personal-mails">
                         <div class="contragent-form__item">
-                            <label for="employee_email">Рабочий e-mail</label>
-                            <input type="email" id="employee_email" name="employee_email[]">
+                            <label for="employee_emails">Рабочий e-mail</label>
+                            <input type="email" name="employee_emails[]">
                         </div>
                         <a id="add-new-email-btn" href="javascript:void(0)" class="add-card"><span>Добавить</span><i></i></a>
                     </div>
@@ -580,8 +580,8 @@
             employeePhonesAmount += 1;
             $("#personal-phones").append(`
             <div class="contragent-form__item">
-                <label for="employee_phone">Рабочий телефон #${employeePhonesAmount}</label>
-                <input type="tel" id="employee_phone" name="employee_phone[]">
+                <label for="employee_phones">Рабочий телефон #${employeePhonesAmount}</label>
+                <input type="tel" name="employee_phones[]">
                 <a href="javascript:void(0)" class="remove"></a>
             </div>
             `);
@@ -592,8 +592,8 @@
             employeeEmailsAmount += 1;
             $("#personal-mails").append(`
             <div class="contragent-form__item">
-                <label for="employee_email">Рабочий e-mail #${employeeEmailsAmount}</label>
-                <input type="email" id="employee_email" name="employee_email[]">
+                <label for="employee_emails">Рабочий e-mail #${employeeEmailsAmount}</label>
+                <input type="email" name="employee_emails[]">
                 <a href="javascript:void(0)" class="remove"></a>
             </div>
             `);

@@ -39,14 +39,8 @@ class CompanyController extends Controller
         return view('company.create', $this->templateData);
     }
 
-    public function store(Request $request)
+    public function store(CompanyCreateRequest $request)
     {
-        $existedCompany = Company::where('ssn', $request->input('ssn'))->first();
-        if ($existedCompany) {
-            return redirect()->route('companies.create')->with(
-                'error', 'Контрагент с таким ИНН уже существует'
-            );
-        }
         $newCompany = Company::create([
             'company_type_id' => $request->company_type,
             'company_status_id' => $request->company_status,
@@ -56,7 +50,7 @@ class CompanyController extends Controller
             'legal' => $request->legal,
             'name' => $request->name,
             'ssn' => $request->ssn,
-            'description' => $request->description,
+            'description' => $request->description ? $request->description : '',
             'address' => $request->address,
         ]);
 
@@ -133,7 +127,7 @@ class CompanyController extends Controller
             'patronymic' => $request->employee_patronymic,
         ]);
 
-        foreach($request->input('employee_phone') as $key => $phone) {
+        foreach($request->input('employee_phones') as $key => $phone) {
             EmployeePhone::create([
                 'company_id' => $company->id,
                 'employee_id' => $employee->id,
@@ -141,7 +135,7 @@ class CompanyController extends Controller
             ]);
         }
 
-        foreach($request->input('employee_email') as $key => $email) {
+        foreach($request->input('employee_emails') as $key => $email) {
             EmployeeEmail::create([
                 'company_id' => $company->id,
                 'employee_id' => $employee->id,

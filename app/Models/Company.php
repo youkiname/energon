@@ -43,6 +43,11 @@ class Company extends Model
         return $this->hasMany(Employee::class);
     }
 
+    public function employeesCount()
+    {
+        return $this->hasMany(Employee::class)->count();
+    }
+
     public function companyType()
     {
         return $this->belongsTo(CompanyType::class);
