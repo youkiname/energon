@@ -94,11 +94,13 @@ class CompanyController extends Controller
     public function update(Request $request, Company $company)
     {
         $request->validate([
+            'name' => ['required', 'string'],
             'ssn' => ['required', 'string', 'max:13'],
             'city' => ['required', 'string'],
             'address' => ['required', 'string'],
         ]);
 
+        $company->name = $request->name;
         $company->ssn = $request->ssn;
         $company->city = $request->city;
         $company->address = $request->address;

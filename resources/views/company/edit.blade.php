@@ -12,10 +12,7 @@
         <div class="info-item-top">
             <div class="info-item-top__left">
                 <div class="info-item-title">
-                    <b>{{ $company->name }}</b>
-                    <div class="info-item-title-box">
-                        <span class="in-work2">{{ $company->status->name }}</span>
-                    </div>
+                    <input type="text" name="name" value="{{ $company->name }}">
 
                     <div class="client-status">
                         <div class="select-box">
