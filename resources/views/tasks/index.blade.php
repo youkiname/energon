@@ -11,25 +11,29 @@
                 </div>
 
                 <div class="plans-request">
-                    <div class="plans-request-info">
+                    <div class="plans-request-info" style="@if ($errors->any()) display: none; @endif">
                         <div class="plans-request-img"><img src="img/request-ico.svg" alt=""></div>
                         <div class="plans-request-title">Новая заметка</div>
                         <div class="plans-request-desc">Добавленная заметка отображается в блоке *планировщика справа, через него вы можете редактировать текущие заметки или смещаь время их реализации на другой срок</div>
                         <a href="#" class="btn-blue">Добавить</a>
                     </div>
 
-                    <div class="plans-request-form">
+                    <div class="plans-request-form" style="@if (!$errors->any()) display: none; @endif">
                         <div class="title">Добавить</div>
                         <form action="{{ route('tasks.store') }}" method="POST" 
                         id="new-task-form" class="form-request" enctype="multipart/form-data">
                             @csrf
                             <div class="form-request__item">
                                 <label for="title">Заголовок</label>
-                                <input type="text" id="title" name="title">
+                                <input type="text" id="title" name="title"
+                                class="@error('title') is-invalid @enderror" value="{{ old('title') }}">
+                                @error('title')
+                                <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-request__item">
                                 <label for="description">Описание</label>
-                                <textarea id="description" name="description"></textarea>
+                                <textarea id="description" name="description">{{ old('description') }}</textarea>
                             </div>
                             <div class="form-request__item">
                                 <label for="">Приоритет</label>
@@ -47,12 +51,26 @@
                             </div>
                             <div class="form-request__item">
                                 <label for="date">Дата</label>
-                                <input class="date-request" type="text" id="date" name="date">
+                                <input class="date-request @error('date') is-invalid @enderror" type="text" 
+                                id="date" name="date" value="{{ old('date') }}">
+                                @error('date')
+                                <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="dates-request">
-                                <input type="time" id="start_time" name="start_time">
-                                <input type="time" id="end_time" name="end_time">
+                                <input type="time" id="start_time" name="start_time"
+                                class="@error('start_time') is-invalid @enderror" value="{{ old('start_time') }}">
+                                
+                                <input type="time" id="end_time" name="end_time"
+                                class="@error('end_time') is-invalid @enderror" value="{{ old('end_time') }}">
+                                
                             </div>
+                            @error('start_time')
+                            <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                            @error('end_time')
+                            <div class="text-danger">{{ $message }}</div>
+                            @enderror
                             <button class="btn-blue" type="submit">Добавить</button>
                         </form>
                         

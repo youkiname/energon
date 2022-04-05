@@ -16,7 +16,7 @@
                     <input type="text" class="form-control @error('name') is-invalid @enderror" id="userName"
                            name="name" required value="{{ old('name') }}">
                     @error('name')
-                    <div class="invalid-feedback">{{ $message }}</div>
+                    <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
             </div>
@@ -27,7 +27,7 @@
                     <input type="email" class="form-control @error('email') is-invalid @enderror"
                            id="userEmail" name="email" required  value="{{ old('email') }}">
                     @error('email')
-                    <div class="invalid-feedback">{{ $message }}</div>
+                    <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
             </div>
@@ -37,7 +37,7 @@
                 <div class="col-sm-4">
                     <input type="file" class="form-control" id="userPhoto" name="photo">
                     @error('photo')
-                    <div class="invalid-feedback">{{ $message }}</div>
+                    <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
             </div>
@@ -61,7 +61,7 @@
                     <input type="password" class="form-control @error('password') is-invalid @enderror"
                            id="userPassword" name="password" autocomplete="new-password" required>
                     @error('password')
-                    <div class="invalid-feedback">{{ $message }}</div>
+                    <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="col-sm-2">
@@ -78,7 +78,7 @@
                     <input type="password" class="form-control @error('password_confirmation') is-invalid @enderror"
                            id="userPasswordConfirm" name="password_confirmation" required autocomplete="off">
                     @error('password_confirmation')
-                    <div class="invalid-feedback">{{ $message }}</div>
+                    <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
             </div>

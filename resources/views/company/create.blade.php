@@ -20,7 +20,7 @@
                         <label for="name">Наименование организации</label>
                         <input type="text" id="name" name="name" class="@error('name') is-invalid @enderror" value="{{ old('name') }}">
                         @error('name')
-                        <div class="invalid-feedback">{{ $message }}</div>
+                        <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="contragent-form-box">
@@ -29,28 +29,28 @@
                             <label for="ssn">ИНН</label>
                             <input type="text" id="ssn" name="ssn" class="@error('ssn') is-invalid @enderror" value="{{ old('ssn') }}">
                             @error('ssn')
-                            <div class="invalid-feedback">{{ $message }}</div>
+                            <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="contragent-form__item">
                             <label for="legal">Правовая форма</label>
                             <input type="text" id="legal" name="legal" class="@error('legal') is-invalid @enderror" value="{{ old('legal') }}">
                             @error('legal')
-                            <div class="invalid-feedback">{{ $message }}</div>
+                            <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="contragent-form__item">
                             <label for="city">Город</label>
                             <input type="text" id="city" name="city" class="@error('city') is-invalid @enderror" value="{{ old('city') }}">
                             @error('city')
-                            <div class="invalid-feedback">{{ $message }}</div>
+                            <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="contragent-form__item">
                             <label for="address">Адрес</label>
                             <input type="text" id="address" name="address" class="@error('address') is-invalid @enderror" value="{{ old('address') }}">
                             @error('address')
-                            <div class="invalid-feedback">{{ $message }}</div>
+                            <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="contragent-form__item">
@@ -61,7 +61,7 @@
                                 @endforeach
                             </select>
                             @error('company_type')
-                            <div class="invalid-feedback">{{ $message }}</div>
+                            <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="contragent-form__item">
@@ -74,7 +74,7 @@
                                 @endforeach
                             </select>
                             @error('company_purchase')
-                            <div class="invalid-feedback">{{ $message }}</div>
+                            <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="contragent-form__item">
@@ -85,7 +85,7 @@
                                 @endforeach
                             </select>
                             @error('company_status')
-                            <div class="invalid-feedback">{{ $message }}</div>
+                            <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="contragent-form__item">
@@ -98,7 +98,7 @@
                                 @endforeach
                             </select>
                             @error('company_potentiality')
-                            <div class="invalid-feedback">{{ $message }}</div>
+                            <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="contragent-form__item big">
@@ -118,7 +118,7 @@
                                     <input type="text" id="employee_position" name="employee_position" 
                                     class="@error('employee_position') is-invalid @enderror" value="{{ old('employee_position') }}">
                                     @error('employee_position')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="contragent-form__item">
@@ -126,7 +126,7 @@
                                     <input type="text" id="employee_first_name" name="employee_first_name" 
                                     class="@error('employee_first_name') is-invalid @enderror" value="{{ old('employee_first_name') }}">
                                     @error('employee_first_name')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="contragent-form__item">
@@ -134,7 +134,7 @@
                                     <input type="text" id="employee_last_name" name="employee_last_name" 
                                     class="@error('employee_last_name') is-invalid @enderror" value="{{ old('employee_last_name') }}">
                                     @error('employee_last_name')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="contragent-form__item">
@@ -142,7 +142,7 @@
                                     <input type="text" id="employee_patronymic" name="employee_patronymic" 
                                     class="@error('employee_patronymic') is-invalid @enderror" value="{{ old('employee_patronymic') }}">
                                     @error('employee_patronymic')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
                             </div>

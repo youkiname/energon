@@ -31,7 +31,7 @@
                     <input type="text" class="form-control @error('name') is-invalid @enderror" id="roleName"
                            name="name" required value="{{ $role->name }}">
                     @error('name')
-                    <div class="invalid-feedback">{{ $message }}</div>
+                    <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
             </div>
