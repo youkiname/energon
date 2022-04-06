@@ -17,41 +17,21 @@
                     </div>
 
                     <div class="contragent-form__item contragent-form__item50">
-                        <label for="name">Наименование организации</label>
-                        <input type="text" id="name" name="name" class="@error('name') is-invalid @enderror" value="{{ old('name') }}">
-                        @error('name')
-                        <div class="text-danger">{{ $message }}</div>
-                        @enderror
+                        <x-input name="name" labelName="Наименование организации"/>
                     </div>
                     <div class="contragent-form-box">
 
                         <div class="contragent-form__item">
-                            <label for="ssn">ИНН</label>
-                            <input type="text" id="ssn" name="ssn" class="@error('ssn') is-invalid @enderror" value="{{ old('ssn') }}">
-                            @error('ssn')
-                            <div class="text-danger">{{ $message }}</div>
-                            @enderror
+                            <x-input name="ssn" labelName="ИНН"/>
                         </div>
                         <div class="contragent-form__item">
-                            <label for="legal">Правовая форма</label>
-                            <input type="text" id="legal" name="legal" class="@error('legal') is-invalid @enderror" value="{{ old('legal') }}">
-                            @error('legal')
-                            <div class="text-danger">{{ $message }}</div>
-                            @enderror
+                            <x-input name="legal" labelName="Правовая форма"/>
                         </div>
                         <div class="contragent-form__item">
-                            <label for="city">Город</label>
-                            <input type="text" id="city" name="city" class="@error('city') is-invalid @enderror" value="{{ old('city') }}">
-                            @error('city')
-                            <div class="text-danger">{{ $message }}</div>
-                            @enderror
+                            <x-input name="city" labelName="Город"/>
                         </div>
                         <div class="contragent-form__item">
-                            <label for="address">Адрес</label>
-                            <input type="text" id="address" name="address" class="@error('address') is-invalid @enderror" value="{{ old('address') }}">
-                            @error('address')
-                            <div class="text-danger">{{ $message }}</div>
-                            @enderror
+                            <x-input name="address" labelName="Адрес"/>
                         </div>
                         <div class="contragent-form__item">
                             <label for="company_type">Тип клиента</label>
@@ -106,70 +86,7 @@
                             <textarea name="description" id="description"></textarea>
                         </div>
 
-                        <div class="personal-form">
-                            <div class="personal-form__top">
-                                <b>Сотрудник # 1</b>
-                                <a href="javascript:void(0)" class="add-card"><span>Добавить
-                                        сотрудника</span><i></i></a>
-                            </div>
-                            <div class="personal-box">
-                                <div class="contragent-form__item">
-                                    <label for="employee_position">Должность</label>
-                                    <input type="text" id="employee_position" name="employee_position" 
-                                    class="@error('employee_position') is-invalid @enderror" value="{{ old('employee_position') }}">
-                                    @error('employee_position')
-                                    <div class="text-danger">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                                <div class="contragent-form__item">
-                                    <label for="employee_first_name">Имя</label>
-                                    <input type="text" id="employee_first_name" name="employee_first_name" 
-                                    class="@error('employee_first_name') is-invalid @enderror" value="{{ old('employee_first_name') }}">
-                                    @error('employee_first_name')
-                                    <div class="text-danger">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                                <div class="contragent-form__item">
-                                    <label for="employee_last_name">Фамилия</label>
-                                    <input type="text" id="employee_last_name" name="employee_last_name" 
-                                    class="@error('employee_last_name') is-invalid @enderror" value="{{ old('employee_last_name') }}">
-                                    @error('employee_last_name')
-                                    <div class="text-danger">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                                <div class="contragent-form__item">
-                                    <label for="employee_patronymic">Отчество</label>
-                                    <input type="text" id="employee_patronymic" name="employee_patronymic" 
-                                    class="@error('employee_patronymic') is-invalid @enderror" value="{{ old('employee_patronymic') }}">
-                                    @error('employee_patronymic')
-                                    <div class="text-danger">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="personal-phones" id="personal-phones">
-                                <div class="contragent-form__item">
-                                    <label for="employee_phones">Рабочий телефон</label>
-                                    <input type="tel" name="employee_phones[]" 
-                                    class="@error('employee_phones') is-invalid @enderror">
-                                </div>
-                                <div class="contragent-form__item">
-                                    <label for="employee_phones">Рабочий телефон # 2</label>
-                                    <input type="tel" name="employee_phones[]">
-                                    <a href="javascript:void(0)" class="remove"></a>
-                                </div>
-                                <a id="add-new-phone-btn" href="javascript:void(0)" class="add-card"><span>Добавить</span><i></i></a>
-                            </div>
-                            
-                            <div class="personal-mails" id="personal-mails">
-                                <div class="contragent-form__item">
-                                    <label for="employee_emails">Рабочий e-mail</label>
-                                    <input type="email" name="employee_emails[]" 
-                                    class="@error('employee_emails') is-invalid @enderror">
-                                </div>
-                                <a id="add-new-email-btn" href="javascript:void(0)" class="add-card"><span>Добавить</span><i></i></a>
-                            </div>
-                        </div>
+                        <x-employee-form />
 
                         <div class="form-btns">
                             <button type="submit" class="btn-blue">Добавить</button>

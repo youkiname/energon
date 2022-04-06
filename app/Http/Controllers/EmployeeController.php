@@ -18,17 +18,17 @@ class EmployeeController extends Controller
     public function update(Request $request, Employee $employee)
     {
         $request->validate([
-            'position' => ['required', 'string'],
-            'first_name' => ['required', 'string'],
-            'last_name' => ['required', 'string'],
-            'phone.*' => ['required', 'string'],
-            'email.*' => ['required', 'string'],
+            'employee_position' => ['required', 'string'],
+            'employee_first_name' => ['required', 'string'],
+            'employee_last_name' => ['required', 'string'],
+            'employee_phones.*' => ['required', 'string'],
+            'employee_emails.*' => ['required', 'string'],
         ]);
 
-        $employee->position = $request->position;
-        $employee->first_name = $request->first_name;
-        $employee->last_name = $request->last_name;
-        $employee->patronymic = $request->patronymic;
+        $employee->position = $request->employee_position;
+        $employee->first_name = $request->employee_first_name;
+        $employee->last_name = $request->employee_last_name;
+        $employee->patronymic = $request->employee_patronymic ? $request->employee_patronymic : '';
 
         $this->updateContacts($request, $employee);
         $employee->save();

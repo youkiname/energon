@@ -239,7 +239,6 @@
                             <option value="Телефонный звонок">Телефонный звонок</option>
                             <option value="Комментарий">Комментарий</option>
                         </select>
-                        <!-- <a href="#" class="btn-new-event"><span>Добавить событие</span><img src="img/plus-blue.svg" alt=""></a> -->
                         <div class="select-box">
                             <span>Категория:</span>
                             <select name="" id="">
@@ -270,52 +269,11 @@
                     @method('post')
                     <input type="hidden" name="company_id" value="{{ $company->id }}">
 
-                    <div class="personal-form__top">
-                        <b>Новый сотрудник</b>
-                    </div>
-                    <div class="personal-box">
-                        <div class="contragent-form__item">
-                            <label for="employee_position">Должность</label>
-                            <input type="text" id="employee_position" name="employee_position">
-                        </div>
-                        <div class="contragent-form__item">
-                            <label for="employee_first_name">Имя</label>
-                            <input type="text" id="employee_first_name" name="employee_first_name">
-                        </div>
-                        <div class="contragent-form__item">
-                            <label for="employee_last_name">Фамилия</label>
-                            <input type="text" id="employee_last_name" name="employee_last_name">
-                        </div>
-                        <div class="contragent-form__item">
-                            <label for="employee_patronymic">Отчество</label>
-                            <input type="text" id="employee_patronymic" name="employee_patronymic">
-                        </div>
-                    </div>
-
-                    <div class="personal-phones" id="personal-phones">
-                        <div class="contragent-form__item">
-                            <label for="employee_phones">Рабочий телефон</label>
-                            <input type="tel" name="employee_phones[]">
-                        </div>
-                        <div class="contragent-form__item">
-                            <label for="employee_phones">Рабочий телефон # 2</label>
-                            <input type="tel" name="employee_phones[]">
-                            <a href="javascript:void(0)" class="remove"></a>
-                        </div>
-                        <a id="add-new-phone-btn" href="javascript:void(0)" class="add-card"><span>Добавить</span><i></i></a>
-                    </div>
-                    
-                    <div class="personal-mails" id="personal-mails">
-                        <div class="contragent-form__item">
-                            <label for="employee_emails">Рабочий e-mail</label>
-                            <input type="email" name="employee_emails[]">
-                        </div>
-                        <a id="add-new-email-btn" href="javascript:void(0)" class="add-card"><span>Добавить</span><i></i></a>
-                    </div>
+                    <x-employee-form />
                     <div class="form-btns">
-                        <button type="submit" class="btn-blue">Добавить</button>
+                        <button type="submit" class="btn-blue">Добавить</button>                            
                     </div>
-                </div>
+                </form>
 
                 <div class="elem-item-title">Связанные организации</div>
                 <div class="elem-item-list">

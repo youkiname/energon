@@ -24,12 +24,7 @@
                         id="new-task-form" class="form-request" enctype="multipart/form-data">
                             @csrf
                             <div class="form-request__item">
-                                <label for="title">Заголовок</label>
-                                <input type="text" id="title" name="title"
-                                class="@error('title') is-invalid @enderror" value="{{ old('title') }}">
-                                @error('title')
-                                <div class="text-danger">{{ $message }}</div>
-                                @enderror
+                                <x-input name="title" labelName="Заголовок"/>
                             </div>
                             <div class="form-request__item">
                                 <label for="description">Описание</label>
@@ -50,12 +45,7 @@
                                 </div>
                             </div>
                             <div class="form-request__item">
-                                <label for="date">Дата</label>
-                                <input class="date-request @error('date') is-invalid @enderror" type="text" 
-                                id="date" name="date" value="{{ old('date') }}">
-                                @error('date')
-                                <div class="text-danger">{{ $message }}</div>
-                                @enderror
+                                <x-input name="date" labelName="Дата" type="date"/>
                             </div>
                             <div class="dates-request">
                                 <input type="time" id="start_time" name="start_time"
@@ -63,7 +53,6 @@
                                 
                                 <input type="time" id="end_time" name="end_time"
                                 class="@error('end_time') is-invalid @enderror" value="{{ old('end_time') }}">
-                                
                             </div>
                             @error('start_time')
                             <div class="text-danger">{{ $message }}</div>

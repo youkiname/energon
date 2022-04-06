@@ -10,28 +10,28 @@
         <h1>Редактирование сотрудника. Компания {{ $employee->company->name }}.</h1>
         <div class="personal-box">
             <div class="contragent-form__item">
-                <label for="position">Должность</label>
-                <input type="text" id="position" name="position" value="{{ $employee->position }}">
+                <label for="employee_position">Должность</label>
+                <input type="text" name="employee_position" value="{{ $employee->position }}">
             </div>
             <div class="contragent-form__item">
-                <label for="first_name">Имя</label>
-                <input type="text" id="first_name" name="first_name" value="{{ $employee->first_name }}">
+                <label for="employee_first_name">Имя</label>
+                <input type="text" name="employee_first_name" value="{{ $employee->first_name }}">
             </div>
             <div class="contragent-form__item">
-                <label for="last_name">Фамилия</label>
-                <input type="text" id="last_name" name="last_name" value="{{ $employee->last_name }}">
+                <label for="employee_last_name">Фамилия</label>
+                <input type="text" name="employee_last_name" value="{{ $employee->last_name }}">
             </div>
             <div class="contragent-form__item">
-                <label for="patronymic">Отчество</label>
-                <input type="text" id="patronymic" name="patronymic" value="{{ $employee->patronymic }}">
+                <label for="employee_patronymic">Отчество</label>
+                <input type="text" name="employee_patronymic" value="{{ $employee->patronymic }}">
             </div>
         </div>
 
         <div class="personal-phones" id="personal-phones">
             @foreach($employee->phones as $phone)
             <div class="contragent-form__item">
-                <label for="phone">Рабочий телефон</label>
-                <input type="tel" value="{{ $phone->phone }}" name="phone[]">
+                <label for="employee_phones">Рабочий телефон</label>
+                <input type="tel" value="{{ $phone->phone }}" name="employee_phones[]">
                 <a href="javascript:void(0)" class="remove"></a>
             </div>
             @endforeach
@@ -42,8 +42,8 @@
         <div class="personal-mails" id="personal-mails">
             @foreach($employee->emails as $email)
             <div class="contragent-form__item">
-                <label for="email">Рабочий e-mail</label>
-                <input type="email" value="{{ $email->email }}" name="email[]">
+                <label for="employee_emails">Рабочий e-mail</label>
+                <input type="email" value="{{ $email->email }}" name="employee_emails[]">
                 <a href="javascript:void(0)" class="remove"></a>
             </div>
             @endforeach
