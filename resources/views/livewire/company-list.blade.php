@@ -12,7 +12,7 @@
                 <div class="table-th">Статус</div>
             </div>
             @foreach($companies as $company)
-                @include('company.table-row', ['company' => $company])
+                @include('company.components.table-row', ['company' => $company])
             @endforeach
         </div>
     </div>

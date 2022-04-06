@@ -262,7 +262,7 @@
             </div>
             <div class="elem-item" id="tab_2">
                 <div class="elem-item-title">Сотрудники</div>
-                @include('company.employees-list', ['employees' => $company->employees])
+                @include('company.components.employees-list', ['employees' => $company->employees])
                 <form action="{{ route('employee.store') }}" class="contragent-form" 
                 method="post" enctype="multipart/form-data" id="employee-form"
                 style="@if (!$errors->any()) display: none; @endif">
@@ -569,40 +569,9 @@
         </div>
     </div>
 </div>
+@include('company.components.contacts-js')
 <script>
-    var employeePhonesAmount = 2;
-    var employeeEmailsAmount = 1;
-
-
     document.addEventListener('DOMContentLoaded', function(){
-        let addNewPhoneButton = document.getElementById('add-new-phone-btn');
-        addNewPhoneButton.onclick = function() {
-            employeePhonesAmount += 1;
-            $("#personal-phones").append(`
-            <div class="contragent-form__item">
-                <label for="employee_phones">Рабочий телефон #${employeePhonesAmount}</label>
-                <input type="tel" name="employee_phones[]">
-                <a href="javascript:void(0)" class="remove"></a>
-            </div>
-            `);
-        };
-        
-        let addNewEmailButton = document.getElementById('add-new-email-btn');
-        addNewEmailButton.onclick = function() {
-            employeeEmailsAmount += 1;
-            $("#personal-mails").append(`
-            <div class="contragent-form__item">
-                <label for="employee_emails">Рабочий e-mail #${employeeEmailsAmount}</label>
-                <input type="email" name="employee_emails[]">
-                <a href="javascript:void(0)" class="remove"></a>
-            </div>
-            `);
-        };
-
-        $(document).on('click', '.remove', function () {
-            $(this).parents('div.contragent-form__item').remove();
-        });
-
         $('#add-new-employee-btn').click(function() {
             if ($('#employee-form').is(":visible")) {
                 return

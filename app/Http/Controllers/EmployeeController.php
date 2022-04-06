@@ -95,10 +95,10 @@ class EmployeeController extends Controller
 
     private function updatePhones(Request $request, Employee $employee) {
         $employee->deletePhones();
-        if (!$request->input('phone')) {
+        if (!$request->input('employee_phones')) {
             return;
         }
-        foreach($request->input('phone') as $key => $phone) {
+        foreach($request->input('employee_phones') as $key => $phone) {
             EmployeePhone::create([
                 'company_id' => $employee->company->id,
                 'employee_id' => $employee->id,
@@ -109,10 +109,10 @@ class EmployeeController extends Controller
 
     private function updateEmails(Request $request, Employee $employee) {
         $employee->deleteEmails();
-        if (!$request->input('email')) {
+        if (!$request->input('employee_emails')) {
             return;
         }
-        foreach($request->input('email') as $key => $email) {
+        foreach($request->input('employee_emails') as $key => $email) {
             EmployeeEmail::create([
                 'company_id' => $employee->company->id,
                 'employee_id' => $employee->id,
