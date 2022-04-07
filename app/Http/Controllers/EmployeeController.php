@@ -54,7 +54,7 @@ class EmployeeController extends Controller
             'position' => $request->employee_position,
             'first_name' => $request->employee_first_name,
             'last_name' => $request->employee_last_name,
-            'patronymic' => $request->employee_patronymic,
+            'patronymic' => $request->employee_patronymic ? $request->employee_patronymic : '',
         ]);
 
         foreach($request->input('employee_phones') as $key => $phone) {
