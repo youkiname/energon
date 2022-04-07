@@ -40,3 +40,4 @@
         <a id="add-new-email-btn" href="javascript:void(0)" class="add-card"><span>Добавить</span><i></i></a>
     </div>
 </div>
+@include('company.components.contacts-js')

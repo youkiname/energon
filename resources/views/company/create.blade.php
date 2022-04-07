@@ -100,5 +100,4 @@
         </div>
     </div>
 </div>
-@include('company.components.contacts-js')
 @endsection

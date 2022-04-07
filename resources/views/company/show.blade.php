@@ -527,7 +527,6 @@
         </div>
     </div>
 </div>
-@include('company.components.contacts-js')
 <script>
     document.addEventListener('DOMContentLoaded', function(){
         $('#add-new-employee-btn').click(function() {
