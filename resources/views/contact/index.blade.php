@@ -19,7 +19,6 @@
 
     <div class="container-compatibility">
         <div class="ss-container contacts-list">
-            <livewire:contact.search />
         </div>
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     </div>
