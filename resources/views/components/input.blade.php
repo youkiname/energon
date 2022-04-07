@@ -3,7 +3,7 @@
 @endif
 
 <input type="{{ $type }}" name="{{ $name }}" 
-class="@error($name) is-invalid @enderror" value="{{ old($name) }}">
+class="@error($name) is-invalid @enderror {{ $class }}" value="{{ old($name) }}">
 
 @error($name)
 <div class="text-danger">{{ $message }}</div>
