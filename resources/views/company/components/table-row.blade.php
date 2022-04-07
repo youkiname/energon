@@ -1,7 +1,7 @@
 <div class="table-tr">
     <div class="table-td">
         <b>{{ $company->legal }}</b>
-        <span>{{ $company->name }}</span>
+        <a href="{{ route('companies.show', ['company' => $company]) }}">{{ $company->name }}</a>
     </div>
     <div class="table-td">
         <b>ВО</b>
