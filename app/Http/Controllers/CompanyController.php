@@ -98,7 +98,7 @@ class CompanyController extends Controller
         $company->ssn = $request->ssn;
         $company->city = $request->city;
         $company->address = $request->address;
-        $company->description = $request->description;
+        $company->description = $request->description ? $request->description : '';
 
         $company->company_type_id = $request->company_type;
         $company->company_purchase_id = $request->company_purchase;
