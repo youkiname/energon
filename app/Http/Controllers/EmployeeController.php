@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreEmployeeRequest;
 use App\Models\Company;
 use App\Models\Employee;
 use App\Models\EmployeePhone;
@@ -15,16 +16,8 @@ class EmployeeController extends Controller
         return view('employee.edit', ['employee' => $employee]);
     }
 
-    public function update(Request $request, Employee $employee)
+    public function update(StoreEmployeeRequest $request, Employee $employee)
     {
-        $request->validate([
-            'employee_position' => ['required', 'string'],
-            'employee_first_name' => ['required', 'string'],
-            'employee_last_name' => ['required', 'string'],
-            'employee_phones.*' => ['required', 'string'],
-            'employee_emails.*' => ['required', 'string'],
-        ]);
-
         $employee->position = $request->employee_position;
         $employee->first_name = $request->employee_first_name;
         $employee->last_name = $request->employee_last_name;
@@ -39,15 +32,7 @@ class EmployeeController extends Controller
         ]);
     }
 
-    public function store(Request $request) {
-        $request->validate([
-            'employee_position' => ['required', 'string'],
-            'employee_first_name' => ['required', 'string'],
-            'employee_last_name' => ['required', 'string'],
-            'employee_phones.*' => ['required', 'string'],
-            'employee_emails.*' => ['required', 'string'],
-        ]);
-
+    public function store(StoreEmployeeRequest $request) {
         $company = Company::find($request->input('company_id'));
         $employee = Employee::create([
             'company_id' => $company->id,

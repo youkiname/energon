@@ -18,25 +18,14 @@
     </div>
 
     <div class="personal-phones" id="personal-phones">
-        <div class="contragent-form__item">
-            <label for="employee_phones">Рабочий телефон</label>
-            <input type="tel" name="employee_phones[]" 
-            class="@error('employee_phones') is-invalid @enderror">
-        </div>
-        <div class="contragent-form__item">
-            <label for="employee_phones">Рабочий телефон</label>
-            <input type="tel" name="employee_phones[]">
-            <a href="javascript:void(0)" class="remove"></a>
-        </div>
+        <x-array-input name="employee_phones" labelName="Рабочий телефон" type="tel"/>
+        
         <a id="add-new-phone-btn" href="javascript:void(0)" class="add-card"><span>Добавить</span><i></i></a>
     </div>
     
     <div class="personal-mails" id="personal-mails">
-        <div class="contragent-form__item">
-            <label for="employee_emails">Рабочий e-mail</label>
-            <input type="email" name="employee_emails[]" 
-            class="@error('employee_emails') is-invalid @enderror">
-        </div>
+        <x-array-input name="employee_emails" labelName="Рабочий e-mail" type="email"/>
+
         <a id="add-new-email-btn" href="javascript:void(0)" class="add-card"><span>Добавить</span><i></i></a>
     </div>
 </div>

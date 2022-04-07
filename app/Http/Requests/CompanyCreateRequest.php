@@ -28,11 +28,13 @@ class CompanyCreateRequest extends FormRequest
             'company_status' => ['sometimes', 'required', 'exists:company_statuses,id'],
             'company_potentiality' => ['sometimes', 'required', 'exists:potentialities,id'],
 
-            'employee_position' => ['required'],
-            'employee_first_name' => ['required'],
-            'employee_last_name' => ['required'],
-            'employee_phones.*' => ["required", "string", "min:1"],
-            'employee_emails.*' => ["required", "string", "min:1"],
+            'employee_position' => ['required', 'string'],
+            'employee_first_name' => ['required', 'string'],
+            'employee_last_name' => ['required', 'string'],
+            'employee_phones' => ['required', 'array', 'min:1'],
+            'employee_phones.*' => ['required', 'string'],
+            'employee_emails' => ['required', 'array', 'min:1'],
+            'employee_emails.*' => ['required', 'email:rfc'],
         ];
     }
 
@@ -48,11 +50,13 @@ class CompanyCreateRequest extends FormRequest
             'company_status.exists' => 'Статус контрагента не зарегистрирован',
             'company_potentiality.exists' => 'Потенциал не зарегистрирован',
 
-            'employee_position.required' => 'Должность сотрудника обязательна',
-            'employee_first_name.required' => 'Имя сотрудника обязательно',
-            'employee_last_name.required' => 'Фамилия сотрудника обязательна',
-            'employee_phones.*.required' => 'Сотрудник должен иметь хотя бы один номер телефона',
-            'employee_emails.*.required' => 'Сотрудник должен иметь хотя бы один номер email',
+            'employee_position.required' => 'Должность сотрудника не заполнена',
+            'employee_first_name.required' => 'Имя сотрудника не заполнено',
+            'employee_last_name.required' => 'Фамилия сотрудника не заполнена',
+            'employee_phones.required' => 'Сотрудник должен имять хотя бы один номер телефона',
+            'employee_phones.*.required' => 'Номер телефона не может быть пустым',
+            'employee_emails.required' => 'Сотрудник должен имять хотя бы один email',
+            'employee_emails.*.required' => 'Email не может быть пустым',
         ];
     }
 
