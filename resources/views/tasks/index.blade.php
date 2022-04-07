@@ -45,7 +45,7 @@
                                 </div>
                             </div>
                             <div class="form-request__item">
-                                <x-input name="date" labelName="Дата" type="date"/>
+                                <x-input name="date" labelName="Дата" class="date-request"/>
                             </div>
                             <div class="dates-request">
                                 <input type="time" id="start_time" name="start_time"

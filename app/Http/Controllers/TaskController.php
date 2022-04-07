@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreTaskRequest;
 use App\Models\Task;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -15,7 +16,7 @@ class TaskController extends Controller
         return view('tasks.index', ["tasks" => $this->collectAllTasks()]);
     }
 
-    public function store(Request $request)
+    public function store(StoreTaskRequest $request)
     {
         $request->validate([
             'title' => ['required', 'string', 'max:255'],
@@ -28,7 +29,7 @@ class TaskController extends Controller
 
         $task = Task::create([
             'title' => $request->title,
-            'description' => $request->description,
+            'description' => $request->description ? $request->description : '',
             'priority' => $request->input_priority,
             'date' => $date,
             'start_time' => $request->start_time,
