@@ -277,53 +277,11 @@
 
                 <div class="elem-item-title">Связанные организации</div>
                 <div class="elem-item-list">
-
-                    <div class="elem-item-box">
-                        <div class="elem-item-box-title">OOO “Smit-Yarcevo”</div>
-                        <div class="el-org">
-                            <span>ИНН</span>
-                            <b>6727014649</b>
-                        </div>
-                        <div class="el-org">
-                            <span>Адрес</span>
-                            <b>301650, Тульская область, г. Новомосковск, 
-                                ул. Калинина, д. 15</b>
-                        </div>
-                        <div class="btn-more-box">
-                            <a class="btn-more" href="javascrirpt:void(0)">
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                            </a>
-                            <div class="btn-el-items">
-                                <a href="#" class="btn-el btn-del"></a>
-                                <a href="#" class="btn-el btn-edit"></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="elem-item-box">
-                        <div class="elem-item-box-title">OOO “Sk STROY”</div>
-                        <div class="el-org">
-                            <span>ИНН</span>
-                            <b>7733306088</b>
-                        </div>
-                        <div class="el-org">
-                            <span>Адрес</span>
-                            <b>115580, Москва, ул. Шипиловская, д. 58, оф. 1</b>
-                        </div>
-                        <div class="btn-more-box">
-                            <a class="btn-more" href="javascrirpt:void(0)">
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                            </a>
-                            <div class="btn-el-items">
-                                <a href="#" class="btn-el btn-del"></a>
-                                <a href="#" class="btn-el btn-edit"></a>
-                            </div>
-                        </div>
-                    </div>
-                    <a href="javascript:void(0)" class="add-card"><span>Добавить</span><i></i></a>
+                    @each('company.components.bundled-company', $company->bundledCompanies, 'company')
+                    <a href="javascript:void(0)" class="add-card" id="add-new-bundle-btn"><span>Добавить</span><i></i></a>
+                </div>
+                <div style="display: none;" id="bundle-company-select">
+                    <livewire:bundle-company-select :currentCompany="$company"/>
                 </div>
             </div>
             <div class="elem-item" id="tab_3" style="display: none;">
@@ -535,6 +493,14 @@
             }
             $('#employee-form').show();
             $('#add-new-employee-btn').hide();
+        });
+
+        $('#add-new-bundle-btn').click(function() {
+            if ($('#bundle-company-select').is(":visible")) {
+                return
+            }
+            $('#bundle-company-select').show();
+            $('#add-new-bundle-btn').hide();
         });
     });
 </script>

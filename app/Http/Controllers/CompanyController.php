@@ -8,6 +8,7 @@ use App\Models\Contact;
 use Illuminate\Http\Request;
 use App\Models\City;
 use App\Models\Company;
+use App\Models\CompanyBundle;
 use App\Models\CompanyDetails;
 use App\Models\CompanyPurchase;
 use App\Models\CompanyStatus;
@@ -116,6 +117,20 @@ class CompanyController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function bundle(Request $request)
+    {
+        $company = Company::find($request->a_company_id);
+        CompanyBundle::create([
+            "a_company_id" => $company->id,
+            "b_company_id" => $request->b_company_id,
+        ]);
+        CompanyBundle::create([
+            "b_company_id" => $company->id,
+            "a_company_id" => $request->b_company_id,
+        ]);
+        return redirect()->route('companies.show', ['company' => $company]);
     }
 
     private function storeEmployee(Request $request, Company $company) {

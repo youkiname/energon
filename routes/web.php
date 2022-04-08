@@ -20,7 +20,9 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth'])->group(function () {
-    
+
+    Route::post('/companies/bundle', [CompanyController::class, 'bundle'])->name('companies.bundle')
+        ->middleware(['auth']);
     Route::resource('companies', CompanyController::class)
         ->middleware(['auth']);
 

@@ -28,6 +28,11 @@ class Company extends Model
         'description'
     ];
 
+    public function bundledCompanies()
+    {
+        return $this->belongsToMany(Company::class, 'company_bundles', 'a_company_id', 'b_company_id');
+    }
+
     public function details()
     {
         return $this->hasOne(CompanyDetails::class);
