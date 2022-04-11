@@ -36,8 +36,7 @@ class TaskController extends Controller
             'end_time' => $request->end_time,
         ]);
 
-        return redirect()->route('tasks.index')
-            ->with('success', 'Задача успешно добавлена');
+        return back()->with('success', 'Задача успешно добавлена');
     }
 
     private function collectAllTasks() {

@@ -18,6 +18,9 @@ use App\Models\Employee;
 use App\Models\EmployeePhone;
 use App\Models\EmployeeEmail;
 
+use App\Models\Task;
+use Illuminate\Support\Facades\DB;
+
 class CompanyController extends Controller
 {
     public $templateData = [];
@@ -89,6 +92,7 @@ class CompanyController extends Controller
     public function tasks(Company $company)
     {
         $this->templateData['company'] = $company;
+        $this->templateData['tasks'] = $this->collectAllTasks();
         return view('company.tasks', $this->templateData);
     }
 
@@ -181,5 +185,17 @@ class CompanyController extends Controller
 
         CompanyDetails::where('company_id', $company->id)
         ->update($updatingFields);
+    }
+
+    private function collectAllTasks() {
+        $dates = DB::table('tasks')
+                ->select('date')
+                ->groupBy('date')
+                ->get();
+        $tasks = [];
+        foreach($dates as $date) {
+            $tasks[$date->date] = Task::where('date', $date->date)->get();
+        };
+        return $tasks;
     }
 }
