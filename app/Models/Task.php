@@ -35,4 +35,9 @@ class Task extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function humanDate()
+    {
+        return Carbon::create($this->date)->toFormattedDateString(); 
+    }
 }

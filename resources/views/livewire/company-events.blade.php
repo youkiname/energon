@@ -2,7 +2,7 @@
     <div class="events-items">
         <div class="new-event-box" id="event-form" style="display: none;">
             <div class="new-event-box__top">
-                <div class="new-event-date">Сегодня, 14:37</div>
+                <div class="new-event-date" id="new-event-date">Сегодня, 14:37</div>
                 <a href="#">Отменить</a>
             </div>
             <form action="{{ route('events.store') }}" method="post" class="form-new-task events-item task new-task green"
@@ -41,7 +41,7 @@
             <div class="events-item-info">
                 <div class="events-item-info-status">{{ $event->eventType->name }}</div>
                 <div class="events-item-info-note">
-                    <b>2 дня назад</b>
+                    <b>{{ $event->relativeDate() }}</b>
                     <span>{{ $event->description }}</span>
                 </div>
                 <div class="events-item-info-person">
@@ -81,6 +81,7 @@
                     return
                 }
                 $('#event-form').show();
+                $('#new-event-date').html(new Date().toDateString());
             });
 
             $("#event_type").on('change', function() {

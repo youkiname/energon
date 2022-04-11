@@ -20,6 +20,7 @@ use App\Models\EmployeeEmail;
 
 use App\Models\Task;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class CompanyController extends Controller
 {
@@ -198,7 +199,8 @@ class CompanyController extends Controller
             ->where('company_id', $this->templateData['company']->id)
             ->get();
             if(!$dailyTasks->isEmpty()) {
-                $tasks[$date->date] = $dailyTasks;
+                $humanDate = Carbon::create($date->date)->toFormattedDateString();
+                $tasks[$humanDate] = $dailyTasks;
             }
         };
         return $tasks;

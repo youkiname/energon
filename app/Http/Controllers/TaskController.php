@@ -43,7 +43,8 @@ class TaskController extends Controller
                 ->get();
         $tasks = [];
         foreach($dates as $date) {
-            $tasks[$date->date] = Task::where('date', $date->date)->get();
+            $humanDate = Carbon::create($date->date)->toFormattedDateString();
+            $tasks[$humanDate] = Task::where('date', $date->date)->get();
         };
         return $tasks;
     }
