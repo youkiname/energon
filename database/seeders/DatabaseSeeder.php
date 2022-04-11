@@ -9,6 +9,7 @@ use App\Models\CompanyPurchase;
 use App\Models\CompanyStatus;
 use App\Models\Potentiality;
 use App\Models\Role;
+use App\Models\EventType;
 
 class DatabaseSeeder extends Seeder
 {
@@ -67,6 +68,16 @@ class DatabaseSeeder extends Seeder
         ]);
         Potentiality::create([
             'name' => "Низкий",
+        ]);
+
+        EventType::create([
+            'name' => 'Телефонный звонок',
+        ]);
+        EventType::create([
+            'name' => 'Заказ',
+        ]);
+        EventType::create([
+            'name' => 'Заявка',
         ]);
     } 
 }

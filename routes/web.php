@@ -35,8 +35,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('contacts', ContactController::class);
 
-    Route::post('/events/add', [EventController::class, 'store'])
-        ->name('events.add');
+    Route::post('/events/store', [EventController::class, 'store'])
+        ->name('events.store');
 
     Route::resource('tasks', TaskController::class);
 
