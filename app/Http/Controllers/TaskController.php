@@ -18,12 +18,6 @@ class TaskController extends Controller
 
     public function store(StoreTaskRequest $request)
     {
-        $request->validate([
-            'title' => ['required', 'string', 'max:255'],
-            'date' => ['required'],
-            'start_time' => ['required'],
-            'end_time' => ['required'],
-        ]);
 
         $date = Carbon::createFromFormat('d.m.Y', $request->date)->toDateString();
 
