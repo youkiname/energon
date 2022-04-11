@@ -22,9 +22,13 @@ Route::get('/', function () {
 Route::middleware(['auth'])->group(function () {
 
     Route::post('/companies/bundle', [CompanyController::class, 'bundle'])->name('companies.bundle')
-        ->middleware(['auth']);
+    ->middleware(['auth']);
+    Route::get('/companies/{company}/contacts', [CompanyController::class, 'contacts'])->name('companies.contacts')
+    ->middleware(['auth']);
+    Route::get('/companies/{company}/tasks', [CompanyController::class, 'tasks'])->name('companies.tasks')
+    ->middleware(['auth']);
     Route::resource('companies', CompanyController::class)
-        ->middleware(['auth']);
+    ->middleware(['auth']);
 
     Route::resource('employee', EmployeeController::class)
     ->middleware(['auth']);

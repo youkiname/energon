@@ -80,6 +80,18 @@ class CompanyController extends Controller
         return view('company.show', $this->templateData);
     }
 
+    public function contacts(Company $company)
+    {
+        $this->templateData['company'] = $company;
+        return view('company.contacts', $this->templateData);
+    }
+
+    public function tasks(Company $company)
+    {
+        $this->templateData['company'] = $company;
+        return view('company.tasks', $this->templateData);
+    }
+
     public function edit(Company $company)
     {
         $this->templateData['company'] = $company;
