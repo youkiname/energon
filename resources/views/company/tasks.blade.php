@@ -21,7 +21,7 @@
                 <div class="plans-box__left">
                     <div class="plans-request-form">
                         <div class="title">Добавить</div>
-                        @include('tasks.components.form')
+                        @include('tasks.components.form', ['company_id' => $company->id])
                     </div>
                 </div>
                 <div class="plans-box__right">

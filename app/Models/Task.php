@@ -17,10 +17,22 @@ class Task extends Model
 
     protected $fillable = [
         'title',
+        'company_id',
+        'user_id',
         'description',
         'priority',
         'date',
         'start_time',
         'end_time'
     ];
+
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
+    }
+
+    public function creator()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

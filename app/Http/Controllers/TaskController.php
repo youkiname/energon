@@ -7,6 +7,7 @@ use App\Http\Requests\StoreTaskRequest;
 use App\Models\Task;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
@@ -23,6 +24,8 @@ class TaskController extends Controller
 
         $task = Task::create([
             'title' => $request->title,
+            'company_id' => $request->company_id,
+            'user_id' => Auth::user()->id,
             'description' => $request->description ? $request->description : '',
             'priority' => $request->input_priority,
             'date' => $date,

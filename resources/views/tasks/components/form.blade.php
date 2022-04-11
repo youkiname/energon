@@ -1,6 +1,9 @@
 <form action="{{ route('tasks.store') }}" method="POST" 
     id="new-task-form" class="form-request" enctype="multipart/form-data">
     @csrf
+    @if(isset($company_id))
+    <input type="hidden" name="company_id" value="{{ $company_id }}">
+    @endif
     <div class="form-request__item">
         <x-input name="title" labelName="Заголовок"/>
     </div>
@@ -27,10 +30,10 @@
     </div>
     <div class="dates-request">
         <input type="time" id="start_time" name="start_time"
-        class="@error('start_time') is-invalid @enderror" value="{{ old('start_time') }}">
+        class="@error('start_time') is-invalid @enderror" value="{{ old('start_time') ?? '08:00' }}">
         
         <input type="time" id="end_time" name="end_time"
-        class="@error('end_time') is-invalid @enderror" value="{{ old('end_time') }}">
+        class="@error('end_time') is-invalid @enderror" value="{{ old('end_time') ?? '09:00' }}">
     </div>
     @error('start_time')
     <div class="text-danger">{{ $message }}</div>

@@ -92,7 +92,7 @@ class CompanyController extends Controller
     public function tasks(Company $company)
     {
         $this->templateData['company'] = $company;
-        $this->templateData['tasks'] = $this->collectAllTasks();
+        $this->templateData['tasks'] = $this->collectTasks();
         return view('company.tasks', $this->templateData);
     }
 
@@ -187,14 +187,19 @@ class CompanyController extends Controller
         ->update($updatingFields);
     }
 
-    private function collectAllTasks() {
+    private function collectTasks() {
         $dates = DB::table('tasks')
                 ->select('date')
                 ->groupBy('date')
                 ->get();
         $tasks = [];
         foreach($dates as $date) {
-            $tasks[$date->date] = Task::where('date', $date->date)->get();
+            $dailyTasks = Task::where('date', $date->date)
+            ->where('company_id', $this->templateData['company']->id)
+            ->get();
+            if(!$dailyTasks->isEmpty()) {
+                $tasks[$date->date] = $dailyTasks;
+            }
         };
         return $tasks;
     }
