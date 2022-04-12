@@ -40,6 +40,14 @@ class TaskController extends Controller
         return back()->with('success', 'Задача успешно добавлена');
     }
 
+    public function destroy(Task $task)
+    {
+        $task->delete();
+        return redirect()->route('tasks.index')->with([
+            'success' => 'Задача успешно удалена.'
+        ]);
+    }
+
     private function collectAllTasks() {
         $dates = DB::table('tasks')
                 ->select('date')
