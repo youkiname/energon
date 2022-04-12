@@ -85,7 +85,7 @@
                 </div>
                 <div class="item-info">
                     <span>Ответственный менеджер </span>
-                    <b>John Doe</b>
+                    <b>{{ $company->manager->name }}</b>
                 </div>
                 <div class="btn-more-box">
                     <a class="btn-more" href="javascrirpt:void(0)">

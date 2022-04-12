@@ -16,6 +16,7 @@ class Company extends Model
     );
 
     protected $fillable = [
+        'user_id',
         'name',
         'ssn',
         'legal',
@@ -27,6 +28,11 @@ class Company extends Model
         'company_potentiality_id',
         'description'
     ];
+
+    public function manager()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
 
     public function bundledCompanies()
     {

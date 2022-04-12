@@ -81,7 +81,7 @@
                 </div>
                 <div class="item-info">
                     <span>Ответственный менеджер </span>
-                    <b>John Doe</b>
+                    <b>{{ $company->manager->name }}</b>
                 </div>
             </div>
         </div>

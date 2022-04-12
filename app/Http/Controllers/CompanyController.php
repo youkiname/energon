@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CompanyCreateRequest;
+use Illuminate\Http\Request;
 use App\Models\CompanyAwait;
 use App\Models\Contact;
-use Illuminate\Http\Request;
 use App\Models\City;
 use App\Models\Company;
 use App\Models\CompanyBundle;
@@ -17,9 +17,10 @@ use App\Models\Potentiality;
 use App\Models\Employee;
 use App\Models\EmployeePhone;
 use App\Models\EmployeeEmail;
-
 use App\Models\Task;
+
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
 class CompanyController extends Controller
@@ -47,6 +48,7 @@ class CompanyController extends Controller
     public function store(CompanyCreateRequest $request)
     {
         $newCompany = Company::create([
+            'user_id' => Auth::user()->id,
             'company_type_id' => $request->company_type,
             'company_status_id' => $request->company_status,
             'company_purchase_id' => $request->company_purchase,
