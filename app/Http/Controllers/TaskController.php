@@ -13,21 +13,25 @@ class TaskController extends Controller
 {
     public function index()
     {
-
         return view('tasks.index', ["tasks" => $this->collectAllTasks()]);
+    }
+
+    public function show(Task $task)
+    {
+        return view('tasks.show', ["task" => $task]);
     }
 
     public function store(StoreTaskRequest $request)
     {
-
         $date = Carbon::createFromFormat('d.m.Y', $request->date)->toDateString();
 
         $task = Task::create([
             'title' => $request->title,
             'company_id' => $request->company_id,
             'user_id' => Auth::user()->id,
-            'description' => $request->description ? $request->description : '',
-            'priority' => $request->input_priority,
+            'description' => $request->description ?? '',
+            'task_priority_id' => $request->input_priority,
+            'task_status_id' => 1,
             'date' => $date,
             'start_time' => $request->start_time,
             'end_time' => $request->end_time,

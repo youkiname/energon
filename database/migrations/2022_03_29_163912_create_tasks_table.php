@@ -17,9 +17,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('company_id')->nullable()->references('id')->on('companies')->onDelete('cascade');
             $table->foreignId('user_id')->references('id')->on('users');
+            $table->foreignId('task_priority_id')->constrained();
+            $table->foreignId('task_status_id')->constrained();
             $table->string('title');
             $table->text('description');
-            $table->smallInteger('priority');
             $table->date('date');
             $table->time('start_time');
             $table->time('end_time');

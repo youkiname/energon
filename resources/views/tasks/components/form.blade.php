@@ -15,13 +15,13 @@
         <label for="">Приоритет</label>
         <div class="priority-box">
             <label class="priority priority-low" for="low">
-                <input type="radio" name="input_priority" id="low" value="0" checked> <span><i></i></span>
+                <input type="radio" name="input_priority" id="low" value="1" checked> <span><i></i></span>
             </label>
             <label class="priority priority-middle" for="middle">
-                <input type="radio" name="input_priority" id="middle" value="1"> <span><i></i></span>
+                <input type="radio" name="input_priority" id="middle" value="2"> <span><i></i></span>
             </label>
             <label class="priority priority-high" for="high">
-                <input type="radio" name="input_priority" id="high" value="2"> <span><i></i></span>
+                <input type="radio" name="input_priority" id="high" value="3"> <span><i></i></span>
             </label>
         </div>
     </div>

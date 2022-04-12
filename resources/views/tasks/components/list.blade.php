@@ -5,9 +5,9 @@
         @foreach($dailyTasks as $task)
         <div class="date-notes">
             <div class="date-note-item 
-            @if($task->priority == 0)
+            @if($task->task_priority_id == 1)
             green
-            @elseif($task->priority == 1)
+            @elseif($task->task_priority_id == 2)
             yellow
             @else
             red
@@ -18,8 +18,12 @@
                     <div class="time-finish">{{ $task->end_time }}</div>
                 </div>
                 <div class="date-note-desc">
-                    <div class="name-note">{{ $task->title }}</div>
+                    <a href="{{ route('tasks.show', ['task'=>$task]) }}" class="name-note"
+                    >{{ $task->title }}</a>
                     <div class="desc-note">{{ $task->description }}</div>
+                    @if($task->company)
+                    <div class="desc-note"><b>{{ $task->company->legal }} {{ $task->company->name }}</b></div>
+                    @endif
                 </div>
             </div>
         </div>

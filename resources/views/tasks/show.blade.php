@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', "Задача: {{ $task->name }}")
+@section('title', "Задача: " . $task->title)
 
 @section('content')
     <div class="content-box__info-item">
@@ -9,62 +9,39 @@
 
                 <div class="message-box__left">
                     <div class="request-info">
-                        @if($task->senior)
-                            <div class="request-info__item">
-                                <span>Постановщик</span>
-                                <b>{{ $task->senior->name }}</b>
-                            </div>
-                        @endif
                         @if($task->company)
                             <div class="request-info__item">
                                 <span>Контрагент</span>
-                                <a href="#" class="blacklink">{{ $task->company->name }}</a>
+                                <a href="{{ route('companies.show', ['company'=>$task->company]) }}" 
+                                class="blacklink">{{ $task->company->name }}</a>
                             </div>
-                        @endif
+                        @endif  
                         <div class="request-info__item">
                             <span>Дата создания</span>
-                            <b>{{ $task->created_at->diffForHumans() }}</b>
+                            <b>{{ $task->humanDate() }}</b>
                         </div>
-                        @if($task->user != $user)
-                            <div class="request-info__item">
-                                <span>Ответственный менеджер</span>
-                                <b>{{ $task->user->name }}</b>
-                            </div>
-                        @endif
+                        <div class="request-info__item">
+                            <span>Ответственный менеджер</span>
+                            <b>{{ $task->creator->name }}</b>
+                        </div>
                         <div class="request-info__item">
                             <span>Статус</span>
                             <b class="task-status-color{{ $task->task_status_id }}">
                                 {{ $task->status->name }}
                             </b>
                         </div>
-                        @if($task->deadline_at)
-                        <div class="request-info__item">
-                            <span>Крайний срок</span>
-                            <b>{{ $task->deadline_at->format('d.m.Y H:i') }}</b>
-                        </div>
-                        @endif
                         <div class="request-info__item request-info__priority
-                                    request-info__priority_{{ $task->priority_id }}">
+                                    request-info__priority_{{ $task->priority->engName }}">
                             <span>Приоритет</span>
-                            <b><i></i> {{ $task->priority }}</b>
+                            <b><i></i> {{ $task->priority->name }}</b>
                         </div>
-                        @if($task->need_confirm)
-                            <div class="request-info__item">
-                                <span>Условия завершения</span>
-                                <b>Требуется подтверждение</b>
-                            </div>
-                        @endif
-                        @if($task->started_at)
-                            <div class="request-info__item">
-                                <span>Взята в работу</span>
-                                <b>{{ $task->started_at->diffForHumans() }}</b>
-                            </div>
-                        @endif
                         <div class="request-info__item remove-task-box">
                             <span>или</span>
-                            <a href="javascript:void(0);" class="remove-task" onclick="removeTask()">
-                                Удалить задачу
-                            </a>
+                            <a href="javascrirpt:void(0)" class="remove-task" data-toggle="confirmation"
+                            onclick="adminConfirm(function() {
+                                document.getElementById('removeTask').submit();
+                            })">Удалить задачу</a>
+
                             <form action="{{ route('tasks.destroy', ['task' => $task]) }}"
                                   method="post" id="removeTask">
                                 @csrf
@@ -78,28 +55,16 @@
                     <div class="request-messages">
                         <div class="request-messages-top">
                             <b>Задача #{{ $task->id }}</b>
-                            <div class="title">{{ $task->name }}</div>
-                            <div class="desc">{{ $task->content }}</div>
-                            @if($task->task_status_id == 1)
-                            <form action="{{ route('tasks.go', ['task' => $task]) }}" method="post">
-                                @csrf
-                                <button type="submit" class="sbtn sbtn-blue">В работу</button>
-                            </form>
-                            @endif
+                            <div class="title">{{ $task->title }}</div>
+                            <div class="desc">{{ $task->description }}</div>
                         </div>
-
-                        @if($task->expired && $task->deadline_at)
-                            <div class="task-expired-message">
-                                <div class="message-form message-error">
-                                    Крайний срок выполнения задачи истек {{ $task->deadline_at->diffForHumans() }}.
-                                </div>
+                        @if($task->isExpired())
+                        <div class="task-expired-message">
+                            <div class="message-form message-error">
+                                Крайний срок выполнения задачи истек {{ $task->deadlineDiff() }}.
                             </div>
+                        </div>
                         @endif
-
-                        <livewire:chat.messages-list :task="$task" :user="$user"/>
-
-                        <livewire:chat.input :task="$task" :user="$user"/>
-
                     </div>
                 </div>
             </div>

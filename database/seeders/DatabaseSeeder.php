@@ -10,6 +10,8 @@ use App\Models\CompanyStatus;
 use App\Models\Potentiality;
 use App\Models\Role;
 use App\Models\EventType;
+use App\Models\TaskStatus;
+use App\Models\TaskPriority;
 
 class DatabaseSeeder extends Seeder
 {
@@ -78,6 +80,32 @@ class DatabaseSeeder extends Seeder
         ]);
         EventType::create([
             'name' => 'Заявка',
+        ]);
+
+        TaskStatus::create([
+            'name' => 'В ожидании',
+        ]);
+        TaskStatus::create([
+            'name' => 'В работе',
+        ]);
+        TaskStatus::create([
+            'name' => 'Отложена',
+        ]);
+        TaskStatus::create([
+            'name' => 'Выполнена',
+        ]);
+
+        TaskPriority::create([
+            'name' => 'Низкий',
+            'engName' => 'low',
+        ]);
+        TaskPriority::create([
+            'name' => 'Средний',
+            'engName' => 'middle',
+        ]);
+        TaskPriority::create([
+            'name' => 'Высокий',
+            'engName' => 'high',
         ]);
     } 
 }
