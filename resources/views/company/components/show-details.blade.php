@@ -94,7 +94,6 @@
                         <span></span>
                     </a>
                     <div class="btn-el-items">
-                        <a href="#" class="btn-el btn-del"></a>
                         <a href="{{ route('companies.edit', ['company'=>$company]) }}" class="btn-el btn-edit"></a>
                     </div>
                 </div>
@@ -147,7 +146,6 @@
                     <span></span>
                 </a>
                 <div class="btn-el-items">
-                    <a href="#" class="btn-el btn-del"></a>
                     <a href="{{ route('companies.edit', ['company'=>$company]) }}" class="btn-el btn-edit"></a>
                 </div>
             </div>
