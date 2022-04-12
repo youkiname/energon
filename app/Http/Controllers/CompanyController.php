@@ -18,6 +18,7 @@ use App\Models\Employee;
 use App\Models\EmployeePhone;
 use App\Models\EmployeeEmail;
 use App\Models\Task;
+use App\Models\Event;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -127,6 +128,7 @@ class CompanyController extends Controller
 
         $company->save();
         $this->updateDetails($request, $company);
+        $this->createEditEvent($company);
 
         return redirect()->route('companies.show', ['company' => $company])->with([
             'success' => 'Организация успешно изменена.'
@@ -209,5 +211,14 @@ class CompanyController extends Controller
             }
         };
         return $tasks;
+    }
+
+    private function createEditEvent(Company $company) {
+        Event::create([
+            'title' => 'Изменение',
+            'description' => 'Контрагент был отредактирован пользователем ' . Auth::user()->name,
+            'company_id' => $company->id,
+            'event_type_id' => 4  # тип комментарий
+        ]);
     }
 }

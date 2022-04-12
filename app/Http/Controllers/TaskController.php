@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreTaskRequest;
 use App\Models\Task;
 use App\Models\Notification;
+use App\Models\Event;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -39,6 +40,7 @@ class TaskController extends Controller
         ]);
         if($task->company) {
             $this->createNotification($task);
+            $this->createEvent($task);
         }
 
         return back()->with('success', 'Задача успешно добавлена');
@@ -72,6 +74,16 @@ class TaskController extends Controller
             'title' => 'Новая задача: ' . $task->title,
             'content' => 'Для компании "' . $task->company->fullName() . '" добавлена новая задача',
             'link' => route('tasks.show', ['task' => $task]),
+        ]);
+    }
+
+    private function createEvent(Task $task)
+    {
+        Event::create([
+            'title' => 'Новая задача',
+            'description' => $task->description,
+            'company_id' => $task->company->id,
+            'event_type_id' => 4  # тип комментарий
         ]);
     }
 }
