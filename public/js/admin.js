@@ -1,6 +1,7 @@
-function adminConfirm(callbackFunction, title = "Вы уверены?") {
+function adminConfirm(callbackFunction, title = "Вы уверены?", text = "") {
     Swal.fire({
         title: title,
+        text: text,
         showDenyButton: false,
         showCancelButton: true,
         confirmButtonText: 'Да',
@@ -13,10 +14,10 @@ function adminConfirm(callbackFunction, title = "Вы уверены?") {
     })
 }
 
-function generatePassword(len=8){
+function generatePassword(len = 8) {
     let password = "";
     let symbols = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    for (let i = 0; i < len; i++){
+    for (let i = 0; i < len; i++) {
         password += symbols.charAt(Math.floor(Math.random() * symbols.length));
     }
     return password;
