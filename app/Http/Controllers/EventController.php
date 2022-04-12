@@ -17,7 +17,6 @@ class EventController extends Controller
             'event_type_id' => $request->event_type_id,
             'title' => $request->title,
             'description' => $request->description,
-            'contact' => $request->contact,
         ]);
 
         return back()->with('success', 'Событие успешно добавлено');

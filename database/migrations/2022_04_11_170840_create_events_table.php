@@ -19,7 +19,6 @@ return new class extends Migration
             $table->foreignId('event_type_id')->references('id')->on('event_types');
             $table->string('title');
             $table->string('description')->nullable();
-            $table->string('contact');
             $table->timestamps();
         });
     }

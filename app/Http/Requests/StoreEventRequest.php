@@ -15,7 +15,6 @@ class StoreEventRequest extends FormRequest
     {
         return [
             'title' => ['required', 'string', 'max:255'],
-            'contact' => ['required', 'string'],
         ];
     }
 
@@ -24,7 +23,6 @@ class StoreEventRequest extends FormRequest
         return [
             'title.required' => 'Название не заполнено',
             'title.max' => 'Название не может превышать 255 символов',
-            'contact.required' => 'Контакт не заполнен'
         ];
     }
 }

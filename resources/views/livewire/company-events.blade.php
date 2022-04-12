@@ -22,9 +22,6 @@
                     <x-input name="title" labelName="Заголовок"/>
                 </div>
                 <div class="form-new-task__item">
-                    <x-input name="contact" labelName="Контактное лицо"/>
-                </div>
-                <div class="form-new-task__item">
                     <label for="">Описание </label>
                     <textarea name="description">{{ old('description') }}</textarea>
                 </div>
@@ -43,8 +40,6 @@
                     <span>{{ $event->description }}</span>
                 </div>
                 <div class="events-item-info-person">
-                    <b>Контактное лицо</b>
-                    <span>{{ $event->contact }}</span>
                 </div>
             </div>
         </div>
