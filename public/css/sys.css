@@ -1348,6 +1348,11 @@ a.add-contact:hover {
     border-left: 2px #0a53be solid;
 }
 
+.notice-item-link {
+    margin-top: 5px;
+    color: #252525;
+}
+
 
 .notice-pagination {
     display: flex;

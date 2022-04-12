@@ -78,4 +78,9 @@ class Company extends Model
     {
         return $this->belongsTo(Potentiality::class, 'company_potentiality_id');
     }
+
+    public function fullName()
+    {
+        return $this->legal . ' ' . $this->name;
+    }
 }

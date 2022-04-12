@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreTaskRequest;
 use App\Models\Task;
+use App\Models\Notification;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -36,6 +37,9 @@ class TaskController extends Controller
             'start_time' => $request->start_time,
             'end_time' => $request->end_time,
         ]);
+        if($task->company) {
+            $this->createNotification($task);
+        }
 
         return back()->with('success', 'Задача успешно добавлена');
     }
@@ -59,5 +63,15 @@ class TaskController extends Controller
             $tasks[$humanDate] = Task::where('date', $date->date)->get();
         };
         return $tasks;
+    }
+
+    private function createNotification(Task $task)
+    {
+        Notification::create([
+            'user_id' => $task->company->manager->id,
+            'title' => 'Новая задача: ' . $task->title,
+            'content' => 'Для компании "' . $task->company->fullName() . '" добавлена новая задача',
+            'link' => route('tasks.show', ['task' => $task]),
+        ]);
     }
 }

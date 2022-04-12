@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\AdminController;
@@ -44,7 +45,7 @@ Route::middleware(['auth'])->group(function () {
         return view('stats.index');
     })->name('stats.index');
 
-    Route::get('alerts', [AlertController::class, 'index'])->name('alerts.index');
+    Route::resource('notifications', NotificationController::class);
 
     Route::get('settings', [SettingController::class, 'index'])->name('settings.index');
     Route::post('settings', [SettingController::class, 'store'])->name('settings.store');

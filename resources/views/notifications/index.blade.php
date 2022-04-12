@@ -3,52 +3,35 @@
 @section('title', "Уведомления")
 
 @section('content')
-    <x-slot name="header">
-        <div class="content-box__back-line">
-            <div class="container-compatibility">
-                <a href="{{ route('companies.index') }}" class="back">Назад</a>
-                <div class="form-contragent-top">
-                    <div class="title">Уведомления (2)</div>
-                </div>
+    <div class="content-box__back-line">
+        <div class="container-compatibility">
+            <div class="form-contragent-top">
+                <div class="title">Уведомления ({{ $amount }})</div>
             </div>
         </div>
-    </x-slot>
+    </div>
 
     <div class="container-compatibility">
+        @foreach($notifications as $notification)
         <div class="notice-item notice-item-new">
             <div class="notice-item-heading">
                 <div class="notice-item-title">
-                    Новая задача
+                    {{ $notification->title }}
                 </div>
                 <div class="notice-item-date">
-                    12.12.2021 в 12:30
+                    {{ $notification->created_at }}
                 </div>
             </div>
             <div class="notice-item-body">
-                Вам пришло сообщение:
+            {{ $notification->content }}
             </div>
+            @if($notification->link)
+            <a href="{{ $notification->link }}" class="notice-item-link">Посмотреть</a>
+            @endif
         </div>
+        @endforeach
 
-        <div class="notice-item">
-            <div class="notice-item-heading">
-                <div class="notice-item-title">
-                    Новая задача
-                </div>
-                <div class="notice-item-date">
-                    12.12.2021 в 12:30
-                </div>
-            </div>
-            <div class="notice-item-body">
-                Вам пришло сообщение:
-            </div>
-        </div>
-
-        <div class="notice-pagination">
-            <a href="#" class="active">1</a>
-            <a href="#">2</a>
-            <a href="#">3</a>
-        </div>
-
-        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        {{ $notifications->links('vendor.pagination.notifications') }}
+        
     </div>
 @endsection
