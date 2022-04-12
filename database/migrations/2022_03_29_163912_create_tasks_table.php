@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('company_id')->nullable();
-            $table->foreignId('user_id');
+            $table->foreignId('company_id')->references('id')->on('companies')->nullable()->onDelete('cascade');;
+            $table->foreignId('user_id')->references('id')->on('users');
             $table->string('title');
             $table->text('description');
             $table->smallInteger('priority');

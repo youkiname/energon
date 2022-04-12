@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('company_details', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('company_id');
+            $table->foreignId('company_id')->references('id')->on('companies')->onDelete('cascade');;
             $table->string('contract_number');
             $table->integer('specification_number');
             $table->string('request_number');
