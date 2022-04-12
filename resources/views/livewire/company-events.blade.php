@@ -1,6 +1,6 @@
 <div class="events-box">
     <div class="events-items">
-        <div class="new-event-box" id="event-form" style="display: none;">
+        <div class="new-event-box" id="event-form" style="@if (!$errors->any()) display: none; @endif">
             <div class="new-event-box__top">
                 <div class="new-event-date" id="new-event-date">Сегодня, 14:37</div>
                 <a href="#">Отменить</a>
@@ -19,16 +19,14 @@
                     </select>
                 </div>
                 <div class="form-new-task__item">
-                    <label for="">Заголовок</label>
-                    <input type="text" name="title" value="">
+                    <x-input name="title" labelName="Заголовок"/>
                 </div>
                 <div class="form-new-task__item">
-                    <label for="">Контактное лицо</label>
-                    <input type="text" name="contact" value="">
+                    <x-input name="contact" labelName="Контактное лицо"/>
                 </div>
                 <div class="form-new-task__item">
                     <label for="">Описание </label>
-                    <textarea name="description"></textarea>
+                    <textarea name="description">{{ old('description') }}</textarea>
                 </div>
                 <button class="btn-blue">Создать</button>
             </form>
