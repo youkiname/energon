@@ -131,9 +131,12 @@ class CompanyController extends Controller
         ]);
     }
 
-    public function destroy($id)
+    public function destroy(Company $company)
     {
-        //
+        $company->delete();
+        return redirect()->route('companies.index')->with([
+            'success' => 'Организация успешно удалена.'
+        ]);
     }
 
     public function bundle(Request $request)

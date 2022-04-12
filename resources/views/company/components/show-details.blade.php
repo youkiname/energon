@@ -38,7 +38,15 @@
                             <span></span>
                         </a>
                         <div class="btn-el-items">
-                            <a href="#" class="btn-el btn-del"></a>
+                            <a href="javascrirpt:void(0)" class="btn-el btn-del" data-toggle="confirmation"
+                            onclick="adminConfirm(function() {
+                                document.getElementById('companyDelete').submit();
+                            }, 'Вы уверены?', 'Все сотрудники, задачи и события, связанные с этой компанией, будут удалены.')"></a>
+                            <form action="{{ route('companies.destroy', ['company' => $company]) }}"
+                                method="post" id="companyDelete">
+                                @csrf
+                                @method('DELETE')
+                            </form>
                             <a href="{{ route('companies.edit', ['company'=>$company]) }}" class="btn-el btn-edit"></a>
                         </div>
                     </div>

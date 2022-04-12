@@ -62,6 +62,8 @@
     @livewireScripts
     <script src="js/vendor.min.js"></script>
     <script src="js/main.js"></script>
+    <script src="{{ asset('js/swal.min.js') }}"></script>
+    <script src="{{ asset('js/admin.js') }}"></script>
     {{ $scripts ?? '' }}
 
     <script>
