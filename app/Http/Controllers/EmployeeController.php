@@ -27,7 +27,7 @@ class EmployeeController extends Controller
         $employee->save();
 
 
-        return redirect()->route('companies.show', ['company' => $employee->company])->with([
+        return redirect()->route('companies.contacts', ['company' => $employee->company])->with([
             'success' => 'Сотрудник успешно изменен.'
         ]);
     }
@@ -57,7 +57,7 @@ class EmployeeController extends Controller
                 'email' => $email,
             ]);
         }
-        return redirect()->route('companies.show', ['company' => $company])->with([
+        return redirect()->route('companies.contacts', ['company' => $company])->with([
             'success' => 'Новый сотрудник добавлен'
         ]);
     }
@@ -66,11 +66,11 @@ class EmployeeController extends Controller
     {
         $company = $employee->company;
         if($company->employeesCount() == 1) {
-            return redirect()->route('companies.show', ['company' => $company])
+            return redirect()->route('companies.contacts', ['company' => $company])
             ->withErrors(['msg' => 'Компания должна иметь хотя бы одного сотрудника']);
         }
         $employee->delete();
-        return redirect()->route('companies.show', ['company' => $company]);
+        return redirect()->route('companies.contacts', ['company' => $company]);
     }
 
     private function updateContacts(Request $request, Employee $employee) {

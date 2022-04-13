@@ -17,7 +17,7 @@
         </div>
         <a href="javascript:void(0)" class="btn-filter"><span>Фильтр</span></a>
         <div class="elem-information__box">
-            <div class="elem-item d-flex bg-white" id="tab_3">
+            <div class="elem-item" id="tab_3" style="display: flex;">
                 <div class="plans-box__left">
                     <div class="plans-request-form">
                         <div class="title">Добавить</div>
