@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('company_id')->nullable()->references('id')->on('companies')->onDelete('cascade');
             $table->foreignId('user_id')->nullable()->references('id')->on('users')->onDelete('set null');
-            $table->foreignId('task_priority_id')->nullable()->references('id')->on('task_priorities')->onDelete('set null');
-            $table->foreignId('task_status_id')->nullable()->references('id')->on('task_statuses')->onDelete('set null');
+            $table->foreignId('task_priority_id');
+            $table->foreignId('task_status_id');
             $table->string('title');
             $table->text('description');
             $table->date('date');
