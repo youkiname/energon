@@ -209,6 +209,11 @@ textarea {
     margin-right: 82px;
 }
 
+.text-danger {
+    font-size: 14px;
+    color: red;
+}
+
 .menu {
     display: -webkit-box;
     display: -ms-flexbox;

@@ -25,7 +25,6 @@
     <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon-180x180.png">
     <link rel="apple-touch-icon" sizes="1024x1024" href="img/favicon/apple-touch-icon-1024x1024.png">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="css/vendor.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/sys.css">
@@ -48,7 +47,7 @@
                 </div>
             </div>
             @if ($errors->any())
-            <div class="alert alert-danger">
+            <div class="message-form message-error">
                 <ul>
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
