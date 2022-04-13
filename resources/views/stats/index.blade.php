@@ -12,7 +12,7 @@
                 </div>
                 <div class="stat-item-bottom">
                     <div class="stat-col">{{ $companiesCount }}</div>
-                    <div class="stat-date">Последний 12.02.2021</div>
+                    <div class="stat-date">Последний {{ $lastCompanyDate }}</div>
                 </div>
             </div>
 
@@ -22,7 +22,7 @@
                 </div>
                 <div class="stat-item-bottom">
                     <div class="stat-col">{{ $employeesCount }}</div>
-                    <div class="stat-date">Последний 12.02.2021</div>
+                    <div class="stat-date">Последний {{ $lastEmployeeDate }}</div>
                 </div>
             </div>
 
