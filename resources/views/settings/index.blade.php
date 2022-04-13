@@ -10,13 +10,10 @@
             </div>
         @endif
 
-        <form action="{{ route('settings.store') }}" method="post">
+        <form action="{{ route('settings.store') }}" method="post" class="contragent-form">
             @csrf
             <div class="settings-list">
                 <div class="settings-title">Уведомления</div>
-                <pre>
-                    {{ json_encode(auth()->user()->settings) }}
-                </pre>
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox"
                            @if(auth()->user()->setting('notification_email')) checked @endif
@@ -27,7 +24,7 @@
                 </div>
             </div>
 
-            <div class="settings-buttons">
+            <div class="form-btns">
                 <button type="submit" class="btn btn-blue">Сохранить</button>
             </div>
         </form>

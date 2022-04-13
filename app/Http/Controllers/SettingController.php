@@ -14,12 +14,9 @@ class SettingController extends Controller
     public function store(Request $request)
     {
         $user = auth()->user();
-
-        if($request->notification_email) {
-            $user->settings([
-                'notification_email' => 1
-            ]);
-        }
+        $user->settings([
+            'notification_email' => $request->notification_email,
+        ]);
 
         return redirect()->route('settings.index')
             ->with('success', 'Настройки сохранены');
