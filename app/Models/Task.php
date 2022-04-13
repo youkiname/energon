@@ -10,7 +10,6 @@ class Task extends Model
 {
     use HasFactory;
 
-    public $timestamps = false;
     public $priorities = [
         0 => "Низкий",
         1 => "Средний",

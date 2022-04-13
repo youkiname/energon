@@ -26,40 +26,58 @@ class DatabaseSeeder extends Seeder
             'name' => 'admin'
         ]);
         Role::create([
-            'name' => 'role2'
+            'name' => 'Менеджер'
         ]);
         Role::create([
-            'name' => 'role3'
+            'name' => 'Главный Менеджер'
         ]);
 
         CompanyType::create([
-            'name' => "Тип контрагента 1",
+            'name' => "Монтажная организация",
         ]);
         CompanyType::create([
-            'name' => "Тип контрагента 2",
+            'name' => "Промышленное предприятие",
         ]);
         CompanyType::create([
-            'name' => "Тип контрагента 3",
+            'name' => "Инвестиционный проект",
+        ]);
+        CompanyType::create([
+            'name' => "АПК",
+        ]);
+        CompanyType::create([
+            'name' => "Проектировщики",
+        ]);
+        CompanyType::create([
+            'name' => "Сетевая компания",
+        ]);
+        CompanyType::create([
+            'name' => "Строительная компания",
         ]);
 
         CompanyPurchase::create([
-            'name' => "Тип закупки 1",
+            'name' => "Внутренняя закупка",
         ]);
         CompanyPurchase::create([
-            'name' => "Тип закупки 2",
+            'name' => "Закупка по 223-Ф3",
         ]);
         CompanyPurchase::create([
-            'name' => "Тип закупки 3",
+            'name' => "Коммерческие закупки на электронной площадке",
         ]);
 
         CompanyStatus::create([
             'name' => "Проработка",
         ]);
         CompanyStatus::create([
-            'name' => "В работе",
+            'name' => "Действующий - разовый",
+        ]);
+        CompanyStatus::create([
+            'name' => "Действующий - постоянный",
         ]);
         CompanyStatus::create([
             'name' => "В ожидании",
+        ]);
+        CompanyStatus::create([
+            'name' => "Закрыт",
         ]);
 
         Potentiality::create([

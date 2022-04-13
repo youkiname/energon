@@ -22,10 +22,11 @@ return new class extends Migration
             $table->string('city');
             $table->string('address');
             $table->foreignId('company_type_id');
-            $table->string('company_purchase_id');
-            $table->string('company_status_id');
-            $table->string('company_potentiality_id');
+            $table->foreignId('company_purchase_id');
+            $table->foreignId('company_status_id');
+            $table->foreignId('company_potentiality_id');
             $table->text('description');
+            $table->timestamps();
         });
     }
 
