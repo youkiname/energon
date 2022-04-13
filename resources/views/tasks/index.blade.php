@@ -28,10 +28,21 @@
             </div>
             <div class="plans-box__right">
                 <a href="javascript:void(0)" class="add-card"><span>Добавить</span><i></i></a>
-                @include('tasks.components.list', ['tasks' => $tasks])
+                <livewire:tasks-list />
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function(){
+        $('.plans-calendar').datepicker({
+            dateFormat: 'yyyy-mm-dd',
+            onSelect: function(dateText) {
+                Livewire.emit('changeTaskDateFilter', dateText)
+            }
+        });
+    });
+</script>
 
 @endsection

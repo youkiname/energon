@@ -17,7 +17,6 @@ use App\Models\Potentiality;
 use App\Models\Employee;
 use App\Models\EmployeePhone;
 use App\Models\EmployeeEmail;
-use App\Models\Task;
 use App\Models\Event;
 
 use Illuminate\Support\Facades\DB;
@@ -96,7 +95,6 @@ class CompanyController extends Controller
     public function tasks(Company $company)
     {
         $this->templateData['company'] = $company;
-        $this->templateData['tasks'] = $this->collectTasks();
         return view('company.tasks', $this->templateData);
     }
 
@@ -193,24 +191,6 @@ class CompanyController extends Controller
 
         CompanyDetails::where('company_id', $company->id)
         ->update($updatingFields);
-    }
-
-    private function collectTasks() {
-        $dates = DB::table('tasks')
-                ->select('date')
-                ->groupBy('date')
-                ->get();
-        $tasks = [];
-        foreach($dates as $date) {
-            $dailyTasks = Task::where('date', $date->date)
-            ->where('company_id', $this->templateData['company']->id)
-            ->get();
-            if(!$dailyTasks->isEmpty()) {
-                $humanDate = Carbon::create($date->date)->toFormattedDateString();
-                $tasks[$humanDate] = $dailyTasks;
-            }
-        };
-        return $tasks;
     }
 
     private function createEditEvent(Company $company) {

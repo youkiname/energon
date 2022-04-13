@@ -25,7 +25,7 @@
                     </div>
                 </div>
                 <div class="plans-box__right">
-                    @include('tasks.components.list', ['tasks' => $tasks])
+                    <livewire:tasks-list :companyId="$company->id"/>
                 </div>
             </div>
         </div>

@@ -15,7 +15,7 @@ class TaskController extends Controller
 {
     public function index()
     {
-        return view('tasks.index', ["tasks" => $this->collectAllTasks()]);
+        return view('tasks.index');
     }
 
     public function show(Task $task)
@@ -53,20 +53,6 @@ class TaskController extends Controller
             'success' => 'Задача успешно удалена.'
         ]);
     }
-
-    private function collectAllTasks() {
-        $dates = DB::table('tasks')
-                ->select('date')
-                ->groupBy('date')
-                ->get();
-        $tasks = [];
-        foreach($dates as $date) {
-            $humanDate = Carbon::create($date->date)->toFormattedDateString();
-            $tasks[$humanDate] = Task::where('date', $date->date)->get();
-        };
-        return $tasks;
-    }
-
     private function createNotification(Task $task)
     {
         Notification::create([
