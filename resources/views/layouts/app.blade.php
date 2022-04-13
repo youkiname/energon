@@ -36,7 +36,11 @@
 <body>
     <div class="wrapper">
         @include('components.navigation')
-
+        @if (session()->has('success'))
+            <div class="settings-success">
+                <div class="message-form message-ok">{{ session('success') }}</div>
+            </div>
+        @endif
         <div class="content-box">
             <div class="content-box__back-line">
                 <div class="container">

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ContactController;
@@ -21,6 +22,7 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
 
     Route::post('/companies/bundle', [CompanyController::class, 'bundle'])
     ->name('companies.bundle');

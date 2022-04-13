@@ -4,12 +4,6 @@
 
 @section('content')
     <div class="container-compatibility">
-        @if (session()->has('success'))
-            <div class="settings-success">
-                <div class="message-form message-ok">{{ session('success') }}</div>
-            </div>
-        @endif
-
         <form action="{{ route('settings.store') }}" method="post" class="contragent-form">
             @csrf
             <div class="settings-list">

@@ -23,7 +23,7 @@
                 <x-profile-image :photo="Auth::user()->photo" />
             </div>
             <div class="profile-hide">
-                <a href="{{ route('contacts.index') }}" class="lk-link">Личный кабинет</a>
+                <a href="{{ route('profile.index') }}" class="lk-link">Личный кабинет</a>
                 <a href="{{ route('settings.index') }}" class="settings-link">Настройки</a>
                 <a href="{{ route('notifications.index') }}" class="note-link">Уведомления</a>
                 @if(auth()->user()->role_id == 1)
