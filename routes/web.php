@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\TaskController as PlannerController;
 use App\Http\Controllers\AlertController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\StatsController;
 
 Route::get('/', function () {
     return redirect('/companies');
@@ -42,9 +43,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('tasks', TaskController::class);
 
-    Route::get('stats', function () {
-        return view('stats.index');
-    })->name('stats.index');
+    Route::get('stats', [StatsController::class, 'index'])->name('stats.index');
 
     Route::resource('notifications', NotificationController::class);
 
