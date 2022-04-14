@@ -35,7 +35,7 @@
                         </div>
                         <div class="contragent-form__item">
                             <label for="company_type">Тип клиента</label>
-                            <select name="company_type" id="cliencompany_typet_type" class="@error('company_type') is-invalid @enderror">
+                            <select name="company_type" id="company_type" class="@error('company_type') is-invalid @enderror">
                                 @foreach($companyTypes as $companyType)
                                 <option value="{{ $companyType->id }}">{{ $companyType->name }}</option>
                                 @endforeach
