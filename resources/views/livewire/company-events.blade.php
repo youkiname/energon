@@ -48,7 +48,7 @@
 
     <div class="events-dates">
         <button class="btn-new-event" id="add-new-event"><span>Добавить событие</span><img src="img/plus-blue.svg" alt=""></button>
-        <div class="select-box">
+        <div class="select-box" wire:ignore>
             <span>Категория:</span>
             <select name="event_type" id="event_type">
                 <option value="0">Все</option>

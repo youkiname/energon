@@ -8,7 +8,7 @@
                 wire:model="searchValue">
             </div>
             <div class="filters-right">
-                <div class="select-box">
+                <div class="select-box" wire:ignore>
                     <span>Статус:</span>
                     <select name="company_status" id="company_status">
                         <option value="0">Все</option>
