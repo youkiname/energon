@@ -31,6 +31,7 @@
                             <b><i></i> {{ $task->priority->name }}</b>
                         </div>
                         <div class="request-info__item remove-task-box">
+                            <a href="{{ route('tasks.edit', ['task'=>$task]) }}" class="edit-task">Изменить</a>
                             <span>или</span>
                             <a href="javascrirpt:void(0)" class="remove-task" data-toggle="confirmation"
                             onclick="adminConfirm(function() {

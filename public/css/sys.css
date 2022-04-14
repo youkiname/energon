@@ -538,6 +538,18 @@ select:focus {
     text-align: center;
 }
 
+.edit-task {
+    color: #fff;
+    font-size: 12px;
+    display: block;
+    width: 100%;
+    background: #2E5BFF;
+    border-radius: 10px;
+    padding: 10px 15px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
 .sys-custom-select .nice-select {
     width: 100%;
     float: none;

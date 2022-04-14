@@ -46,6 +46,27 @@ class TaskController extends Controller
         return back()->with('success', 'Задача успешно добавлена');
     }
 
+    public function edit(Task $task)
+    {
+        return view('tasks.edit', ['task' => $task]);
+    }
+
+    public function update(StoreTaskRequest $request, Task $task)
+    {
+        $task->title = $request->title;
+        $task->description = $request->description;
+        $task->description = $request->description ?? '';
+        $task->date = $request->date;
+        $task->start_time = $request->start_time;
+        $task->end_time = $request->end_time;
+
+        $task->save();
+
+        return redirect()->route('tasks.show', ['task' => $task])->with([
+            'success' => 'Задача успешно изменена.'
+        ]);
+    }
+
     public function destroy(Task $task)
     {
         $task->delete();
