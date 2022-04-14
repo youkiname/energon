@@ -2689,6 +2689,10 @@ select {
     margin-bottom: 28px;
 }
 
+.form-request .btn-blue {
+    width: 100%;
+}
+
 .form-request__item label {
     display: block;
     font-weight: 600;
