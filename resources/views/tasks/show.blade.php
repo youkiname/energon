@@ -24,12 +24,7 @@
                             <span>Ответственный менеджер</span>
                             <b>{{ $task->creator->name }}</b>
                         </div>
-                        <div class="request-info__item">
-                            <span>Статус</span>
-                            <b class="task-status-color{{ $task->task_status_id }}">
-                                {{ $task->status->name }}
-                            </b>
-                        </div>
+                        <livewire:task-status-select :task="$task"/>
                         <div class="request-info__item request-info__priority
                                     request-info__priority_{{ $task->priority->engName }}">
                             <span>Приоритет</span>

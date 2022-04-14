@@ -19,7 +19,7 @@
                 </div>
                 <div class="date-note-desc">
                     <a href="{{ route('tasks.show', ['task'=>$task]) }}" class="name-note"
-                    >{{ $task->title }}</a>
+                    >{{ $task->title }} - {{ $task->status->name }}</a>
                     <div class="desc-note">{{ $task->description }}</div>
                     @if($task->company)
                     <div class="desc-note"><b>{{ $task->company->legal }} {{ $task->company->name }}</b></div>
