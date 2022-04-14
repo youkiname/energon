@@ -4,7 +4,7 @@
         <a href="{{ route('companies.show', ['company' => $company]) }}">{{ $company->name }}</a>
     </div>
     <div class="table-td">
-        <b>ВО</b>
+        <b>Город</b>
         <span>{{ $company->city }}</span>
     </div>
     <div class="table-td">

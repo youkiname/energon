@@ -14,7 +14,7 @@
                     <div class="plans-request-info" style="@if ($errors->any()) display: none; @endif">
                         <div class="plans-request-img"><img src="img/request-ico.svg" alt=""></div>
                         <div class="plans-request-title">Новая заметка</div>
-                        <div class="plans-request-desc">Добавленная заметка отображается в блоке *планировщика справа, через него вы можете редактировать текущие заметки или смещаь время их реализации на другой срок</div>
+                        <div class="plans-request-desc">Добавленная заметка отображается в блоке планировщика справа, через него вы можете редактировать текущие заметки или смещать время их реализации на другой срок</div>
                         <a href="#" class="btn-blue">Добавить</a>
                     </div>
 
