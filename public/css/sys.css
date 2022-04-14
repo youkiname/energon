@@ -1222,6 +1222,7 @@ a.add-contact {
     font-size: 12px;
     border-radius: 10px;
     background: #FFFFFF;
+    color: black;
     border: 1px solid #E1E1E1;
     padding: 8px 26px;
 }

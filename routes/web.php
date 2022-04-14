@@ -50,6 +50,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('settings', [SettingController::class, 'index'])->name('settings.index');
     Route::post('settings', [SettingController::class, 'store'])->name('settings.store');
 
+    Route::get('contacts', [ContactController::class, 'index'])->name('contacts.index');
+
     Route::middleware(['admin'])->prefix('admin')->name('admin.')->group(function () {
 
         Route::get('/', [AdminController::class, 'index'])->name('index');
