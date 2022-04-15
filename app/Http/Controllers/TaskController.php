@@ -11,6 +11,9 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\NotificationMail;
+
 class TaskController extends Controller
 {
     public function index()
@@ -76,12 +79,14 @@ class TaskController extends Controller
     }
     private function createNotification(Task $task)
     {
-        Notification::create([
+        $notification = Notification::create([
             'user_id' => $task->company->manager->id,
             'title' => 'Новая задача: ' . $task->title,
             'content' => 'Для компании "' . $task->company->fullName() . '" добавлена новая задача',
             'link' => route('tasks.show', ['task' => $task]),
         ]);
+
+        Mail::to($task->company->manager->email)->send(new NotificationMail($notification));
     }
 
     private function createEvent(Task $task)
