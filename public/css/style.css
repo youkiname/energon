@@ -3192,7 +3192,12 @@ select {
     margin-bottom: 0;
 }
 
+.task-status {
+    margin-bottom: 85px;
+}
+
 .task-status .nice-select {
+    line-height: 40px;
     max-width: 100%;
     width: 100%;
     height: 45px;
@@ -3877,7 +3882,7 @@ select {
     margin-bottom: 0;
 }
 
-.request-info__item span {
+.request-info__item p {
     display: block;
     font-weight: 600;
     font-size: 10px;

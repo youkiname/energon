@@ -11,28 +11,28 @@
                     <div class="request-info">
                         @if($task->company)
                             <div class="request-info__item">
-                                <span>Контрагент</span>
+                                <p>Контрагент</p>
                                 <a href="{{ route('companies.show', ['company'=>$task->company]) }}" 
                                 class="blacklink">{{ $task->company->name }}</a>
                             </div>
                         @endif  
                         <div class="request-info__item">
-                            <span>Дата создания</span>
+                            <p>Дата создания</p>
                             <b>{{ $task->humanDate() }}</b>
                         </div>
                         <div class="request-info__item">
-                            <span>Ответственный менеджер</span>
+                            <p>Ответственный менеджер</p>
                             <b>{{ $task->creator->name }}</b>
                         </div>
                         <livewire:task-status-select :task="$task"/>
                         <div class="request-info__item request-info__priority
                                     request-info__priority_{{ $task->priority->engName }}">
-                            <span>Приоритет</span>
+                            <p>Приоритет</p>
                             <b><i></i> {{ $task->priority->name }}</b>
                         </div>
                         <div class="request-info__item remove-task-box">
                             <a href="{{ route('tasks.edit', ['task'=>$task]) }}" class="edit-task">Изменить</a>
-                            <span>или</span>
+                            <p>или</p>
                             <a href="javascrirpt:void(0)" class="remove-task" data-toggle="confirmation"
                             onclick="adminConfirm(function() {
                                 document.getElementById('removeTask').submit();

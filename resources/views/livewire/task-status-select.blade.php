@@ -1,6 +1,6 @@
 <div class="request-info__item">
-    <span>Статус</span>
-    <b class="task-status" wire:ignore>
+    <p>Статус</p>
+    <div class="task-status" wire:ignore>
         <select name="task_status" id="task_status">
             @foreach($statuses as $status)
             <option value="{{ $status->id }}" 
@@ -8,7 +8,7 @@
             >{{ $status->name }}</option>
             @endforeach
         </select>
-    </b>
+    </div>
     <script>
         document.addEventListener('DOMContentLoaded', function(){
             $("#task_status").on('change', function() {
