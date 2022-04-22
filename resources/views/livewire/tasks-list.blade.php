@@ -14,8 +14,8 @@
             @endif
             ">
                 <div class="time">
-                    <div class="time-start">{{ $task->start_time }}</div>
-                    <div class="time-finish">{{ $task->end_time }}</div>
+                    <div class="time-start">{{ substr($task->start_time, 0, -3) }}</div>
+                    <div class="time-finish">{{ substr($task->end_time, 0, -3) }}</div>
                 </div>
                 <div class="date-note-desc">
                     <a href="{{ route('tasks.show', ['task'=>$task]) }}" class="name-note"
