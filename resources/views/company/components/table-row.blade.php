@@ -29,6 +29,9 @@
     </div>
     <div class="table-td">
         <a href="#" class="table-tr-btn"></a>
-        <a href="{{ route('companies.show', ['company' => $company]) }}" class="del">{{ $company->status->name }}</a>
+        <a href="{{ route('companies.show', ['company' => $company]) }}" class="del"
+        style="width: auto;">
+        {{ $company->status->name }}
+        </a>
     </div>
 </div>
