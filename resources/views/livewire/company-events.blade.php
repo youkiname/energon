@@ -10,9 +10,9 @@
                 @csrf
                 <input type="hidden" name="company_id" value="{{ $company->id }}">
                 <div class="title">Новое событие</div>
-                <div class="form-new-task__item">
+                <div class="form-new-task__item"  style="margin-bottom: 60px;">
                     <label for="">Категория</label>
-                    <select name="event_type_id" class="w-100">
+                    <select name="event_type_id">
                         @foreach($eventTypes as $type)
                         <option value="{{ $type->id }}">{{ $type->name }}</option>
                         @endforeach
