@@ -57,6 +57,22 @@ class Task extends Model
         return Carbon::create($this->date)->toFormattedDateString(); 
     }
 
+    public function getFormattedStartTime() {
+        // Some DB like mysql save time field like HOURS:MINUTES:SEC
+        // We need HOURS:MINUTES
+        $hours = explode(':', $this->start_time)[0];
+        $minutes = explode(':', $this->start_time)[1];
+        return $hours . ':' . $minutes;
+    }
+
+    public function getFormattedEndTime() {
+        // Some DB like mysql save time field like HOURS:MINUTES:SEC
+        // We need HOURS:MINUTES
+        $hours = explode(':', $this->end_time)[0];
+        $minutes = explode(':', $this->end_time)[1];
+        return $hours . ':' . $minutes;
+    }
+
     public function startDate()
     {
         return Carbon::create($this->date . ' ' . $this->start_time);
