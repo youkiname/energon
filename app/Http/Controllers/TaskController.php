@@ -86,7 +86,10 @@ class TaskController extends Controller
             'link' => route('tasks.show', ['task' => $task]),
         ]);
 
-        Mail::to($task->company->manager->email)->send(new NotificationMail($notification));
+        $user = auth()->user();
+        if ($user->settings && $user->settings['notification_email']) {
+            Mail::to($task->company->manager->email)->send(new NotificationMail($notification));
+        }
     }
 
     private function createEvent(Task $task)
