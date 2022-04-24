@@ -7,6 +7,7 @@ use App\Http\Requests\StoreTaskRequest;
 use App\Models\Task;
 use App\Models\Notification;
 use App\Models\Event;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -86,8 +87,8 @@ class TaskController extends Controller
             'link' => route('tasks.show', ['task' => $task]),
         ]);
 
-        $user = auth()->user();
-        if ($user->settings && $user->settings['notification_email']) {
+        $targetUser = $task->company->manager;
+        if ($targetUser->settings && $targetUser->settings['notification_email']) {
             Mail::to($task->company->manager->email)->send(new NotificationMail($notification));
         }
     }
