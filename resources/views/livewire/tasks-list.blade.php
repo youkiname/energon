@@ -2,6 +2,11 @@
 @foreach($tasks as  $day=>$dailyTasks)
     <div class="date-plan-item">
         <div class="title">{{ $day }}</div>
+        @if($dailyTasks->isEmpty())
+        <div class="date-notes">
+            Пусто
+        </div>
+        @endif
         @foreach($dailyTasks as $task)
         <div class="date-notes">
             <div class="date-note-item 

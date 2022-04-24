@@ -40,21 +40,32 @@ class TasksList extends Component
         if ($this->selectedDate) {
             $dates = $dates->where('date', $this->selectedDate);
         }
-        $dates = $dates->groupBy('date')->get();
+        $dates = $dates->groupBy('date')->orderBy('date', "DESC")->get();
 
-        $tasks = [];
+        $today = date("Y-m-d");
+        $tasks = [
+            'Сегодня' => $this->getTasksByDate($today)
+        ];
+
         foreach($dates as $date) {
-            $dailyTasks = Task::where('date', $date->date);
-            if ($this->companyId) {
-                $dailyTasks = $dailyTasks->where('company_id', $this->companyId);
+            if ($date->date == $today) {
+                continue;
             }
-            $dailyTasks = $dailyTasks->get();
-
+            $dailyTasks = $this->getTasksByDate($date->date);
             if(!$dailyTasks->isEmpty()) {
                 $humanDate = Carbon::create($date->date)->toFormattedDateString();
                 $tasks[$humanDate] = $dailyTasks;
             }
         };
         $this->tasks = $tasks;
+    }
+
+    private function getTasksByDate($date) {
+        $tasks = Task::where('date', $date);
+        if ($this->companyId) {
+            $tasks = $tasks->where('company_id', $this->companyId);
+        }
+        $tasks = $tasks->get();
+        return $tasks;
     }
 }
