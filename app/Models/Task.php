@@ -85,7 +85,7 @@ class Task extends Model
 
     public function deadlineDiff()
     {
-        return $this->deadline()->diffForHumans(Carbon::now());
+        return substr($this->deadline()->diffForHumans(Carbon::now()), 0, -4) . ' назад';
     }
 
     public function isExpired()

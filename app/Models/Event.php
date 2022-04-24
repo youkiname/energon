@@ -30,14 +30,6 @@ class Event extends Model
 
     public function relativeDate()
     {
-        $diffInDays = Carbon::now()->diffInDays($this->created_at);
-        if ($diffInDays > 0) {
-            return $diffInDays . " дня назад";
-        }
-        $diffInHours = Carbon::now()->diffInHours($this->created_at);
-        if ($diffInHours > 0) {
-            return $diffInHours . " часов назад";
-        }
-        return "Менее часа назад";
+        return substr(Carbon::now()->diffForHumans($this->created_at), 0, -10) . ' назад';
     }
 }
