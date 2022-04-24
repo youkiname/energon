@@ -4,31 +4,8 @@
             <div class="info-item-top__left">
                 <div class="info-item-title">
                     <b>{{ $company->name }}</b>
-                    <div class="info-item-title-box">
-                        <select name="status-select" id="status-select">
-                            <option selected disabled value="Статус">Статус</option>
-                            @foreach($companyStatuses as $companyStatus)
-                                <option value="{{ $companyStatus->id }}">{{ $companyStatus->name }}</option>
-                            @endforeach
-                        </select>
-                        <span class="in-work2">{{ $company->status->name }}</span>
-                    </div>
-
-                    <div class="client-status">
-                        <div class="select-box">
-                            <span>Потенциал клиента:</span>
-                            
-                            <select name="" id="">
-                            @foreach($companyPotentialities as $companyPotentiality)
-                                <option value="{{ $companyPotentiality->id }}"
-                                @if($companyPotentiality->id == $company->potentiality->id) selected @endif
-                                >
-                                    {{ $companyPotentiality->name }}
-                                </option>
-                            @endforeach
-                            </select>
-                        </div>
-                    </div>
+                    <livewire:company-status-select :company="$company"/>
+                    <livewire:company-potentiality-select :company="$company"/>
 
 
                     <div class="btn-more-box">
