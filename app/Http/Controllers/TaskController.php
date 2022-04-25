@@ -34,10 +34,11 @@ class TaskController extends Controller
         $task = Task::create([
             'title' => $request->title,
             'company_id' => $request->company_id,
-            'user_id' => Auth::user()->id,
+            'creator_id' => Auth::user()->id,
+            'target_user_id' => $request->target_user_id == 0 ? null : $request->target_user_id,
             'description' => $request->description ?? '',
             'task_priority_id' => $request->input_priority,
-            'task_status_id' => 1,
+            'task_status_id' => $request->status_id,
             'date' => $date,
             'start_time' => $request->start_time,
             'end_time' => $request->end_time,
@@ -97,6 +98,7 @@ class TaskController extends Controller
     {
         Event::create([
             'title' => 'Новая задача',
+            'creator_id' => Auth::user()->id,
             'description' => $task->description,
             'company_id' => $task->company->id,
             'event_type_id' => 4  # тип комментарий

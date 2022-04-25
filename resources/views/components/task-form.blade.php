@@ -1,8 +1,8 @@
 <form action="{{ route('tasks.store') }}" method="POST" 
     id="new-task-form" class="form-request" enctype="multipart/form-data">
     @csrf
-    @if(isset($company_id))
-    <input type="hidden" name="company_id" value="{{ $company_id }}">
+    @if(isset($companyId))
+    <input type="hidden" name="company_id" value="{{ $companyId }}">
     @endif
     <div class="form-request__item">
         <x-input name="title" labelName="Заголовок"/>
@@ -10,6 +10,23 @@
     <div class="form-request__item">
         <label for="description">Описание</label>
         <textarea id="description" name="description">{{ old('description') }}</textarea>
+    </div>
+    <div class="form-request__item" style="margin-bottom: 60px;">
+        <label for="">Контактное лицо</label>
+        <select name="target_user_id" >
+            <option value="0" selected>Пусто</option>
+            @foreach($users as $user)
+            <option value="{{ $user->id }}">{{ $user->name }}</option>
+            @endforeach
+        </select>
+    </div>
+    <div class="form-request__item"style="margin-bottom: 60px;">
+        <label for="">Статус</label>
+        <select name="status_id" >
+            @foreach($statuses as $status)
+            <option value="{{ $status->id }}">{{ $status->name }}</option>
+            @endforeach
+        </select>
     </div>
     <div class="form-request__item">
         <label for="">Приоритет</label>

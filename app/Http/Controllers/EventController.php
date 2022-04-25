@@ -14,6 +14,8 @@ class EventController extends Controller
     {
         Event::create([
             'company_id' => $request->company_id,
+            'creator_id' => Auth::user()->id,
+            'target_user_id' => $request->target_user_id == 0 ? null : $request->target_user_id,
             'event_type_id' => $request->event_type_id,
             'title' => $request->title,
             'description' => $request->description,

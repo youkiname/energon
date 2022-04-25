@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
+use App\Models\User;
 use App\Models\Event;
 use App\Models\EventType;
 
@@ -25,6 +26,7 @@ class CompanyEvents extends Component
     {
         $this->company = $company;
         $this->eventTypes = EventType::all();
+        $this->users = User::all();
         $this->refreshEvents();
     }
 

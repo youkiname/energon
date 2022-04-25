@@ -23,7 +23,8 @@ class Task extends Model
     protected $fillable = [
         'title',
         'company_id',
-        'user_id',
+        'creator_id',
+        'target_user_id',
         'description',
         'task_priority_id',
         'task_status_id',
@@ -49,7 +50,12 @@ class Task extends Model
 
     public function creator()
     {
-        return $this->belongsTo(User::class, 'user_id', 'id');
+        return $this->belongsTo(User::class, 'creator_id', 'id');
+    }
+
+    public function targetUser()
+    {
+        return $this->belongsTo(User::class, 'target_user_id', 'id');
     }
 
     public function humanDate()

@@ -21,6 +21,15 @@
                 <div class="form-new-task__item">
                     <x-input name="title" labelName="Заголовок"/>
                 </div>
+                <div class="form-new-task__item"  style="margin-bottom: 60px;">
+                    <label for="">Контактное лицо</label>
+                    <select name="target_user_id">
+                        <option value="0" selected>Пусто</option>
+                        @foreach($users as $user)
+                        <option value="{{ $user->id }}">{{ $user->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
                 <div class="form-new-task__item">
                     <label for="">Описание </label>
                     <textarea name="description">{{ old('description') }}</textarea>

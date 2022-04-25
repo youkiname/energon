@@ -20,7 +20,7 @@
 
                     <div class="plans-request-form" style="@if (!$errors->any()) display: none; @endif">
                         <div class="title">Добавить</div>
-                        @include('tasks.components.form')
+                        <x-task-form />
                     </div>
                 </div>
 

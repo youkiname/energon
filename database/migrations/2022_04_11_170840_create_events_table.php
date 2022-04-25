@@ -16,7 +16,9 @@ return new class extends Migration
         Schema::create('events', function (Blueprint $table) {
             $table->id();
             $table->foreignId('company_id')->references('id')->on('companies')->onDelete('cascade');;
-            $table->foreignId('event_type_id');
+            $table->foreignId('creator_id')->nullable()->references('id')->on('users')->onDelete('set null');
+            $table->foreignId('target_user_id')->nullable()->references('id')->on('users')->onDelete('set null');
+            $table->foreignId('event_type_id')->nullable()->references('id')->on('event_types')->onDelete('set null');
             $table->string('title');
             $table->string('description')->nullable();
             $table->timestamps();

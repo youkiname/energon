@@ -13,10 +13,27 @@ class Event extends Model
     protected $fillable = [
         'title',
         'description',
+        'creator_id',
+        'target_user_id',
         'company_id',
         'event_type_id',
         'created_at',
     ];
+
+    public function company()
+    {
+        return $this->belongsTo(Company::class, 'company_id', 'id');
+    }
+
+    public function creator()
+    {
+        return $this->belongsTo(User::class, 'creator_id', 'id');
+    }
+
+    public function targetUser()
+    {
+        return $this->belongsTo(User::class, 'target_user_id', 'id');
+    }
 
     public function eventType()
     {

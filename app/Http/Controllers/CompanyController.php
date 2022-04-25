@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CompanyCreateRequest;
 use Illuminate\Http\Request;
-use App\Models\CompanyAwait;
-use App\Models\Contact;
+use App\Models\User;
 use App\Models\City;
 use App\Models\Company;
 use App\Models\CompanyBundle;
@@ -95,6 +94,7 @@ class CompanyController extends Controller
     public function tasks(Company $company)
     {
         $this->templateData['company'] = $company;
+        $this->templateData['users'] = User::all();
         return view('company.tasks', $this->templateData);
     }
 
@@ -196,6 +196,7 @@ class CompanyController extends Controller
     private function createEditEvent(Company $company) {
         Event::create([
             'title' => 'Изменение',
+            'creator_id' => Auth::user()->id,
             'description' => 'Контрагент был отредактирован пользователем ' . Auth::user()->name,
             'company_id' => $company->id,
             'event_type_id' => 4  # тип комментарий
