@@ -21,9 +21,15 @@
                             <b>{{ $task->humanDate() }}</b>
                         </div>
                         <div class="request-info__item">
-                            <p>Ответственный менеджер</p>
+                            <p>Добавил</p>
                             <b>{{ $task->creator->name }}</b>
                         </div>
+                        @if($task->targetUser)
+                        <div class="request-info__item">
+                            <p>Ответственный менеджер</p>
+                            <b>{{ $task->targetUser->name }}</b>
+                        </div>
+                        @endif
                         <livewire:task-status-select :task="$task"/>
                         <div class="request-info__item request-info__priority
                                     request-info__priority_{{ $task->priority->engName }}">

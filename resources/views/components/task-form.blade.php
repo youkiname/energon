@@ -12,7 +12,7 @@
         <textarea id="description" name="description">{{ old('description') }}</textarea>
     </div>
     <div class="form-request__item" style="margin-bottom: 60px;">
-        <label for="">Контактное лицо</label>
+        <label for="">Ответственный менеджер</label>
         <select name="target_user_id" >
             <option value="0" selected>Пусто</option>
             @foreach($users as $user)

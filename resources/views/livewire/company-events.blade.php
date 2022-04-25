@@ -49,6 +49,10 @@
                     <span>{{ $event->description }}</span>
                 </div>
                 <div class="events-item-info-person">
+                    <span>Добавил: {{ $event->creator->name }}</span>
+                    @if($event->targetUser)
+                    <span>Контактное лицо: {{ $event->targetUser->name }}</span>
+                    @endif
                 </div>
             </div>
         </div>
