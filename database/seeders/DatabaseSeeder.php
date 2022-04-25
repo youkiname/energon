@@ -100,6 +100,9 @@ class DatabaseSeeder extends Seeder
             'name' => 'Заявка',
         ]);
         EventType::create([
+            'name' => 'Редактирование',
+        ]);
+        EventType::create([
             'name' => 'Комментарий',
         ]);
 
