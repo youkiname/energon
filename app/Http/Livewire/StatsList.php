@@ -225,10 +225,10 @@ class StatsList extends Component
     private function applyCompanyFilter($query) {
         if (!$this->selectedCompany) {
             if ($this->selectedCompanyType) {
-                $query = $query->whereRaw("company_id in (select 1 from companies where companies.company_type_id == ?)", [$this->selectedCompanyType->id]);
+                $query = $query->whereRaw("company_id in (select 1 from companies where companies.company_type_id = ?)", [$this->selectedCompanyType->id]);
             }
             if ($this->selectedCompanyStatus) {
-                $query = $query->whereRaw("company_id in (select 1 from companies where companies.company_status_id == ?)", [$this->selectedCompanyStatus->id]);
+                $query = $query->whereRaw("company_id in (select 1 from companies where companies.company_status_id = ?)", [$this->selectedCompanyStatus->id]);
             }
             return $query;
         }
