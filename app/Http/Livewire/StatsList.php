@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\DB;
 
 use App\Models\User;
 use App\Models\Company;
+use App\Models\CompanyStatus;
+use App\Models\CompanyType;
 use App\Models\Employee;
 use App\Models\Task;
 
@@ -29,6 +31,10 @@ class StatsList extends Component
 
     public $stats = [];
     public $colors = ['red', 'green', 'yellow'];
+    public $selectedCompany = null;
+    public $selectedCompanyType = null;
+    public $selectedCompanyStatus = null;
+    public $selectedCompanyName = "Все";
     public $selectedManager = null;
     public $managerRelation = 'creator_id';
     public $selectedType = null;
@@ -40,17 +46,52 @@ class StatsList extends Component
         'changeStatType' => 'onChangeType',
         'changeManagerRelation' => 'onChangeManagerRelation',
         'changeDateRange' => 'onChangeDateRange',
+        'changeCompanyId' => 'onChangeCompany',
+        'changeCompanyTypeId' => 'onChangeCompanyType',
+        'changeCompanyStatusId' => 'onChangeCompanyStatus',
     ];
 
     public function mount()
     {
         $this->managers = User::all();
+        $this->companies = Company::all();
+        $this->companyStatuses = CompanyStatus::all();
+        $this->companyTypes = CompanyType::all();
         $this->collectStats();
     }
 
     public function render()
     {
         return view('livewire.stats-list');
+    }
+
+    public function onChangeCompany($id) {
+        if ($id == 0) {
+            $this->selectedCompany = null;
+            $this->selectedCompanyName = "Все";
+        } else {
+            $this->selectedCompany = Company::find(intval($id));
+            $this->selectedCompanyName = $this->selectedCompany->fullName();
+        }
+        $this->collectStats();
+    }
+
+    public function onChangeCompanyType($id) {
+        if ($id == 0) {
+            $this->selectedCompanyType = null;
+        } else {
+            $this->selectedCompanyType = CompanyType::find(intval($id));
+        }
+        $this->collectStats();
+    }
+
+    public function onChangeCompanyStatus($id) {
+        if ($id == 0) {
+            $this->selectedCompanyStatus = null;
+        } else {
+            $this->selectedCompanyStatus = CompanyStatus::find(intval($id));
+        }
+        $this->collectStats();
     }
 
     public function onChangeManager($id) {
@@ -117,6 +158,9 @@ class StatsList extends Component
             'edits' => ['title' => "Редактирования", 'get' => 'getEditsAmount'],
             'comments' => ['title' => "Комментарии", 'get' => 'getCommentsAmount'],
         ];
+        if($this->selectedCompany) {
+            unset($tables['companies']);
+        }
         if ($this->selectedType) {
             $selected = $this->selectedType;
             return array_filter($tables, function($k) use ($selected) {
@@ -137,6 +181,7 @@ class StatsList extends Component
         $query = DB::table('tasks')
         ->where($this->managerRelation, $managerId);
         $query = $this->applyDateFilter($query);
+        $query = $this->applyCompanyFilter($query);
         return $query->count();
     }
 
@@ -144,6 +189,7 @@ class StatsList extends Component
         $query = DB::table('events')
         ->where($this->managerRelation, $managerId);
         $query = $this->applyDateFilter($query);
+        $query = $this->applyCompanyFilter($query);
         return $query->count();
     }
 
@@ -152,6 +198,7 @@ class StatsList extends Component
         ->where($this->managerRelation, $managerId)
         ->where('event_type_id', $eventTypeId);
         $query = $this->applyDateFilter($query);
+        $query = $this->applyCompanyFilter($query);
         return $query->count();
     }
 
@@ -175,6 +222,19 @@ class StatsList extends Component
         return $this->getEventsWithTypeAmount($managerId, 5);
     }
 
+    private function applyCompanyFilter($query) {
+        if (!$this->selectedCompany) {
+            if ($this->selectedCompanyType) {
+                $query = $query->whereRaw("company_id in (select 1 from companies where companies.company_type_id == ?)", [$this->selectedCompanyType->id]);
+            }
+            if ($this->selectedCompanyStatus) {
+                $query = $query->whereRaw("company_id in (select 1 from companies where companies.company_status_id == ?)", [$this->selectedCompanyStatus->id]);
+            }
+            return $query;
+        }
+        return $query->where('company_id', $this->selectedCompany->id);
+    }
+
     private function applyDateFilter($query) {
         if ($this->beginDate) {
             $query = $query->where('created_at', '>=', $this->beginDate);
@@ -184,6 +244,4 @@ class StatsList extends Component
         }
         return $query;
     }
-
-    
 }

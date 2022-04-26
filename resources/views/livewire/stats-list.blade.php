@@ -5,6 +5,33 @@
             <div class="filters">
                 <div class="filters-right">
                     <div class="select-box" wire:ignore>
+                        <span>Контрагент: </span>
+                        <select name="company_id" id="company_id">
+                            <option value="0">Все</option>
+                            @foreach($companies as $company)
+                            <option value="{{ $company->id }}">{{ $company->fullName() }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="select-box" wire:ignore id="company_status_select">
+                        <span>Статус: </span>
+                        <select name="company_status_id" id="company_status_id">
+                            <option value="0">Все</option>
+                            @foreach($companyStatuses as $status)
+                            <option value="{{ $status->id }}">{{ $status->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="select-box" wire:ignore id="company_type_select">
+                        <span>Тип: </span>
+                        <select name="company_type_id" id="company_type_id">
+                            <option value="0">Все</option>
+                            @foreach($companyTypes as $companyType)
+                            <option value="{{ $companyType->id }}">{{ $companyType->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="select-box" wire:ignore>
                         <span>Менеджер: </span>
                         <select name="manager_id" id="manager_id">
                             <option value="0">Все</option>
@@ -54,6 +81,14 @@
                 <div class="stat-item-top">
                     <div class="stat-item-name">{{ $stat->title }}</div>
                     <p style="font-size: 0.7em;">Менеджер: {{ $stat->manager }}</p>
+                    <p style="font-size: 0.7em;">
+                    Контрагент: 
+                    @if($selectedCompanyStatus || $selectedCompanyType)
+                    отфильтровано
+                    @else
+                    {{ $selectedCompanyName }}
+                    @endif
+                    </p>
                 </div>
                 <div class="stat-item-bottom">
                     <div class="stat-col">{{ $stat->amount }}</div>
@@ -65,6 +100,26 @@
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function(){
+            $("#company_id").on('change', function() {
+                let value = $("#company_id").val()
+                if(value != '0') {
+                    $("#company_status_select").hide()
+                    $("#company_type_select").hide()
+                } else {
+                    $("#company_status_select").show()
+                    $("#company_type_select").show()
+                }
+                Livewire.emit('changeCompanyId', value)
+            });
+
+            $("#company_type_id").on('change', function() {
+                Livewire.emit('changeCompanyTypeId', $("#company_type_id").val())
+            });
+
+            $("#company_status_id").on('change', function() {
+                Livewire.emit('changeCompanyStatusId', $("#company_status_id").val())
+            });
+
             $("#manager_id").on('change', function() {
                 Livewire.emit('changeManagerId', $("#manager_id").val())
             });
