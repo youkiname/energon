@@ -23,13 +23,13 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         Role::create([
-            'name' => 'admin'
-        ]);
-        Role::create([
-            'name' => 'Менеджер'
+            'name' => 'Администратор'
         ]);
         Role::create([
             'name' => 'Главный Менеджер'
+        ]);
+        Role::create([
+            'name' => 'Менеджер'
         ]);
 
         CompanyType::create([
