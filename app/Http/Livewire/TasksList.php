@@ -3,9 +3,11 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
-use App\Models\Task;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+
+use App\Models\Task;
 
 class TasksList extends Component
 {
@@ -65,7 +67,17 @@ class TasksList extends Component
         if ($this->companyId) {
             $tasks = $tasks->where('company_id', $this->companyId);
         }
+        $tasks = $this->applyRolePermissions($tasks);
         $tasks = $tasks->get();
         return $tasks;
+    }
+
+    private function applyRolePermissions($query) {
+        // обычный менеджер может просматривать только свои задачи
+        $user = Auth::user();
+        if ($user->role->id == 3) {
+            return $query->where('creator_id', $user->id);
+        }
+        return $query;
     }
 }

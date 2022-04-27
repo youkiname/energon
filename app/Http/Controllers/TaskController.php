@@ -24,7 +24,10 @@ class TaskController extends Controller
 
     public function show(Task $task)
     {
-        return view('tasks.show', ["task" => $task]);
+        return view('tasks.show', [
+            "task" => $task,
+            "displayEditButton" => Auth::user()->role->id != 3,
+        ]);
     }
 
     public function store(StoreTaskRequest $request)

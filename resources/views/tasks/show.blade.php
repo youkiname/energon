@@ -36,6 +36,7 @@
                             <p>Приоритет</p>
                             <b><i></i> {{ $task->priority->name }}</b>
                         </div>
+                        @if($displayEditButton)
                         <div class="request-info__item remove-task-box">
                             <a href="{{ route('tasks.edit', ['task'=>$task]) }}" class="edit-task">Изменить</a>
                             <p>или</p>
@@ -50,6 +51,7 @@
                                 @method('DELETE')
                             </form>
                         </div>
+                        @endif
                     </div>
                 </div>
 

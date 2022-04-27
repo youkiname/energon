@@ -3,6 +3,8 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
+use Illuminate\Support\Facades\Auth;
+
 use App\Models\Company;
 
 class CompanyList extends Component
@@ -20,23 +22,12 @@ class CompanyList extends Component
 
     public function mount()
     {
-        $this->companies = Company::all();
+        $this->refreshCompanies();
     }
 
     public function render()
     {
         return view('livewire.company-list');
-    }
-
-    public function refreshCompanies() {
-        $searchTerm = '%' . $this->searchValue . '%';
-        $sqlQuery = Company::whereRaw("UPPER(name) LIKE ?", [mb_strtoupper($searchTerm)]); 
-
-        if ($this->statusId != $this->allStatusId) {
-            $sqlQuery = $sqlQuery->where('company_status_id', $this->statusId);
-        }
-
-        $this->companies = $sqlQuery->orderBy('name', 'ASC')->get();
     }
 
     public function changeStatusId($id) {
@@ -47,5 +38,26 @@ class CompanyList extends Component
     public function changeSearchValue($value) {
         $this->searchValue = $value;
         $this->refreshCompanies();
+    }
+
+    private function refreshCompanies() {
+        $searchTerm = '%' . $this->searchValue . '%';
+        $sqlQuery = Company::whereRaw("UPPER(name) LIKE ?", [mb_strtoupper($searchTerm)]); 
+
+        if ($this->statusId != $this->allStatusId) {
+            $sqlQuery = $sqlQuery->where('company_status_id', $this->statusId);
+        }
+        $sqlQuery = $this->applyRolePermissions($sqlQuery);
+        $this->companies = $sqlQuery->orderBy('name', 'ASC')->get();
+    }
+
+
+    private function applyRolePermissions($query) {
+        // обычный менеджер может просматривать только своих контрагентов
+        $user = Auth::user();
+        if ($user->role->id == 3) {
+            return $query->where('creator_id', $user->id);
+        }
+        return $query;
     }
 }

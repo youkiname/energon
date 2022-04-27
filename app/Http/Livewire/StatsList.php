@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\User;
 use App\Models\Company;
@@ -31,6 +32,7 @@ class StatsList extends Component
 
     public $stats = [];
     public $colors = ['red', 'green', 'yellow'];
+    public $managers = [];
     public $selectedCompany = null;
     public $selectedCompanyType = null;
     public $selectedCompanyStatus = null;
@@ -53,7 +55,7 @@ class StatsList extends Component
 
     public function mount()
     {
-        $this->managers = User::all();
+        $this->managers = $this->getManagers();
         $this->companies = Company::all();
         $this->companyStatuses = CompanyStatus::all();
         $this->companyTypes = CompanyType::all();
@@ -122,7 +124,7 @@ class StatsList extends Component
     private function collectStats() {
         $this->stats = [];
         $tables = $this->getTables();
-        $managers = $this->getSelectedManagers();
+        $managers = $this->getManagers();
         
         foreach($tables as $filterData) {
             $title = $filterData['title'];
@@ -140,11 +142,14 @@ class StatsList extends Component
         }
     }
 
-    private function getSelectedManagers() {
+    private function getManagers() {
+        if (Auth::user()->role->id == 3) {
+            return User::where('id', Auth::user()->id)->get();
+        }
         if($this->selectedManager) {
             return [$this->selectedManager];
         }
-        return $this->managers;
+        return User::all();
     }
 
     private function getTables() {
