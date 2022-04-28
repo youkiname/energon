@@ -21,7 +21,6 @@ class UserIsAdmin
         if (Auth::user()->role_id > 1) {
             return redirect(RouteServiceProvider::HOME);
         }
-        dd($request);
         return $next($request);
     }
 }
