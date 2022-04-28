@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Role;
+use App\Models\Task;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -28,6 +29,9 @@ class UserController extends Controller
     public function show(User $user)
     {
         $this->data['user'] = $user;
+        $this->data['tasks'] = Task::where('creator_id', $user->id)
+                               ->orWhere('target_user_id', $user->id)
+                               ->get();
         return view('admin.users.show', $this->data);
     }
 
