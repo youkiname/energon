@@ -9,7 +9,6 @@
             <div class="plans-box__left">
                 <div class="plans-calendar">
                 </div>
-
                 <div class="plans-request">
                     <div class="plans-request-info" style="@if ($errors->any()) display: none; @endif">
                         <div class="plans-request-img"><img src="img/request-ico.svg" alt=""></div>
@@ -23,7 +22,6 @@
                         <x-task-form />
                     </div>
                 </div>
-
                 
             </div>
             <div class="plans-box__right">

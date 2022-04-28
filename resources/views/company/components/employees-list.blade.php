@@ -19,6 +19,7 @@
                 @endforeach
             </div>
         </div>
+        @if(Auth::user()->isMainManager())
         <div class="btn-more-box">
             <a class="btn-more" href="javascrirpt:void(0)">
                 <span></span>
@@ -35,6 +36,7 @@
                 <a href="{{ route('employee.edit', ['employee'=>$employee]) }}" class="btn-el btn-edit"></a>
             </div>
         </div>
+        @endif
     </div>
     @endforeach
 

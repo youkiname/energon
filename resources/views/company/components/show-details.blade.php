@@ -7,7 +7,7 @@
                     <livewire:company-status-select :company="$company"/>
                     <livewire:company-potentiality-select :company="$company"/>
 
-
+                    @if(Auth::user()->isAdmin())
                     <div class="btn-more-box">
                         <a class="btn-more" href="javascrirpt:void(0)">
                             <span></span>
@@ -27,7 +27,7 @@
                             <a href="{{ route('companies.edit', ['company'=>$company]) }}" class="btn-el btn-edit"></a>
                         </div>
                     </div>
-
+                    @endif()
                 </div>
                 <div class="info-item-content">
                     <p>{{ $company->description }}</p>
@@ -64,6 +64,7 @@
                     <span>Ответственный менеджер </span>
                     <b>{{ $company->manager->name }}</b>
                 </div>
+                @if(Auth::user()->isAdmin())
                 <div class="btn-more-box">
                     <a class="btn-more" href="javascrirpt:void(0)">
                         <span></span>
@@ -74,6 +75,7 @@
                         <a href="{{ route('companies.edit', ['company'=>$company]) }}" class="btn-el btn-edit"></a>
                     </div>
                 </div>
+                @endif
             </div>
         </div>
 
@@ -116,6 +118,7 @@
                     <b>{{ $company->details->equipment_type }}</b>
                 </div>
             </div>
+            @if(Auth::user()->isAdmin())
             <div class="btn-more-box">
                 <a class="btn-more" href="javascrirpt:void(0)">
                     <span></span>
@@ -126,6 +129,7 @@
                     <a href="{{ route('companies.edit', ['company'=>$company]) }}" class="btn-el btn-edit"></a>
                 </div>
             </div>
+            @endif
         </div>
     </div>
 </div>

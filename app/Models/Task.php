@@ -33,6 +33,31 @@ class Task extends Model
         'end_time'
     ];
 
+    public function isUserHasRights($method, $user) {
+        // Просматривать может админ, главный менеджер, создатель и ответственный
+        // редактировать, удалять может только главный менеджер, админ и создатель
+        // Создавать могут все
+        switch ($method) {
+            case "GET":
+                return $user->isMainManager() || $this->creator_id == $user->id || $this->target_user_id == $user->id;
+                break;
+            case "PUT":
+                return $user->isMainManager() || $this->creator_id == $user->id;
+                break;
+            case "POST":
+                return true;
+                break;
+            case "DELETE":
+                return $user->isMainManager() || $this->creator_id == $user->id;
+                break;
+        }
+        return false;
+    }
+
+    public function isCompleted() {
+        return $this->task_status_id == 4;
+    }
+
     public function priority()
     {
         return $this->belongsTo(TaskPriority::class, 'task_priority_id', 'id');

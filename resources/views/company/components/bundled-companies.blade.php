@@ -1,6 +1,6 @@
 @foreach($companies as $company)
 <div class="elem-item-box
-@if($mainCompany->isBundleConfirmed($company->id)) @else bundle-not-confirmed @endif
+@if(!($mainCompany->isBundleConfirmed($company->id))) bundle-not-confirmed @endif
 ">
     <div class="elem-item-box-title">
         <a href="{{ route('companies.show', ['company' => $company]) }}"

@@ -24,9 +24,10 @@ class TaskController extends Controller
 
     public function show(Task $task)
     {
+        $user = Auth::user();
         return view('tasks.show', [
             "task" => $task,
-            "displayEditButton" => Auth::user()->role->id != 3,
+            "displayEditButton" => $user->role->id < 3 || $user->id == $task->creator_id,
         ]);
     }
 

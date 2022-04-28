@@ -27,6 +27,27 @@ class Company extends Model
         'description'
     ];
 
+    public function isUserHasRights($method, $user) {
+        // Просматривать может только главный менеджер, админ и создатель
+        // Редактировать и удалять не может никто кроме админа
+        // Создавать могут все
+        switch ($method) {
+            case "GET":
+                return $user->isMainManager() || $this->creator_id == $user->id;
+                break;
+            case "PUT":
+                return false;
+                break;
+            case "POST":
+                return true;
+                break;
+            case "DELETE":
+                return false;
+                break;
+        }
+        return false;
+    }
+
     public function manager()
     {
         return $this->belongsTo(User::class, 'creator_id', 'id');

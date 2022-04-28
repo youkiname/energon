@@ -27,20 +27,20 @@ Route::middleware(['auth'])->group(function () {
     Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
 
     Route::post('/companies/bundle', [CompanyController::class, 'bundle'])
-    ->name('companies.bundle');
+    ->name('companies.bundle')->middleware('role_rights:company');
     Route::get('/companies/{company}/contacts', [CompanyController::class, 'contacts'])
-    ->name('companies.contacts');
+    ->name('companies.contacts')->middleware('role_rights:company');
     Route::get('/companies/{company}/tasks', [CompanyController::class, 'tasks'])
-    ->name('companies.tasks');
-    Route::resource('companies', CompanyController::class);
+    ->name('companies.tasks')->middleware('role_rights:company');
+    Route::resource('companies', CompanyController::class)->middleware('role_rights:company');
 
-    Route::resource('employee', EmployeeController::class);
+    Route::resource('employee', EmployeeController::class)->middleware('role_rights:employee');
 
     Route::resource('contacts', ContactController::class);
 
     Route::post('/events/store', [EventController::class, 'store'])->name('events.store');
 
-    Route::resource('tasks', TaskController::class);
+    Route::resource('tasks', TaskController::class)->middleware('role_rights:task');
 
     Route::get('stats', [StatsController::class, 'index'])->name('stats.index');
 

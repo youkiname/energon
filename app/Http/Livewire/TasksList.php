@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
 use App\Models\Task;
+use App\Models\TaskStatus;
 
 class TasksList extends Component
 {
@@ -23,6 +24,7 @@ class TasksList extends Component
     public function mount($companyId = null)
     {
         $this->companyId = $companyId;
+        $this->statuses = TaskStatus::all();
         $this->refreshTasks();
     }
 
@@ -59,11 +61,22 @@ class TasksList extends Component
                 $tasks[$humanDate] = $dailyTasks;
             }
         };
+        $tasks['Завершенные'] = $this->getCompletedTasks();
         $this->tasks = $tasks;
     }
 
     private function getTasksByDate($date) {
-        $tasks = Task::where('date', $date);
+        $tasks = Task::where('date', $date)->where("task_status_id", "!=", 4);
+        if ($this->companyId) {
+            $tasks = $tasks->where('company_id', $this->companyId);
+        }
+        $tasks = $this->applyRolePermissions($tasks);
+        $tasks = $tasks->get();
+        return $tasks;
+    }
+
+    private function getCompletedTasks() {
+        $tasks = Task::where("task_status_id", "=", 4);
         if ($this->companyId) {
             $tasks = $tasks->where('company_id', $this->companyId);
         }
@@ -73,10 +86,10 @@ class TasksList extends Component
     }
 
     private function applyRolePermissions($query) {
-        // обычный менеджер может просматривать только свои задачи
+        // обычный менеджер может просматривать только свои задачи или которые ему назначили
         $user = Auth::user();
         if ($user->role->id == 3) {
-            return $query->where('creator_id', $user->id);
+            return $query->whereRaw('(creator_id = ? OR target_user_id = ?)', [$user->id, $user->id]);
         }
         return $query;
     }
