@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\CompanyBundleController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\NotificationController;
@@ -33,13 +34,11 @@ Route::middleware(['auth'])->group(function () {
     ->name('companies.tasks');
     Route::resource('companies', CompanyController::class);
 
-    Route::resource('employee', EmployeeController::class)
-    ->middleware(['auth']);
+    Route::resource('employee', EmployeeController::class);
 
     Route::resource('contacts', ContactController::class);
 
-    Route::post('/events/store', [EventController::class, 'store'])
-        ->name('events.store');
+    Route::post('/events/store', [EventController::class, 'store'])->name('events.store');
 
     Route::resource('tasks', TaskController::class);
 
@@ -50,10 +49,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('settings', [SettingController::class, 'index'])->name('settings.index');
     Route::post('settings', [SettingController::class, 'store'])->name('settings.store');
 
-    Route::get('contacts', [ContactController::class, 'index'])->name('contacts.index');
-
     Route::middleware(['admin'])->prefix('admin')->name('admin.')->group(function () {
-
         Route::get('/', [AdminController::class, 'index'])->name('index');
 
         Route::get('/users/trash', [UserController::class, 'trash'])->name('users.trash');
@@ -63,7 +59,11 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('roles', RoleController::class);
 
         Route::resource('tasks', PlannerController::class);
+    });
 
+    Route::middleware(['main_manager'])->group(function () {
+        Route::post('/bundles/confirm/{company}/{another}', [CompanyBundleController::class, 'confirm'])->name('bundles.confirm');
+        Route::delete('/bundles/destroy/{company}/{another}', [CompanyBundleController::class, 'destroy'])->name('bundles.destroy');
     });
 
 });

@@ -144,15 +144,21 @@ class CompanyController extends Controller
     public function bundle(Request $request)
     {
         $company = Company::find($request->a_company_id);
+        $user = Auth::user();
+        $status_id = $user->isMainManager() ? 2 : 1;
         CompanyBundle::create([
+            "creator_id" => $user->id,
             "a_company_id" => $company->id,
             "b_company_id" => $request->b_company_id,
+            "status_id" => $status_id
         ]);
         CompanyBundle::create([
+            "creator_id" => $user->id,
             "b_company_id" => $company->id,
             "a_company_id" => $request->b_company_id,
+            "status_id" => $status_id
         ]);
-        return redirect()->route('companies.show', ['company' => $company]);
+        return redirect()->route('companies.contacts', ['company' => $company]);
     }
 
     private function storeEmployee(Request $request, Company $company) {

@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 use App\Models\CompanyType;
 use App\Models\CompanyPurchase;
 use App\Models\CompanyStatus;
+use App\Models\CompanyBundleStatus;
 use App\Models\Potentiality;
 use App\Models\Role;
 use App\Models\EventType;
@@ -78,6 +79,13 @@ class DatabaseSeeder extends Seeder
         ]);
         CompanyStatus::create([
             'name' => "Закрыт",
+        ]);
+
+        CompanyBundleStatus::create([
+            'name' => "Неподтверждено"
+        ]);
+        CompanyBundleStatus::create([
+            'name' => "Утверждено"
         ]);
 
         Potentiality::create([

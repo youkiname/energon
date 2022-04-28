@@ -2193,6 +2193,10 @@ select {
     background: #F14D75;
 }
 
+.bundle-not-confirmed {
+    background: rgba(170, 170, 170, 0.7)
+}
+
 .time {
     padding: 2px 0 2px 0;
     display: -webkit-box;

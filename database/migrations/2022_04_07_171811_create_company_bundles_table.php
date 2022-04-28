@@ -11,8 +11,10 @@ return new class extends Migration
     {
         Schema::create('company_bundles', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('creator_id')->references('id')->on('users');
             $table->foreignId('a_company_id')->references('id')->on('companies')->onDelete('cascade');;
             $table->foreignId('b_company_id')->references('id')->on('companies')->onDelete('cascade');;
+            $table->foreignId('status_id')->nullable()->references('id')->on('company_bundle_statuses')->onDelete('set null')->default(1);;
         });
     }
 

@@ -36,6 +36,14 @@ class User extends Authenticatable
         'settings' => ''
     );
 
+    public function isAdmin() {
+        return $this->role->id == 1;
+    }
+
+    public function isMainManager() {
+        return $this->role->id < 3;
+    }
+
     public function companies()
     {
         return $this->hasMany(Company::class)->orderBy('name');

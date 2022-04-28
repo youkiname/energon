@@ -12,7 +12,13 @@ class CompanyBundle extends Model
     public $timestamps = false;
 
     protected $fillable = [
+        'creator_id',
         'a_company_id',
         'b_company_id',
+        'status_id',
     ];
+
+    public function isConfirmed() {
+        return $this->status_id == 2;
+    }
 }

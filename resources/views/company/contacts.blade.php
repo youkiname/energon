@@ -35,7 +35,9 @@
 
                 <div class="elem-item-title">Связанные организации</div>
                 <div class="elem-item-list">
-                    @each('company.components.bundled-company', $company->bundledCompanies, 'company')
+                    @include('company.components.bundled-companies', 
+                    ['companies'=>$company->bundledCompanies,
+                     'mainCompany'=>$company])
                     <a href="javascript:void(0)" class="add-card" id="add-new-bundle-btn"><span>Добавить</span><i></i></a>
                 </div>
                 <div style="display: none;" id="bundle-company-select">

@@ -37,6 +37,11 @@ class Company extends Model
         return $this->belongsToMany(Company::class, 'company_bundles', 'a_company_id', 'b_company_id');
     }
 
+    public function isBundleConfirmed($another_company_id) {
+        $bundle = CompanyBundle::where('b_company_id', $another_company_id)->first();
+        return $bundle->isConfirmed();
+    }
+
     public function details()
     {
         return $this->hasOne(CompanyDetails::class);
