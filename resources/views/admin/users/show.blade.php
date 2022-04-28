@@ -10,12 +10,7 @@
 
         <ul class="nav nav-tabs">
             <li class="nav-item">
-                <a class="nav-link active" href="{{ route('admin.users.show', ['user' => $user]) }}">
-                    Статистика
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{ route('admin.users.show', ['user' => $user]) }}">
                     Задачи
                 </a>
             </li>

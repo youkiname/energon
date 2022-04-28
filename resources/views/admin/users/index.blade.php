@@ -34,7 +34,7 @@
                 <tr>
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
-                    <td>{{ $user->role_id }}</td>
+                    <td>{{ $user->role->name }}</td>
                     <td>
                         @if(Route::is('admin.users.trash') )
                             <a href="javascript:void(0);"

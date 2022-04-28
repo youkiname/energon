@@ -69,12 +69,26 @@ class UserController extends Controller
 
     }
 
-    public function edit()
+    public function edit(User $user)
     {
+        $this->data['user'] = $user;
+        return view('admin.users.edit', $this->data);
     }
 
-    public function update()
+    public function update(Request $request, User $user)
     {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255'],
+            'role_id' => ['required'],
+        ]);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->role_id = $request->role_id;
+        $user->save();
+
+        return redirect()->route('admin.users.show', ['user' => $user])
+        ->with('success', "Успешно");
     }
 
     public function destroy(User $user)
