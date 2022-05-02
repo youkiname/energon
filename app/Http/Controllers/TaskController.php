@@ -34,12 +34,11 @@ class TaskController extends Controller
     public function store(StoreTaskRequest $request)
     {
         $date = Carbon::createFromFormat('d.m.Y', $request->date)->toDateString();
-
         $task = Task::create([
             'title' => $request->title,
             'company_id' => $request->company_id,
             'creator_id' => Auth::user()->id,
-            'target_user_id' => $request->target_user_id == 0 ? null : $request->target_user_id,
+            'target_user_id' => $request->target_user_id ?? Auth::user()->id,
             'description' => $request->description ?? '',
             'task_priority_id' => $request->input_priority,
             'task_status_id' => $request->status_id,

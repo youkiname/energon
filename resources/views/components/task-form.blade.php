@@ -11,15 +11,16 @@
         <label for="description">Описание</label>
         <textarea id="description" name="description">{{ old('description') }}</textarea>
     </div>
+    @if(Auth::user()->isMainManager())
     <div class="form-request__item" style="margin-bottom: 60px;">
         <label for="">Ответственный менеджер</label>
         <select name="target_user_id" >
-            <option value="0" selected>Пусто</option>
             @foreach($users as $user)
             <option value="{{ $user->id }}">{{ $user->name }}</option>
             @endforeach
         </select>
     </div>
+    @endif
     <div class="form-request__item"style="margin-bottom: 60px;">
         <label for="">Статус</label>
         <select name="status_id" >
