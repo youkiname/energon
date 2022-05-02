@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', "Детальный просмотр: {{ $company->name }}")
+@section('title', "Детальный просмотр: " . $company->name)
 
 @section('content')
 @include('components.decor-images')
