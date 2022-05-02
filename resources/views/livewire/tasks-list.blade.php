@@ -8,7 +8,7 @@
         </div>
         @endif
         @foreach($dailyTasks as $task)
-        <div class="date-notes" style="@if($task->isCompleted()) background: #99ff9d; @endif">
+        <div class="date-notes" style="@if($task->isCompleted()) background: #ececec; @endif">
             <div class="date-note-item 
             @if($task->task_priority_id == 1)
             green
