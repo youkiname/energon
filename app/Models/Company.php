@@ -34,7 +34,7 @@ class Company extends Model
         // Создавать могут все
         switch ($method) {
             case "GET":
-                return $user->isMainManager() || $this->creator_id == $user->id;
+                return $user->isMainManager() || $this->creator_id == $user->id || $this->target_user_id == $user->id;
                 break;
             case "PUT":
                 return false;
