@@ -77,7 +77,16 @@
                     <label for="description">Описание компании</label>
                     <textarea name="description" id="description">{{ $company->description }}</textarea>
                 </div>
-                
+                <div class="contragent-form__item">
+                    <label for="target_user_id">Ответственный менеджер</label>
+                    <select name="target_user_id" id="target_user_id">
+                        @foreach($managers as $manager)
+                        <option value="{{ $manager->id }}"
+                        @if($manager->id == $company->target_user_id) selected @endif
+                        >{{ $manager->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
             </div>
             <div class="contragent-form-box">
                 <div class="contragent-form__item">

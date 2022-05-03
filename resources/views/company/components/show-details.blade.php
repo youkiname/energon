@@ -62,7 +62,11 @@
                 </div>
                 <div class="item-info">
                     <span>Ответственный менеджер </span>
+                    @if($company->manager)
                     <b>{{ $company->manager->name }}</b>
+                    @else
+                    <b>Пусто</b>
+                    @endif
                 </div>
                 @if(Auth::user()->isAdmin())
                 <div class="btn-more-box">

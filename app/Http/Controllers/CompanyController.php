@@ -48,6 +48,7 @@ class CompanyController extends Controller
     {
         $newCompany = Company::create([
             'creator_id' => Auth::user()->id,
+            'target_user_id' => Auth::user()->id,
             'company_type_id' => $request->company_type,
             'company_status_id' => $request->company_status,
             'company_purchase_id' => $request->company_purchase,
@@ -101,6 +102,7 @@ class CompanyController extends Controller
     public function edit(Company $company)
     {
         $this->templateData['company'] = $company;
+        $this->templateData['managers'] = User::all();
         return view('company.edit', $this->templateData);
     }
 
@@ -123,6 +125,8 @@ class CompanyController extends Controller
         $company->company_purchase_id = $request->company_purchase;
         $company->company_status_id = $request->company_status;
         $company->company_potentiality_id = $request->company_potentiality;
+
+        $company->target_user_id = $request->target_user_id;
 
         $company->save();
         $this->updateDetails($request, $company);

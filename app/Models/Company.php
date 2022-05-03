@@ -15,6 +15,7 @@ class Company extends Model
 
     protected $fillable = [
         'creator_id',
+        'target_user_id',
         'name',
         'ssn',
         'legal',
@@ -48,9 +49,14 @@ class Company extends Model
         return false;
     }
 
-    public function manager()
+    public function creator()
     {
         return $this->belongsTo(User::class, 'creator_id', 'id');
+    }
+
+    public function manager()
+    {
+        return $this->belongsTo(User::class, 'target_user_id', 'id');
     }
 
     public function bundledCompanies()

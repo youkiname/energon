@@ -56,7 +56,7 @@ class CompanyList extends Component
         // обычный менеджер может просматривать только своих контрагентов
         $user = Auth::user();
         if ($user->role->id == 3) {
-            return $query->where('creator_id', $user->id);
+            return $query->whereRaw('(creator_id = ? OR target_user_id = ?)', [$user->id, $user->id]);
         }
         return $query;
     }
