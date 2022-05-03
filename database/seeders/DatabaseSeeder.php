@@ -4,6 +4,10 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+
+use Illuminate\Support\Facades\Hash;
+
+use App\Models\User;
 use App\Models\CompanyType;
 use App\Models\CompanyPurchase;
 use App\Models\CompanyStatus;
@@ -138,6 +142,19 @@ class DatabaseSeeder extends Seeder
         TaskPriority::create([
             'name' => 'Высокий',
             'engName' => 'high',
+        ]);
+
+        User::create([
+            'name' => 'Vadim',
+            'role_id' => 1,
+            'email' => 'rright_02@aol.com',
+            'password' => Hash::make('132'),
+        ]);
+        User::create([
+            'name' => 'Fuka',
+            'role_id' => 3,
+            'email' => 'vadimv10@mail.ru',
+            'password' => Hash::make('132'),
         ]);
     } 
 }
