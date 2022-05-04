@@ -17,6 +17,7 @@ use App\Models\Employee;
 use App\Models\EmployeePhone;
 use App\Models\EmployeeEmail;
 use App\Models\Event;
+use App\Models\CompanyManagerConfirmation;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -44,8 +45,14 @@ class CompanyController extends Controller
         return view('company.create', $this->templateData);
     }
 
-    public function store(CompanyCreateRequest $request)
+    public function store(Request $request)
     {
+        if($this->isSsnExisting($request->ssn)) {
+            $this->createReassignConfirmation($request->ssn, Auth::user()->id);
+            return redirect()->route('companies.create')->with([
+                'success' => 'Организация уже существует. Был отправлен запрос на переназначение менеджера.'
+            ]);
+        }
         $newCompany = Company::create([
             'creator_id' => Auth::user()->id,
             'target_user_id' => Auth::user()->id,
@@ -212,4 +219,16 @@ class CompanyController extends Controller
             'event_type_id' => 4  # тип комментарий
         ]);
     }
+
+    private function isSsnExisting($ssn) {
+        return Company::where('ssn', $ssn)->count() > 0;
+    }
+
+    private function createReassignConfirmation($ssn, $managerId) {
+        $company = Company::where('ssn', $ssn)->first();
+        CompanyManagerConfirmation::create([
+            'company_id' => $company->id,
+            'new_manager_id' => $managerId,
+        ]);
+    } 
 }

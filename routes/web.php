@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\TaskController as PlannerController;
 use App\Http\Controllers\AlertController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\StatsController;
+use App\Http\Controllers\ConfirmationController;
 
 Route::get('/', function () {
     return redirect('/companies');
@@ -62,6 +63,9 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware(['main_manager'])->group(function () {
         Route::post('/bundles/confirm/{company}/{another}', [CompanyBundleController::class, 'confirm'])->name('bundles.confirm');
         Route::delete('/bundles/destroy/{company}/{another}', [CompanyBundleController::class, 'destroy'])->name('bundles.destroy');
+        
+        Route::put('confirmations/confirm/{confirmation}/', [ConfirmationController::class, 'confirm'])->name('confirmations.confirm');
+        Route::resource('confirmations', ConfirmationController::class);
     });
 
 });

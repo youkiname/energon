@@ -27,8 +27,11 @@
                 <a href="{{ route('contacts.index') }}" class="contact-book">Контакты</a>
                 <a href="{{ route('settings.index') }}" class="settings-link">Настройки</a>
                 <a href="{{ route('notifications.index') }}" class="note-link">Уведомления</a>
-                @if(auth()->user()->role_id == 1)
+                @if(auth()->user()->isAdmin())
                 <a href="{{ route('admin.index') }}" class="lk-link sys-admin-link">Управление</a>
+                @endif
+                @if(auth()->user()->isMainManager())
+                <a href="{{ route('confirmations.index') }}" class="lk-link sys-admin-link">Запросы</a>
                 @endif
                 <a href="{{ route('logout') }}" class="log-out-link"
                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

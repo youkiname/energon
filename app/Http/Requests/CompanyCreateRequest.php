@@ -19,7 +19,7 @@ class CompanyCreateRequest extends FormRequest
     {
         return [
             'name' => ['required'],
-            'ssn' => ['required', 'numeric', 'unique:companies,ssn'],
+            'ssn' => ['required', 'numeric'],
             'legal' => ['required'],
             'city' => ['required'],
             'address' => ['required'],
@@ -43,7 +43,6 @@ class CompanyCreateRequest extends FormRequest
         return [
             'name.required' => 'Организация без имени',
             'ssn.required' => 'Неверный ИНН',
-            'ssn.unique' => 'Этот ИНН уже занят',
             'legal.required' => 'Неверная правовая форма',
             'city.required' => 'Город не указан',
             'address.required' => 'Адрес не указан',
