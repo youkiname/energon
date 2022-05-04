@@ -18,9 +18,8 @@
                 <table>
                     <thead>
                     <tr>
-                        <th>Контрагент</th>
-                        <th>Текущий менеджер</th>
-                        <th>Новый менеджер</th>
+                        <th>Тип</th>
+                        <th>Описание</th>
                         <th>Ссылка</th>
                         <th></th>
                     </tr>
@@ -28,22 +27,53 @@
                     <tbody>
                         @foreach($confirmations as $confirm)
                         <tr class="ss-table-search-table-collapsed">
-                            <td class="nopadding">
-                                <a href="{{ route('companies.show', ['company'=>$confirm->company]) }}">{{ $confirm->company->fullName() }}</a>
+                            <td>
+                                Назначение менеджера
                             </td>
-                            <td>{{ $confirm->company->manager->name }}</td>
-                            <td>{{ $confirm->newManager->name }}</td>
+                            <td class="nopadding">
+                                <a href="{{ route('companies.show', ['company'=>$confirm->company]) }}">
+                                    {{ $confirm->company->fullName() }}
+                                </a> запрос на смену ответственного менеджера</td>
                             <td class="nopadding">
                                 <a href="{{ route('confirmations.show', ['confirmation'=>$confirm]) }}">Открыть</a>
                             </td>
                             <td class="nopadding">
                                 <a href="javascript:void(0)" onclick="adminConfirm(function() {
-                                    document.getElementById('reject{{ $confirm->id }}').submit();
+                                    document.getElementById('destroy{{ $confirm->id }}').submit();
                                 })">
-                                    Отклонить
+                                    Удалить
                                 </a>
                                 <form action="{{ route('confirmations.destroy', ['confirmation'=>$confirm]) }}"
-                                    method="post" id="reject{{ $confirm->id }}">
+                                    method="post" id="destroy{{ $confirm->id }}">
+                                    @csrf
+                                    @method('DELETE')
+                                </form>
+                            </td>
+                        </tr>
+                        @endforeach
+                        @foreach($tasksRequests as $taskRequest)
+                        <tr class="ss-table-search-table-collapsed">
+                            <td>
+                                Закрытие задачи
+                            </td>
+                            <td class="nopadding">
+                                <a href="{{ route('tasks.show', ['task'=>$taskRequest->task]) }}">
+                                    {{ $taskRequest->task->title }}
+                                </a>
+                            </td>
+                            <td class="nopadding">
+                                <a href="{{ route('tasks.show', ['task'=>$taskRequest->task]) }}">
+                                    Открыть
+                                </a>
+                            </td>
+                            <td class="nopadding">
+                                <a href="javascript:void(0)" onclick="adminConfirm(function() {
+                                    document.getElementById('destroyTaskRequest{{ $taskRequest->id }}').submit();
+                                })">
+                                    Удалить
+                                </a>
+                                <form action="{{ route('confirmations.destroyTaskRequest', ['taskRequest'=>$taskRequest]) }}"
+                                    method="post" id="destroyTaskRequest{{ $taskRequest->id }}">
                                     @csrf
                                     @method('DELETE')
                                 </form>

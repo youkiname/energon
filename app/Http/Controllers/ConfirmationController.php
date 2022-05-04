@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\CompanyManagerConfirmation;
+use App\Models\TaskClosingRequest;
 use App\Models\User;
 use App\Models\Company;
 
@@ -14,7 +15,11 @@ class ConfirmationController extends Controller
     public function index()
     {
         $confirmations = CompanyManagerConfirmation::all();
-        return view('confirmations.index', ['confirmations' => $confirmations]);
+        $tasksRequests = TaskClosingRequest::all();
+        return view('confirmations.index', [
+            'confirmations' => $confirmations,
+            'tasksRequests' => $tasksRequests,
+        ]);
     }
 
     public function show(CompanyManagerConfirmation $confirmation)
@@ -29,6 +34,12 @@ class ConfirmationController extends Controller
     public function destroy(CompanyManagerConfirmation $confirmation)
     {
         $confirmation->delete();
+        return redirect()->route('confirmations.index');
+    }
+    
+    public function destroyTaskRequest(TaskClosingRequest $taskRequest)
+    {
+        $taskRequest->delete();
         return redirect()->route('confirmations.index');
     }
 

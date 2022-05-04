@@ -61,10 +61,16 @@ Route::middleware(['auth'])->group(function () {
     });
 
     Route::middleware(['main_manager'])->group(function () {
-        Route::post('/bundles/confirm/{company}/{another}', [CompanyBundleController::class, 'confirm'])->name('bundles.confirm');
-        Route::delete('/bundles/destroy/{company}/{another}', [CompanyBundleController::class, 'destroy'])->name('bundles.destroy');
+        Route::post('/bundles/confirm/{company}/{another}', [CompanyBundleController::class, 'confirm'])
+        ->name('bundles.confirm');
+        Route::delete('/bundles/destroy/{company}/{another}', [CompanyBundleController::class, 'destroy'])
+        ->name('bundles.destroy');
         
-        Route::put('confirmations/confirm/{confirmation}/', [ConfirmationController::class, 'confirm'])->name('confirmations.confirm');
+        Route::put('confirmations/confirm/{confirmation}/', [ConfirmationController::class, 'confirm'])
+        ->name('confirmations.confirm');
+        Route::delete('confirmations/destroyTaskRequest/{taskRequest}/', [ConfirmationController::class, 'destroyTaskRequest'])
+        ->name('confirmations.destroyTaskRequest');
+        
         Route::resource('confirmations', ConfirmationController::class);
     });
 
