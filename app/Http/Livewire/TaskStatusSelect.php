@@ -15,6 +15,7 @@ class TaskStatusSelect extends Component
 
     public $statuses = [];
     public $closingStatusId = 4;
+    public $showConfirmInfo = false;
 
     protected $listeners = [
         'changeTaskStatus' => 'onChangeStatus',
@@ -24,6 +25,7 @@ class TaskStatusSelect extends Component
     {
         $this->statuses = TaskStatus::all();
         $this->task = $task;
+        $this->showConfirmInfo = $this->isWaitingConfirmation();
     }
 
     public function render()
@@ -38,12 +40,29 @@ class TaskStatusSelect extends Component
         }
         $this->task->task_status_id = intval($id);
         $this->task->save();
+        $this->removeConfirmationRequest();
     }
 
     private function createTaskClosingRequest() {
+        if($this->isWaitingConfirmation()) {
+            return;
+        }
         TaskClosingRequest::create([
             'task_id' => $this->task->id,
             'manager_id' => Auth::user()->id,
         ]);
+        $this->showConfirmInfo = true;
+    }
+
+    private function isWaitingConfirmation() {
+        $request = TaskClosingRequest::where('task_id', $this->task->id)
+        ->first();
+        return $request;
+    }
+
+    private function removeConfirmationRequest() {
+        TaskClosingRequest::where('task_id', $this->task->id)
+        ->delete();
+        $this->showConfirmInfo = false;
     }
 }

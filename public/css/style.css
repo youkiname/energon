@@ -3939,6 +3939,8 @@ select {
 }
 
 .messages-box {
+    overflow: auto;
+    max-height: 500px;
     background: #FFFFFF;
     border-radius: 10px;
     padding: 41px 36px 13px 36px;
@@ -4059,6 +4061,18 @@ select {
 }
 
 .form-message textarea {
+    border: none;
+    min-height: 48px;
+    height: 48px;
+    margin-bottom: 0;
+    padding: 12px 56px;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 160%;
+    color: #000000;
+}
+
+.form-message input {
     border: none;
     min-height: 48px;
     height: 48px;

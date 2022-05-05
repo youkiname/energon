@@ -9,6 +9,11 @@
             @endforeach
         </select>
     </div>
+    <b style="color: #2E5BFF;
+    @if(!$showConfirmInfo)
+    display: none;
+    @endif
+    ">Запрос на подтверждение закрытия задачи отправлен</b>
     <script>
         document.addEventListener('DOMContentLoaded', function(){
             $("#task_status").on('change', function() {

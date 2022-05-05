@@ -6,7 +6,6 @@
     <div class="content-box__info-item">
         <div class="container">
             <div class="message-box">
-
                 <div class="message-box__left">
                     <div class="request-info">
                         @if($task->company)
@@ -70,6 +69,7 @@
                         </div>
                         @endif
                     </div>
+                    <livewire:chat :chatId="$task->id"/> 
                 </div>
             </div>
         </div>
