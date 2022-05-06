@@ -12,8 +12,9 @@ class NotificationController extends Controller
 
     public function index()
     {
-        $notifications = Notification::where('user_id', Auth::user()->id)->paginate(10);
-        $amount = Notification::count();
+        $query = Notification::where('user_id', Auth::user()->id)->where('viewed', false);
+        $notifications = $query->paginate(10);
+        $amount = $query->count();
 
         return view('notifications.index', ["notifications" => $notifications, 'amount' => $amount]);
     }
