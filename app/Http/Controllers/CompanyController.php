@@ -45,7 +45,7 @@ class CompanyController extends Controller
         return view('company.create', $this->templateData);
     }
 
-    public function store(Request $request)
+    public function store(CompanyCreateRequest $request)
     {
         if($this->isSsnExisting($request->ssn)) {
             $this->createReassignConfirmation($request->ssn, Auth::user()->id);
