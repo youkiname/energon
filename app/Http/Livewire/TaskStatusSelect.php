@@ -7,6 +7,7 @@ use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\TaskStatus;
+use App\Models\Notification;
 use App\Models\TaskClosingRequest;
 
 
@@ -52,6 +53,17 @@ class TaskStatusSelect extends Component
             'manager_id' => Auth::user()->id,
         ]);
         $this->showConfirmInfo = true;
+        $this->createTaskClosingNotification();
+    }
+
+    private function createTaskClosingNotification() {
+        Notification::create([
+            'user_id' => $this->task->creator->id,
+            'title' => 'Закрытие задачи для ' . Auth::user()->name,
+            'content' => $this->task->title,
+            'content' => " " . $this->task->title,
+            'link' => route('tasks.show', ['task' => $this->task]),
+        ]);
     }
 
     private function isWaitingConfirmation() {
