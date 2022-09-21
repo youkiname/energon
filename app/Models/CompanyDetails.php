@@ -21,6 +21,7 @@ class CompanyDetails extends Model
         'order_sum',
         'manager_premium',
         'working_hours',
-        'equipment_type'
+        'equipment_type',
+        'delivery_place'
     ];
 }

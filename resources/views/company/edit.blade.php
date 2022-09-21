@@ -125,6 +125,10 @@
                     <label>Тип оборудования</label>
                     <input type="text" value="{{ $company->details->equipment_type }}" id="equipment_type" name="equipment_type">
                 </div>
+                <div class="contragent-form__item">
+                    <label>Место доставки\Склад</label>
+                    <input type="text" value="{{ $company->details->delivery_place }}" id="delivery_place" name="delivery_place">
+                </div>
             </div>
             <div class="form-btns">
                 <button type="submit" class="btn-blue">Сохранить</button>

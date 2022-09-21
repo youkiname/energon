@@ -30,14 +30,15 @@ class Company extends Model
 
     public function isUserHasRights($method, $user) {
         // Просматривать может только главный менеджер, админ и создатель
-        // Редактировать и удалять не может никто кроме админа
+        // Редактировать может админ, создатель и ответственный менеджер.
+        // удалять не может никто кроме админа
         // Создавать могут все
         switch ($method) {
             case "GET":
                 return $user->isMainManager() || $this->creator_id == $user->id || $this->target_user_id == $user->id;
                 break;
             case "PUT":
-                return false;
+                return $this->creator_id == $user->id || $this->target_user_id == $user->id;
                 break;
             case "POST":
                 return true;

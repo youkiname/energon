@@ -7,7 +7,7 @@
                     <livewire:company-status-select :company="$company"/>
                     <livewire:company-potentiality-select :company="$company"/>
 
-                    @if(Auth::user()->isAdmin())
+                    
                     <div class="btn-more-box">
                         <a class="btn-more" href="javascrirpt:void(0)">
                             <span></span>
@@ -15,6 +15,7 @@
                             <span></span>
                         </a>
                         <div class="btn-el-items">
+                            @if($company->isUserHasRights('DELETE', Auth::user()))
                             <a href="javascrirpt:void(0)" class="btn-el btn-del" data-toggle="confirmation"
                             onclick="adminConfirm(function() {
                                 document.getElementById('companyDelete').submit();
@@ -24,10 +25,13 @@
                                 @csrf
                                 @method('DELETE')
                             </form>
+                            @endif()
+
+                            @if($company->isUserHasRights('PUT', Auth::user()))
                             <a href="{{ route('companies.edit', ['company'=>$company]) }}" class="btn-el btn-edit"></a>
+                            @endif()
                         </div>
                     </div>
-                    @endif()
                 </div>
                 <div class="info-item-content">
                     <p>{{ $company->description }}</p>
@@ -68,7 +72,7 @@
                     <b>Пусто</b>
                     @endif
                 </div>
-                @if(Auth::user()->isAdmin())
+                @if($company->isUserHasRights('PUT', Auth::user()))
                 <div class="btn-more-box">
                     <a class="btn-more" href="javascrirpt:void(0)">
                         <span></span>
@@ -121,8 +125,12 @@
                     <span>Тип оборудования</span>
                     <b>{{ $company->details->equipment_type }}</b>
                 </div>
+                <div>
+                    <span>Место доставки\Склад</span>
+                    <b>{{ $company->details->delivery_place }}</b>
+                </div>
             </div>
-            @if(Auth::user()->isAdmin())
+            @if($company->isUserHasRights('PUT', Auth::user()))
             <div class="btn-more-box">
                 <a class="btn-more" href="javascrirpt:void(0)">
                     <span></span>

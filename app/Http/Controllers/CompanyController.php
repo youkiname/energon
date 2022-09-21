@@ -77,7 +77,8 @@ class CompanyController extends Controller
             'order_sum' => 0,
             'manager_premium' => 0,
             'working_hours' => 0,
-            'equipment_type' => ''
+            'equipment_type' => '',
+            'delivery_place' => '',
         ]);
 
         $this->storeEmployee($request, $newCompany);

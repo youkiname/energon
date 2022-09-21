@@ -25,6 +25,7 @@ return new class extends Migration
             $table->integer('manager_premium');
             $table->integer('working_hours');
             $table->string('equipment_type');
+            $table->string('delivery_place');
         });
     }
 
