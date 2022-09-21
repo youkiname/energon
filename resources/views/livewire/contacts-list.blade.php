@@ -34,12 +34,12 @@
                             <td>{{ $employee->position }}</td>
                             <td class="nopadding">
                                 <div class="linkblock">
-                                    <a href="tel:{{ $employee->phone->phone }}">{{ $employee->phone->phone }}</a>
+                                    <a href="tel:{{ $employee->phone() }}">{{ $employee->phone() }}</a>
                                 </div>
                             </td>
                             <td class="nopadding">
                                 <div class="linkblock">
-                                    <a href="mailto:{{ $employee->email->email }}">{{ $employee->email->email }}</a>
+                                    <a href="mailto:{{ $employee->email() }}">{{ $employee->email() }}</a>
                                 </div>
                             </td>
                             <td class="nopadding">

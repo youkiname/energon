@@ -1,7 +1,5 @@
 @foreach($companies as $company)
-<div class="elem-item-box
-@if(!($mainCompany->isBundleConfirmed($company->id))) bundle-not-confirmed @endif
-">
+<div class="elem-item-box">
     <div class="elem-item-box-title">
         <a href="{{ route('companies.show', ['company' => $company]) }}"
         style="color: black;">
@@ -16,11 +14,6 @@
         <span>Адрес</span>
         <b>{{ $company->address }}</b>
     </div>
-    @if(!($mainCompany->isBundleConfirmed($company->id))) 
-    <div class="el-org">
-        <span>Неподтверждена</span>
-    </div>
-    @endif
 
     @if(Auth::user()->isMainManager())
     <div class="btn-more-box">

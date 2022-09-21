@@ -49,7 +49,8 @@ class Employee extends Model
 
     public function phone()
     {
-        return $this->hasOne(EmployeePhone::class);
+        $phone = EmployeePhone::where('employee_id', $this->id)->first();
+        return $phone ? $phone->phone : '';
     }
 
     public function phones()
@@ -64,7 +65,8 @@ class Employee extends Model
 
     public function email()
     {
-        return $this->hasOne(EmployeeEmail::class);
+        $email = EmployeeEmail::where('employee_id', $this->id)->first();
+        return $email ? $email->email : '';
     }
 
     public function emails()

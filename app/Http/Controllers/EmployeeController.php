@@ -84,6 +84,9 @@ class EmployeeController extends Controller
             return;
         }
         foreach($request->input('employee_phones') as $key => $phone) {
+            if (!$phone) {
+                continue;
+            }
             EmployeePhone::create([
                 'company_id' => $employee->company->id,
                 'employee_id' => $employee->id,
@@ -98,6 +101,9 @@ class EmployeeController extends Controller
             return;
         }
         foreach($request->input('employee_emails') as $key => $email) {
+            if (!$email) {
+                continue;
+            }
             EmployeeEmail::create([
                 'company_id' => $employee->company->id,
                 'employee_id' => $employee->id,

@@ -1,5 +1,5 @@
 <div class="table-tr">
-    <div class="table-td">
+    <div class="table-td" style="max-width: 100px; overflow: hidden; text-overflow: ellipsis;">
         <b>{{ $company->legal }}</b>
         <a href="{{ route('companies.show', ['company' => $company]) }}">{{ $company->name }}</a>
     </div>
@@ -13,11 +13,11 @@
     </div>
     <div class="table-td">
         <b>Рабочий телефон</b>
-        <span><a href="tel:{{ $company->employee->phone->phone }}">{{ $company->employee->phone->phone }}</a></span>
+        <span><a href="tel:{{ $company->employee->phone() }}">{{ $company->employee->phone() }}</a></span>
     </div>
     <div class="table-td">
         <b>Рабочий e-mail</b>
-        <span><a href="mailto:{{ $company->employee->email->email }}">{{ $company->employee->email->email }}</a></span>
+        <span><a href="mailto:{{ $company->employee->email() }}">{{ $company->employee->email() }}</a></span>
     </div>
     <div class="table-td">
         <b>ИНН</b>
@@ -26,6 +26,10 @@
     <div class="table-td">
         <b>Тип клиента</b>
         <span>{{ $company->companyType->name }}</span>
+    </div>
+    <div class="table-td">
+        <b>Ответственный</b>
+        <span>{{ $company->manager->name }}</span>
     </div>
     <div class="table-td">
         <a href="#" class="table-tr-btn"></a>

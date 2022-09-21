@@ -20,21 +20,14 @@ class CompanyCreateRequest extends FormRequest
         return [
             'name' => ['required'],
             'ssn' => ['required', 'numeric'],
-            'legal' => ['required'],
-            'city' => ['required'],
-            'address' => ['required'],
-            'company_type' => ['sometimes', 'required', 'exists:company_types,id'],
-            'company_purchase' => ['sometimes', 'required', 'exists:company_purchases,id'],
-            'company_status' => ['sometimes', 'required', 'exists:company_statuses,id'],
-            'company_potentiality' => ['sometimes', 'required', 'exists:potentialities,id'],
+            'company_type' => ['required', 'exists:company_types,id'],
+            'company_purchase' => ['required', 'exists:company_purchases,id'],
+            'company_status' => ['required', 'exists:company_statuses,id'],
+            'company_potentiality' => ['required', 'exists:potentialities,id'],
 
-            'employee_position' => ['required', 'string'],
-            'employee_first_name' => ['required', 'string'],
-            'employee_last_name' => ['required', 'string'],
-            'employee_phones' => ['required', 'array', 'min:1'],
-            'employee_phones.*' => ['required', 'string'],
-            'employee_emails' => ['required', 'array', 'min:1'],
-            'employee_emails.*' => ['required', 'email:rfc'],
+            'employee_phones' => ['array'],
+            'employee_emails' => ['array'],
+            'employee_emails.*' => ['email:rfc'],
         ];
     }
 

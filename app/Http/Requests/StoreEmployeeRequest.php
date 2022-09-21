@@ -19,13 +19,9 @@ class StoreEmployeeRequest extends FormRequest
     public function rules()
     {
         return [
-            'employee_position' => ['required', 'string'],
-            'employee_first_name' => ['required', 'string'],
-            'employee_last_name' => ['required', 'string'],
-            'employee_phones' => ['required', 'array', 'min:1'],
-            'employee_phones.*' => ['required', 'string'],
-            'employee_emails' => ['required', 'array', 'min:1'],
-            'employee_emails.*' => ['required', 'email:rfc'],
+            'employee_phones' => ['array'],
+            'employee_emails' => ['array'],
+            'employee_emails.*' => ['email:rfc'],
         ];
     }
 

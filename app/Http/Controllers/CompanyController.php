@@ -118,8 +118,6 @@ class CompanyController extends Controller
         $request->validate([
             'name' => ['required', 'string'],
             'ssn' => ['required', 'string', 'max:13'],
-            'city' => ['required', 'string'],
-            'address' => ['required', 'string'],
         ]);
 
         $company->name = $request->name;
@@ -175,13 +173,16 @@ class CompanyController extends Controller
     private function storeEmployee(Request $request, Company $company) {
         $employee = Employee::create([
             'company_id' => $company->id,
-            'position' => $request->employee_position,
-            'first_name' => $request->employee_first_name,
-            'last_name' => $request->employee_last_name,
+            'position' => $request->employee_position ? $request->employee_position : '[Неизвестно]',
+            'first_name' => $request->employee_first_name ? $request->employee_position : '[Неизвестно]',
+            'last_name' => $request->employee_last_name ? $request->employee_position : '[Неизвестно]',
             'patronymic' => $request->employee_patronymic ? $request->employee_patronymic : '',
         ]);
 
         foreach($request->input('employee_phones') as $key => $phone) {
+            if (!$phone) {
+                continue;
+            }
             EmployeePhone::create([
                 'company_id' => $company->id,
                 'employee_id' => $employee->id,
@@ -190,6 +191,9 @@ class CompanyController extends Controller
         }
 
         foreach($request->input('employee_emails') as $key => $email) {
+            if (!$email) {
+                continue;
+            }
             EmployeeEmail::create([
                 'company_id' => $company->id,
                 'employee_id' => $employee->id,

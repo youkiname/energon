@@ -9,6 +9,7 @@
                 <div class="table-th">E-mail</div>
                 <div class="table-th">ИНН</div>
                 <div class="table-th">тип клиента</div>
+                <div class="table-th">Менеджер</div>
                 <div class="table-th">Статус</div>
             </div>
             @foreach($companies as $company)
