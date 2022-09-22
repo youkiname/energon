@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Employee;
+use Illuminate\Support\Facades\Auth;
 
 class ContactsList extends Component
 {
@@ -13,7 +14,6 @@ class ContactsList extends Component
 
     public function mount()
     {
-        $this->employees = Employee::limit(30)->get();
         $this->refreshContacts();
     }
 
@@ -27,23 +27,27 @@ class ContactsList extends Component
     }
 
     private function refreshContacts() {
-        if(!$this->searchQuery) {
-            $this->employees = Employee::limit(30)->get();
-            return;
-        }
+        $userId = Auth::user()->id;
         $searchTerm = '%' . $this->searchQuery . '%';
         $employees = Employee::
-        whereRaw("UPPER(first_name) LIKE ?", [mb_strtoupper($searchTerm)])
-        ->orWhereRaw("UPPER(last_name) LIKE ?", [mb_strtoupper($searchTerm)])
-        ->orWhereRaw("UPPER(patronymic) LIKE ?", [mb_strtoupper($searchTerm)])
-        ->orWhereHas('phones', function($q) use ($searchTerm) { 
-            $q->where('phone', 'like', $searchTerm);
-        })
-        ->orWhereHas('emails', function($q) use ($searchTerm) { 
-            $q->where('email', 'like', $searchTerm);
-        })
-        ->limit(30);
-         
-        $this->employees = $employees->get();
+        join('companies', 'employees.company_id', '=', 'companies.id')
+        ->select('employees.*', 'companies.creator_id', 'companies.target_user_id')
+        ->where(function ($query) use ($searchTerm) {
+            $query->whereRaw("UPPER(CONCAT(employees.first_name, ' ', employees.last_name, ' ', employees.patronymic)) LIKE ?", [mb_strtoupper($searchTerm)])
+            ->orWhereHas('phones', function($q) use ($searchTerm) { 
+                $q->where('phone', 'like', $searchTerm);
+            })
+            ->orWhereHas('emails', function($q) use ($searchTerm) { 
+                $q->where('email', 'like', $searchTerm);
+            });
+        });
+        if (!Auth::user()->isAdmin()) {
+            $employees = $employees->where(function ($query) use ($userId) {
+                $query->where('companies.creator_id', $userId)
+                ->orWhere('companies.target_user_id', $userId);
+            });
+        }
+        
+        $this->employees = $employees->limit(30)->get();
     }
 }
