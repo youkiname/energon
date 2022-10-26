@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('company_id')->references('id')->on('companies')->onDelete('cascade');;
             $table->foreignId('creator_id')->nullable()->references('id')->on('users')->onDelete('set null');
-            $table->foreignId('target_user_id')->nullable()->references('id')->on('users')->onDelete('set null');
+            $table->foreignId('target_user_id')->nullable()->references('id')->on('employees')->onDelete('set null');
             $table->foreignId('event_type_id')->nullable()->references('id')->on('event_types')->onDelete('set null');
             $table->string('title');
             $table->string('description')->nullable();

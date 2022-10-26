@@ -3,7 +3,7 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
-use App\Models\User;
+use App\Models\Employee;
 use App\Models\Event;
 use App\Models\EventType;
 
@@ -26,7 +26,7 @@ class CompanyEvents extends Component
     {
         $this->company = $company;
         $this->eventTypes = EventType::all();
-        $this->users = User::all();
+        $this->employees = Employee::where('company_id', $this->company->id)->get();
         $this->refreshEvents();
     }
 

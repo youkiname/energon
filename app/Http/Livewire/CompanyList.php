@@ -10,6 +10,7 @@ use App\Models\Company;
 class CompanyList extends Component
 {
     public $companies = [];
+    public $managerId = 0;
     public $statusId = 0;
     public $searchValue = "";
 
@@ -17,6 +18,7 @@ class CompanyList extends Component
 
     protected $listeners = [
         'changeStatusId' => 'changeStatusId',
+        'setSelectedManager' => 'setSelectedManager',
         'changeSearchValue' => 'changeSearchValue',
     ];
 
@@ -28,6 +30,11 @@ class CompanyList extends Component
     public function render()
     {
         return view('livewire.company-list');
+    }
+
+    public function setSelectedManager($id) {
+        $this->managerId = intval($id);
+        $this->refreshCompanies();
     }
 
     public function changeStatusId($id) {
@@ -42,10 +49,13 @@ class CompanyList extends Component
 
     private function refreshCompanies() {
         $searchTerm = '%' . $this->searchValue . '%';
-        $sqlQuery = Company::whereRaw("UPPER(name) LIKE ?", [mb_strtoupper($searchTerm)]); 
+        $sqlQuery = Company::whereRaw("UPPER(name) LIKE ?", [mb_strtoupper($searchTerm)]);
 
         if ($this->statusId != $this->allStatusId) {
             $sqlQuery = $sqlQuery->where('company_status_id', $this->statusId);
+        }
+        if ($this->managerId != 0) {
+            $sqlQuery = $sqlQuery->where('target_user_id', $this->managerId);
         }
         $sqlQuery = $this->applyRolePermissions($sqlQuery);
         $this->companies = $sqlQuery->orderBy('name', 'ASC')->get();

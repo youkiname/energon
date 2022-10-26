@@ -32,7 +32,7 @@ class Event extends Model
 
     public function targetUser()
     {
-        return $this->belongsTo(User::class, 'target_user_id', 'id');
+        return $this->belongsTo(Employee::class, 'target_user_id', 'id');
     }
 
     public function eventType()
@@ -42,7 +42,7 @@ class Event extends Model
 
     public function date()
     {
-        return Carbon::create($this->created_at)->toFormattedDateString(); 
+        return Carbon::create($this->created_at)->toFormattedDateString();
     }
 
     public function relativeDate()
