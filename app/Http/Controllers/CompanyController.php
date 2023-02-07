@@ -205,6 +205,9 @@ class CompanyController extends Controller
 
     private function updateDetails(Request $request, Company $company) {
         $updatingFields = [];
+        if (empty($request->order_date)) {
+            $request->merge( array( 'order_date' => NULL ) );
+        }
         foreach($company->details->getAttributes() as $attribute => $value) {
             if(!is_null($request->input($attribute))) {
                 $updatingFields[$attribute] = $request->input($attribute);
