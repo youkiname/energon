@@ -33,60 +33,45 @@
                 </div>
                 <div class="contragent-form__item">
                     <label for="company_type">Тип клиента</label>
-                    <select name="company_type" id="company_type">
-                    @foreach($companyTypes as $companyType)
-                        <option value="{{ $companyType->id }}"
-                        @if($companyType->id == $company->companyType->id) selected @endif
-                        >{{ $companyType->name }}</option>
-                    @endforeach
-                    </select>
+                    <x-select 
+                    name="company_type" 
+                    :items="$companyTypes" 
+                    :default="$company->companyType->id" />
                 </div>
                 <div class="contragent-form__item">
                     <label for="company_purchase">Тип закупки</label>
-                    <select name="company_purchase" id="company_purchase">
-                        @foreach($companyPurchases as $companyPurchase)
-                        <option value="{{ $companyPurchase->id }}"
-                        @if($companyPurchase->id == $company->purchase->id) selected @endif
-                        >{{ $companyPurchase->name }}</option>
-                        @endforeach
-                    </select>
+                    <x-select 
+                    name="company_purchase" 
+                    :items="$companyPurchases" 
+                    :default="$company->purchase->id" />
                 </div>
                 <div class="contragent-form__item">
                     <label for="company_status">Статус клиента</label>
-                    <select name="company_status" id="company_status">
-                        @foreach($companyStatuses as $companyStatus)
-                        <option value="{{ $companyStatus->id }}"
-                        @if($companyStatus->id == $company->status->id) selected @endif
-                        >{{ $companyStatus->name }}</option>
-                        @endforeach
-                    </select>
+                    <x-select 
+                    name="company_status" 
+                    :items="$companyStatuses" 
+                    :default="$company->status->id" />
                 </div>
                 <div class="contragent-form__item">
                     <label for="company_potentiality">Потенциал клиента</label>
-                    <select name="company_potentiality" id="company_potentiality">
-                    @foreach($companyPotentialities as $companyPotentiality)
-                        <option value="{{ $companyPotentiality->id }}"
-                        @if($companyPotentiality->id == $company->potentiality->id) selected @endif
-                        >
-                            {{ $companyPotentiality->name }}
-                        </option>
-                    @endforeach
-                    </select>
+                    <x-select 
+                    name="company_potentiality" 
+                    :items="$companyPotentialities" 
+                    :default="$company->potentiality->id" />
                 </div>
                 <div class="contragent-form__item big">
                     <label for="description">Описание компании</label>
                     <textarea name="description" id="description">{{ $company->description }}</textarea>
                 </div>
+                @if (Auth::user()->isMainManager())
                 <div class="contragent-form__item">
                     <label for="target_user_id">Ответственный менеджер</label>
-                    <select name="target_user_id" id="target_user_id">
-                        @foreach($managers as $manager)
-                        <option value="{{ $manager->id }}"
-                        @if($manager->id == $company->target_user_id) selected @endif
-                        >{{ $manager->name }}</option>
-                        @endforeach
-                    </select>
+                    <x-select 
+                    name="target_user_id" 
+                    :items="$managers" 
+                    :default="$company->target_user_id" />
                 </div>
+                @endif
             </div>
             <div class="contragent-form-box">
                 <div class="contragent-form__item">

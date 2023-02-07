@@ -51,7 +51,7 @@ class Task extends Model
                 return $user->isMainManager() || $this->creator_id == $user->id;
                 break;
         }
-        return false;
+        return $user->isAdmin();
     }
 
     public function isCompleted() {

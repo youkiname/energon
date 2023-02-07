@@ -174,9 +174,9 @@ class CompanyController extends Controller
     private function storeEmployee(Request $request, Company $company) {
         $employee = Employee::create([
             'company_id' => $company->id,
-            'position' => $request->employee_position ? $request->employee_position : '[Неизвестно]',
-            'first_name' => $request->employee_first_name ? $request->employee_position : '[Неизвестно]',
-            'last_name' => $request->employee_last_name ? $request->employee_position : '[Неизвестно]',
+            'position' => $request->employee_position ? $request->employee_position : '',
+            'first_name' => $request->employee_first_name ? $request->employee_first_name : '',
+            'last_name' => $request->employee_last_name ? $request->employee_last_name : '',
             'patronymic' => $request->employee_patronymic ? $request->employee_patronymic : '',
         ]);
 

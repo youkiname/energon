@@ -37,7 +37,9 @@
                             <label for="company_type">Тип клиента</label>
                             <select name="company_type" id="company_type" class="@error('company_type') is-invalid @enderror">
                                 @foreach($companyTypes as $companyType)
-                                <option value="{{ $companyType->id }}">{{ $companyType->name }}</option>
+                                <option value="{{ $companyType->id }}" 
+                                    @if(old("company_type") == $companyType->id) selected @endif
+                                >{{ $companyType->name }}</option>
                                 @endforeach
                             </select>
                             @error('company_type')
@@ -48,7 +50,9 @@
                             <label for="company_purchase">Тип закупки</label>
                             <select name="company_purchase" id="company_purchase" class="@error('company_purchase') is-invalid @enderror">
                                 @foreach($companyPurchases as $companyPurchase)
-                                    <option value="{{ $companyPurchase->id }}">
+                                    <option value="{{ $companyPurchase->id }}"
+                                    @if(old("company_purchase") == $companyPurchase->id) selected @endif
+                                    >
                                         {{ $companyPurchase->name }}
                                     </option>
                                 @endforeach
@@ -61,7 +65,9 @@
                             <label for="company_status">Статус клиента</label>
                             <select name="company_status" id="company_status" class="@error('company_status') is-invalid @enderror">
                                 @foreach($companyStatuses as $companyStatus)
-                                    <option value="{{ $companyStatus->id }}">{{ $companyStatus->name }}</option>
+                                    <option value="{{ $companyStatus->id }}"
+                                    @if(old("company_status") == $companyStatus->id) selected @endif
+                                    >{{ $companyStatus->name }}</option>
                                 @endforeach
                             </select>
                             @error('company_status')
@@ -72,7 +78,9 @@
                             <label for="company_potentiality">Потенциал клиента</label>
                             <select name="company_potentiality" id="company_potentiality" class="@error('company_potentiality') is-invalid @enderror">
                                 @foreach($companyPotentialities as $companyPotentiality)
-                                <option value="{{ $companyPotentiality->id }}">
+                                <option value="{{ $companyPotentiality->id }}"
+                                @if(old("company_potentiality") == $companyPotentiality->id) selected @endif
+                                >
                                     {{ $companyPotentiality->name }}
                                 </option>
                                 @endforeach

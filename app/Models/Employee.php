@@ -18,23 +18,9 @@ class Employee extends Model
     ];
 
     public function isUserHasRights($method, $user) {
-        // Просматривать может только главный менеджер, админ
-        // Редактировать, добавлять и удалять не может никто кроме админа
-        switch ($method) {
-            case "GET":
-                return $user->isMainManager();
-                break;
-            case "PUT":
-                return false;
-                break;
-            case "POST":
-                return false;
-                break;
-            case "DELETE":
-                return false;
-                break;
-        }
-        return false;
+        // Все действия может совершать админ, главный менеджер
+        // и менеджер этого контрагента
+        return $user->isMainManager() || $this->company->target_user_id == $user->id;
     }
 
     public function getFullName() {

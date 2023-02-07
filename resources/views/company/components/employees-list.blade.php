@@ -19,7 +19,6 @@
                 @endforeach
             </div>
         </div>
-        @if(Auth::user()->isMainManager())
         <div class="btn-more-box">
             <a class="btn-more" href="javascrirpt:void(0)">
                 <span></span>
@@ -27,16 +26,19 @@
                 <span></span>
             </a>
             <div class="btn-el-items">
+                @if($employee->isUserHasRights('PUT', Auth::user()))
                 <form action="{{ route('employee.destroy', ['employee' => $employee]) }}"
                       method="post" id="employeeDelete{{ $employee->id }}">
                     @csrf
                     @method('DELETE')
                     <a href="javascript:void(0)" class="btn-el btn-del" onclick="document.getElementById('employeeDelete{{ $employee->id }}').submit()"></a>
                 </form>
+                @endif
+                @if($employee->isUserHasRights('DELETE', Auth::user()))
                 <a href="{{ route('employee.edit', ['employee'=>$employee]) }}" class="btn-el btn-edit"></a>
+                @endif
             </div>
         </div>
-        @endif
     </div>
     @endforeach
 

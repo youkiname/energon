@@ -44,10 +44,10 @@ class Company extends Model
                 return true;
                 break;
             case "DELETE":
-                return false;
+                return $user->isAdmin();
                 break;
         }
-        return false;
+        return $user->isAdmin();
     }
 
     public function creator()

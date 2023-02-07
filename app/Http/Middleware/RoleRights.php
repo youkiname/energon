@@ -14,7 +14,6 @@ class RoleRights
     {
         $user = Auth::user();
         $model = $request->route($modelName);
-        // dd($model->isUserHasRights($request->method(), $user));
         if ($model == null || $user->isAdmin() || $model->isUserHasRights($request->method(), $user)) {
             return $next($request);
         }
