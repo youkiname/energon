@@ -24,7 +24,7 @@ class ConfirmationController extends Controller
 
     public function show(CompanyManagerConfirmation $confirmation)
     {
-        $managers = User::all();
+        $managers = User::where('deleted_at', NULL)->get();
         return view('confirmations.show', [
             'confirmation' => $confirmation,
             'managers' => $managers,

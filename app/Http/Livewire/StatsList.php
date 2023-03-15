@@ -149,7 +149,7 @@ class StatsList extends Component
         if($this->selectedManager) {
             return [$this->selectedManager];
         }
-        return User::all();
+        return User::where('deleted_at', NULL)->get();
     }
 
     private function getTables() {

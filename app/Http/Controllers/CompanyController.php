@@ -103,14 +103,14 @@ class CompanyController extends Controller
     public function tasks(Company $company)
     {
         $this->templateData['company'] = $company;
-        $this->templateData['users'] = User::all();
+        $this->templateData['users'] = User::where('deleted_at', NULL)->get();
         return view('company.tasks', $this->templateData);
     }
 
     public function edit(Company $company)
     {
         $this->templateData['company'] = $company;
-        $this->templateData['managers'] = User::all();
+        $this->templateData['managers'] = User::where('deleted_at', NULL)->get();
         return view('company.edit', $this->templateData);
     }
 

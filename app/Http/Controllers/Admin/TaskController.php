@@ -13,7 +13,7 @@ class TaskController extends Controller
 {
     public function index()
     {
-        $data['users'] = User::all();
+        $data['users'] = User::where('deleted_at', NULL)->get();
         $data['statuses'] = TaskStatus::all();
         $data['tasks'] = Task::all()->groupBy('task_status_id');
         return view('admin.tasks.index', $data);
@@ -21,7 +21,7 @@ class TaskController extends Controller
 
     public function create()
     {
-        $data['users'] = User::all();
+        $data['users'] = User::where('deleted_at', NULL)->get();
         return view('admin.tasks.create', $data);
     }
 

@@ -17,7 +17,7 @@ class CompanyFilters extends Component
     {
         $this->letters = mb_str_split('АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ');
         $this->statuses = CompanyStatus::all();
-        $this->managers = User::all();
+        $this->managers = User::where('deleted_at', NULL)->get();
 
     }
 

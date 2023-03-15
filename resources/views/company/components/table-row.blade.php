@@ -29,7 +29,11 @@
     </div>
     <div class="table-td">
         <b>Ответственный</b>
+        @if($company->manager)
         <span>{{ $company->manager->name }}</span>
+        @else
+        <span>Пусто</span>
+        @endif
     </div>
     <div class="table-td">
         <a href="#" class="table-tr-btn"></a>

@@ -16,7 +16,7 @@ class TaskForm extends Component
     public function __construct($companyId=null)
     {
         $this->companyId = $companyId;
-        $this->users = User::all();
+        $this->users = User::where('deleted_at', NULL)->get();
         $this->statuses = TaskStatus::all();
     }
 
