@@ -132,7 +132,9 @@ class CompanyController extends Controller
         $company->company_status_id = $request->company_status;
         $company->company_potentiality_id = $request->company_potentiality;
 
-        $company->target_user_id = $request->target_user_id;
+        if (Auth::user()->isMainManager()) {
+            $company->target_user_id = $request->target_user_id;
+        }
 
         $company->save();
         $this->updateDetails($request, $company);
@@ -238,5 +240,5 @@ class CompanyController extends Controller
             'company_id' => $company->id,
             'new_manager_id' => $managerId,
         ]);
-    } 
+    }
 }
