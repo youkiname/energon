@@ -8,8 +8,8 @@
                         <span>Контрагент: </span>
                         <select name="company_id" id="company_id">
                             <option value="0">Все</option>
-                            @foreach($companies as $company)
-                            <option value="{{ $company->id }}">{{ $company->fullName() }}</option>
+                            @foreach ($companies as $company)
+                                <option value="{{ $company->id }}">{{ $company->fullName() }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -17,8 +17,8 @@
                         <span>Статус: </span>
                         <select name="company_status_id" id="company_status_id">
                             <option value="0">Все</option>
-                            @foreach($companyStatuses as $status)
-                            <option value="{{ $status->id }}">{{ $status->name }}</option>
+                            @foreach ($companyStatuses as $status)
+                                <option value="{{ $status->id }}">{{ $status->name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -26,8 +26,8 @@
                         <span>Тип: </span>
                         <select name="company_type_id" id="company_type_id">
                             <option value="0">Все</option>
-                            @foreach($companyTypes as $companyType)
-                            <option value="{{ $companyType->id }}">{{ $companyType->name }}</option>
+                            @foreach ($companyTypes as $companyType)
+                                <option value="{{ $companyType->id }}">{{ $companyType->name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -35,8 +35,8 @@
                         <span>Менеджер: </span>
                         <select name="manager_id" id="manager_id">
                             <option value="0">Все</option>
-                            @foreach($managers as $manager)
-                            <option value="{{ $manager->id }}">{{ $manager->name }}</option>
+                            @foreach ($managers as $manager)
+                                <option value="{{ $manager->id }}">{{ $manager->name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -63,8 +63,8 @@
                     </div>
                     <div class="date-range">
                         <div class="date-range-item">
-                            <input placeholder="С" class="start_one" data-multiple-dates-separator=" - " 
-                            type="text" class="date" id="datepicker">
+                            <input placeholder="С" class="start_one" data-multiple-dates-separator=" - " type="text"
+                                class="date" id="datepicker">
                         </div>
                         <div class="date-range-item">
                             <input placeholder="По" type="text" class="date end_one">
@@ -76,33 +76,33 @@
     </div>
     <div class="container">
         <div class="stats-box">
-            @foreach($stats as $stat)
-            <div class="stat-item {{ $colors[array_rand($colors, 1)] }}">
-                <div class="stat-item-top">
-                    <div class="stat-item-name">{{ $stat->title }}</div>
-                    <p style="font-size: 0.7em;">Менеджер: {{ $stat->manager }}</p>
-                    <p style="font-size: 0.7em;">
-                    Контрагент: 
-                    @if($selectedCompanyStatus || $selectedCompanyType)
-                    отфильтровано
-                    @else
-                    {{ $selectedCompanyName }}
-                    @endif
-                    </p>
+            @foreach ($stats as $stat)
+                <div class="stat-item {{ $colors[array_rand($colors, 1)] }}">
+                    <div class="stat-item-top">
+                        <div class="stat-item-name">{{ $stat->title }}</div>
+                        <p style="font-size: 0.7em;">Менеджер: {{ $stat->manager }}</p>
+                        <p style="font-size: 0.7em;">
+                            Контрагент:
+                            @if ($selectedCompanyStatus || $selectedCompanyType)
+                                отфильтровано
+                            @else
+                                {{ $selectedCompanyName }}
+                            @endif
+                        </p>
+                    </div>
+                    <div class="stat-item-bottom">
+                        <div class="stat-col">{{ $stat->amount }}</div>
+                        <div class="stat-date">{{ $stat->date }}</div>
+                    </div>
                 </div>
-                <div class="stat-item-bottom">
-                    <div class="stat-col">{{ $stat->amount }}</div>
-                    <div class="stat-date">{{ $stat->date }}</div>
-                </div>
-            </div>
             @endforeach()
         </div>
     </div>
     <script>
-        document.addEventListener('DOMContentLoaded', function(){
+        document.addEventListener('DOMContentLoaded', function() {
             $("#company_id").on('change', function() {
                 let value = $("#company_id").val()
-                if(value != '0') {
+                if (value != '0') {
                     $("#company_status_select").hide()
                     $("#company_type_select").hide()
                 } else {
@@ -136,11 +136,14 @@
                 range: 'multiple',
                 showWeek: true,
                 firstDay: 1,
-                dateFormat: 'mm.dd.yyyy',
-                onSelect: function (fd, d, picker) {
+                dateFormat: 'dd.mm.yyyy',
+                onSelect: function(fd, d, picker) {
                     $(".start_one").val(fd.split("-")[0]);
                     $(".end_one").val(fd.split("-")[1]);
-                    Livewire.emit('changeDateRange', {begin: d[0], end: d[1]})
+                    Livewire.emit('changeDateRange', {
+                        begin: d[0],
+                        end: d[1]
+                    })
                 },
             });
         });
