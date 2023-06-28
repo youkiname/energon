@@ -48,9 +48,10 @@ class CompanyController extends Controller
     public function store(CompanyCreateRequest $request)
     {
         if($this->isSsnExisting($request->ssn)) {
-            $this->createReassignConfirmation($request->ssn, Auth::user()->id);
+            $existedCompany = Company::where('ssn', $request->ssn)->first();
+            $targetManagerName = $existedCompany->manager->name;
             return redirect()->route('companies.create')->with([
-                'success' => 'Организация уже существует. Был отправлен запрос на переназначение менеджера.'
+                'error' => sprintf('Организация уже существует. Ответственный менеджер: %s.', $targetManagerName)
             ]);
         }
         $newCompany = Company::create([
@@ -235,6 +236,11 @@ class CompanyController extends Controller
     }
 
     private function createReassignConfirmation($ssn, $managerId) {
+        // Этот метод не используется на данный момент.
+        // Раньше при совпадении ИНН с существующим в базе главному менеджеру
+        // отправлялся запрос с просьбой замены ответственного.
+        // Сейчас просто отображается уведомление о совпадении и отображается
+        // имя текущего ответственного менеджера.
         $company = Company::where('ssn', $ssn)->first();
         CompanyManagerConfirmation::create([
             'company_id' => $company->id,

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +11,7 @@
     <link rel="shortcut icon" href="./img/favicon/favicon.ico" type="image/x-icon">
     <link rel="icon" sizes="16x16" href="./img/favicon/favicon-16x16.png" type="image/png">
     <link rel="icon" sizes="32x32" href="./img/favicon/favicon-32x32.png" type="image/png">
-    
+
     <link rel="apple-touch-icon-precomposed" href="img/favicon/apple-touch-icon-precomposed.png">
     <link rel="apple-touch-icon" href="img/favicon/apple-touch-icon.png">
     <link rel="apple-touch-icon" sizes="57x57" href="img/favicon/apple-touch-icon-57x57.png">
@@ -32,12 +33,18 @@
     @livewireStyles
     <title>@yield('title', config('app.name'))</title>
 </head>
+
 <body>
     <div class="wrapper">
         @include('components.navigation')
         @if (session()->has('success'))
             <div class="settings-success">
                 <div class="message-form message-ok">{{ session('success') }}</div>
+            </div>
+        @endif
+        @if (session()->has('error'))
+            <div class="settings-success">
+                <div class="message-form message-error">{{ session('error') }}</div>
             </div>
         @endif
         <div class="content-box">
@@ -47,14 +54,14 @@
                 </div>
             </div>
             @if ($errors->any())
-            <div class="message-form message-error">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-            @endif 
+                <div class="message-form message-error">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             @yield('content')
         </div>
 
@@ -81,4 +88,5 @@
     </script>
 
 </body>
+
 </html>
