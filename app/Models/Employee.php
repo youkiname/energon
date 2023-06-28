@@ -24,7 +24,7 @@ class Employee extends Model
     }
 
     public function getFullName() {
-        return $this->first_name . ' ' . $this->last_name . ' ' . $this->patronymic;
+        return $this->last_name . ' ' . $this->first_name . ' ' . $this->patronymic;
     }
 
     public function company()
