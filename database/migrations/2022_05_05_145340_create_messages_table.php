@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('chat_id');
             $table->foreignId('sender_id')->nullable()->references('id')->on('users')->onDelete('set null');
             $table->boolean('viewed')->default(0);
-            $table->string('text');
+            $table->text('text');
             $table->foreignId('attachment_id')->nullable()->references('id')->on('attachments')->onDelete('set null');
             $table->timestamps();
         });
