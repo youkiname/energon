@@ -29,12 +29,14 @@
     <link rel="stylesheet" href="css/vendor.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/sys.css">
+    <link rel="stylesheet" href="css/notifications.css">
 
     @livewireStyles
     <title>@yield('title', config('app.name'))</title>
 </head>
 
 <body>
+    <livewire:notifications-box /> 
     <div class="wrapper">
         @include('components.navigation')
         @if (session()->has('success'))
@@ -85,6 +87,26 @@
                 icon: event.detail.type,
             })
         });
+
+        function onNotificationCloseButton(event) {
+            event.parentElement.remove();
+        }
+
+        function buildNotification(text) {
+            let notification = document.createElement('div');
+            notification.classList.add("notification");
+            notification.innerHTML = `
+            <p>${text}</p>
+            <button type="button" onclick='onNotificationCloseButton(this)'>X</button>
+            `;
+            return notification;
+        }
+
+        function displayNotification(text) {
+            const box = document.getElementById("notifications-box");
+            box.appendChild(buildNotification(text));
+        }
+        // displayNotification('textТстовое уведомление очень борлшое очень обхемное и очен сложеное');
     </script>
 
 </body>

@@ -1,0 +1,39 @@
+.notifications-box {
+    z-index: 10;
+    position: fixed;
+    bottom: 10px;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.notification {
+    min-height: 67px;
+    width: 560px;
+    max-width: 90%;
+    border-radius: 12px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    background-color: #2e5bff;
+    color: white;
+}
+
+.notification button {
+    background: none;
+    color: white;
+}
+
+.notification p {
+    color: white;
+    font-size: medium;
+}
+
+.notification a {
+    color: white;
+    font-size: medium;
+    font-weight: bold;
+}
