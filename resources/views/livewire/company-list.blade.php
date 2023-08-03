@@ -3,7 +3,7 @@
         <div class="table">
             <div class="table-tr">
                 <div class="table-th">Компания</div>
-                <div class="table-th">Город</div>
+                <div class="table-th">Регион</div>
                 <div class="table-th">Контактное лицо</div>
                 <div class="table-th">телефон</div>
                 <div class="table-th">E-mail</div>

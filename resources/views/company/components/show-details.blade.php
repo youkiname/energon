@@ -42,7 +42,7 @@
                         <b>{{ $company->ssn }}</b>
                     </div>
                     <div>
-                        <span>Город</span>
+                        <span>Регион</span>
                         <b>{{ $company->city }}</b>
                     </div>
                     <div>

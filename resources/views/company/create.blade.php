@@ -28,7 +28,7 @@
                             <x-input name="legal" labelName="Правовая форма"/>
                         </div>
                         <div class="contragent-form__item">
-                            <x-input name="city" labelName="Город"/>
+                            <x-input name="city" labelName="Регион"/>
                         </div>
                         <div class="contragent-form__item">
                             <x-input name="address" labelName="Адрес"/>

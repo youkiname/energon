@@ -37,7 +37,7 @@ class CompanyCreateRequest extends FormRequest
             'name.required' => 'Организация без имени',
             'ssn.required' => 'Неверный ИНН',
             'legal.required' => 'Неверная правовая форма',
-            'city.required' => 'Город не указан',
+            'city.required' => 'Регион не указан',
             'address.required' => 'Адрес не указан',
             'company_type.exists' => 'Тип контрагента не зарегистрирован',
             'company_purchase.exists' => 'Тип закупки не зарегистрирован',

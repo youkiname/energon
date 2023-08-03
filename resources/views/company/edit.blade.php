@@ -24,7 +24,7 @@
                     <input type="text" value="{{ $company->legal }}" id="legal" name="legal">
                 </div>
                 <div class="contragent-form__item">
-                    <label>Город</label>
+                    <label>Регион</label>
                     <input type="text" value="{{ $company->city }}" id="city" name="city">
                 </div>
                 <div class="contragent-form__item">

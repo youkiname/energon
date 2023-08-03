@@ -6,7 +6,7 @@
         <div class="table">
             <div class="table-tr">
                 <div class="table-th">Компания</div>
-                <div class="table-th">Город</div>
+                <div class="table-th">Регион</div>
                 <div class="table-th">ИНН</div>
                 <div class="table-th">тип клиента</div>
                 <div class="table-th"></div>
