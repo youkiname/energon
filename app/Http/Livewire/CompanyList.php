@@ -6,6 +6,7 @@ use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\Company;
+use Illuminate\Database\Eloquent\Builder;
 
 class CompanyList extends Component
 {
@@ -49,7 +50,10 @@ class CompanyList extends Component
 
     private function refreshCompanies() {
         $searchTerm = '%' . $this->searchValue . '%';
-        $sqlQuery = Company::whereRaw("UPPER(name) LIKE ?", [mb_strtoupper($searchTerm)]);
+        $sqlQuery = Company::where(function (Builder $query) use ($searchTerm) {
+            $query->whereRaw("UPPER(name) LIKE ?", [mb_strtoupper($searchTerm)])
+                  ->orWhereRaw("ssn LIKE ?", [$searchTerm]);
+        });
 
         if ($this->statusId != $this->allStatusId) {
             $sqlQuery = $sqlQuery->where('company_status_id', $this->statusId);
