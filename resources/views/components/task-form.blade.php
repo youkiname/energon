@@ -4,8 +4,18 @@
     @if(isset($companyId))
     <input type="hidden" name="company_id" value="{{ $companyId }}">
     @endif
-    <div class="form-request__item">
-        <x-input name="title" labelName="Заголовок"/>
+    <div class="form-request__item" style="margin-bottom: 60px;">
+        <label for="">Заголовок</label>
+        <select name="title" id="title"
+        class="@error('title') is-invalid @enderror">
+            <option value="Звонок" @if(old("title") == "Звонок") selected @endif>Звонок</option>
+            <option value="Встреча" @if(old("title") == "Встреча") selected @endif>Встреча</option>
+            <option value="Email" @if(old("title") == "Email") selected @endif>Email</option>
+            <option value="Задача" @if(old("title") == "Задача") selected @endif>Задача</option>
+        </select>
+        @error('company_type')
+        <div class="text-danger">{{ $message }}</div>
+        @enderror
     </div>
     <div class="form-request__item">
         <label for="description">Описание</label>
@@ -21,7 +31,7 @@
         </select>
     </div>
     @endif
-    <div class="form-request__item"style="margin-bottom: 60px;">
+    <div class="form-request__item" style="margin-bottom: 60px;">
         <label for="">Статус</label>
         <select name="status_id" >
             @foreach($statuses as $status)
@@ -50,7 +60,8 @@
         <input type="time" id="start_time" name="start_time"
         class="@error('start_time') is-invalid @enderror" value="{{ old('start_time') ?? '08:00' }}">
         
-        <input type="time" id="end_time" name="end_time"
+        <!-- Поле end_time не используется по запросу работодателя. -->
+        <input type="time" id="end_time" name="end_time" style="display:none"
         class="@error('end_time') is-invalid @enderror" value="{{ old('end_time') ?? '09:00' }}">
     </div>
     @error('start_time')

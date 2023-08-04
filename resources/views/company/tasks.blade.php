@@ -13,14 +13,14 @@
         <div class="elem-information__btns">
         <a href="{{ route('companies.show', ['company' => $company]) }}" class="btn-switch" data-switch="tab_1">Лента событий</a>
             <a href="{{ route('companies.contacts', ['company' => $company]) }}" class="btn-switch" data-switch="tab_2">Контакты</a>
-            <a href="{{ route('companies.tasks', ['company' => $company]) }}" class="btn-switch active" data-switch="tab_3">Задачи</a>
+            <a href="{{ route('companies.tasks', ['company' => $company]) }}" class="btn-switch active" data-switch="tab_3">События</a>
         </div>
         <a href="javascript:void(0)" class="btn-filter"><span>Фильтр</span></a>
         <div class="elem-information__box">
             <div class="elem-item" id="tab_3" style="display: flex;">
                 <div class="plans-box__left">
                     <div class="plans-request-form">
-                        <div class="title">Добавить</div>
+                        <div class="elem-item-title">Добавить</div>
                         <x-task-form :companyId="$company->id"/>
                     </div>
                 </div>

@@ -24,7 +24,7 @@ return new class extends Migration
             $table->text('description');
             $table->date('date');
             $table->time('start_time');
-            $table->time('end_time');
+            $table->time('end_time')->comment('Поле end_time не используется по запросу работодателя.');
             $table->timestamps();
         });
     }

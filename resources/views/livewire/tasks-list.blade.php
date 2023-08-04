@@ -20,7 +20,7 @@
             ">
                 <div class="time">
                     <div class="time-start">{{ $task->getFormattedStartTime() }}</div>
-                    <div class="time-finish">{{ $task->getFormattedEndTime() }}</div>
+                    <div class="time-finish" style="display: none">{{ $task->getFormattedEndTime() }}</div>
                 </div>
                 <div class="date-note-desc">
                     <a href="{{ route('tasks.show', ['task'=>$task]) }}" class="name-note"

@@ -13,7 +13,7 @@
         <div class="elem-information__btns">
             <a href="{{ route('companies.show', ['company' => $company]) }}" class="btn-switch" data-switch="tab_1">Лента событий</a>
             <a href="{{ route('companies.contacts', ['company' => $company]) }}" class="btn-switch active" data-switch="tab_2">Контакты</a>
-            <a href="{{ route('companies.tasks', ['company' => $company]) }}" class="btn-switch" data-switch="tab_3">Задачи</a>
+            <a href="{{ route('companies.tasks', ['company' => $company]) }}" class="btn-switch" data-switch="tab_3">События</a>
         </div>
         <a href="javascript:void(0)" class="btn-filter"><span>Фильтр</span></a>
         <div class="elem-information__box">

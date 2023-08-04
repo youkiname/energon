@@ -25,8 +25,10 @@
             <div class="dates-request">
                 <input type="time" id="start_time" name="start_time"
                 value="{{ $task->start_time }}">
-                
-                <input type="time" id="end_time" name="end_time"
+
+                <!-- Поле end_time не используется по запросу работодателя. -->
+                <input style="display: none"
+                type="time" id="end_time" name="end_time"
                 value="{{ $task->end_time }}">
             </div>
             <button class="btn-blue" type="submit">Сохранить</button>
