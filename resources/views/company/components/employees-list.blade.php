@@ -19,6 +19,18 @@
                 @endforeach
             </div>
         </div>
+        <div class="elem-item-box__bottom">
+            @if($employee->is_main)
+                <span class="employee-is-main-span">Основной контакт</span>
+            @else
+            <form action="{{ route('employee.makeMain', ['employee' => $employee]) }}"
+            method="post">
+                @csrf
+                @method('PUT')
+                <button class="employee-make-main-button" type="submit">Сделать основным</button>
+            </form>
+            @endif
+        </div>
         <div class="btn-more-box">
             <a class="btn-more" href="javascrirpt:void(0)">
                 <span></span>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreEmployeeRequest;
 use App\Models\Company;
@@ -30,6 +31,16 @@ class EmployeeController extends Controller
         return redirect()->route('companies.contacts', ['company' => $employee->company])->with([
             'success' => 'Сотрудник успешно изменен.'
         ]);
+    }
+
+    public function makeMain(Employee $employee)
+    {
+        DB::table('employees')
+            ->where('company_id', $employee->company->id)
+            ->update(['is_main' => 0]);
+        $employee->is_main = TRUE;
+        $employee->save();
+        return redirect()->route('companies.contacts', ['company' => $employee->company]);
     }
 
     public function store(StoreEmployeeRequest $request) {

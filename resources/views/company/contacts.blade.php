@@ -19,7 +19,7 @@
         <div class="elem-information__box">
             <div class="elem-item" id="tab_2">
                 <div class="elem-item-title">Сотрудники</div>
-                @include('company.components.employees-list', ['employees' => $company->employees])
+                @include('company.components.employees-list', ['employees' => $employees])
                 <form action="{{ route('employee.store') }}" class="contragent-form" 
                 method="post" enctype="multipart/form-data" id="employee-form"
                 style="@if (!$errors->any()) display: none; @endif">

@@ -1743,6 +1743,21 @@ select {
     margin-bottom: 19px;
 }
 
+.employee-make-main-button {
+    font-size: 10px;
+    font-weight: 600;
+    color: #96979B;
+    background: none;
+    padding: 0%;
+}
+
+.employee-is-main-span {
+    background: #2E5BFF;
+    color: white !important;
+    border-radius: 3px;
+    padding: 3px;
+}
+
 .elem-item-box__bottom {
     padding-top: 21px;
     display: -webkit-box;

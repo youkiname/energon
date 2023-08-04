@@ -35,6 +35,8 @@ Route::middleware(['auth'])->group(function () {
     ->name('companies.tasks')->middleware('role_rights:company');
     Route::resource('companies', CompanyController::class)->middleware('role_rights:company');
 
+    Route::put('employee/makeMain/{employee}/', [EmployeeController::class, 'makeMain'])
+        ->name('employee.makeMain')->middleware('role_rights:employee');;
     Route::resource('employee', EmployeeController::class)->middleware('role_rights:employee');
 
     Route::resource('contacts', ContactController::class);

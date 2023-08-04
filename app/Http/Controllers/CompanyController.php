@@ -98,6 +98,9 @@ class CompanyController extends Controller
     public function contacts(Company $company)
     {
         $this->templateData['company'] = $company;
+        $this->templateData['employees'] = Employee::where('company_id', $company->id)
+            ->orderBy('is_main', 'desc')
+            ->get();
         return view('company.contacts', $this->templateData);
     }
 

@@ -15,6 +15,7 @@ class Employee extends Model
         'first_name',
         'last_name',
         'patronymic',
+        'is_main',
     ];
 
     public function isUserHasRights($method, $user) {
