@@ -32,6 +32,13 @@
                 @foreach ($employee->phones as $phone)
                     <div class="contragent-form__item">
                         <label for="employee_phones">Телефон</label>
+                        <select name="phone_types[]">
+                            @foreach($phoneTypes as $phoneType)
+                            <option value="{{ $phoneType->id }}"
+                            @if($phone->phone_type_id == $phoneType->id) selected @endif
+                            >{{ $phoneType->name }}</option>
+                            @endforeach
+                        </select>
                         <input type="tel" value="{{ $phone->phone }}" name="employee_phones[]">
                         <a href="javascript:void(0)" class="remove"></a>
                     </div>
@@ -56,5 +63,5 @@
             </div>
         </form>
     </div>
-    @include('company.components.contacts-js')
+    @include('company.components.contacts-js', ['phoneTypes' => $phoneTypes])
 @endsection

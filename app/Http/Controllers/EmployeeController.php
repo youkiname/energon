@@ -9,12 +9,14 @@ use App\Models\Company;
 use App\Models\Employee;
 use App\Models\EmployeePhone;
 use App\Models\EmployeeEmail;
+use App\Models\EmployeePhoneType;
 
 class EmployeeController extends Controller
 {
     public function edit(Employee $employee)
     {
-        return view('employee.edit', ['employee' => $employee]);
+        $phoneTypes = EmployeePhoneType::all();
+        return view('employee.edit', ['employee' => $employee, 'phoneTypes' => $phoneTypes]);
     }
 
     public function update(StoreEmployeeRequest $request, Employee $employee)
@@ -57,6 +59,7 @@ class EmployeeController extends Controller
             EmployeePhone::create([
                 'company_id' => $company->id,
                 'employee_id' => $employee->id,
+                'phone_type_id' => $request->input('phone_types')[$key],
                 'phone' => $phone,
             ]);
         }
@@ -101,6 +104,7 @@ class EmployeeController extends Controller
             EmployeePhone::create([
                 'company_id' => $employee->company->id,
                 'employee_id' => $employee->id,
+                'phone_type_id' => $request->input('phone_types')[$key],
                 'phone' => $phone,
             ]);
         }

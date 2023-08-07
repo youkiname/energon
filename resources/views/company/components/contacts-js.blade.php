@@ -20,12 +20,18 @@
         addNewPhoneButton.onclick = function() {
             $(`
             <div class="contragent-form__item">
-                <label for="employee_phones">Телефон</label>
+                <label>Телефон</label>
+                <select name="phone_types[]">
+                    @foreach($phoneTypes as $phoneType)
+                    <option value="{{ $phoneType->id }}">{{ $phoneType->name }}</option>
+                    @endforeach
+                </select>
                 <input type="tel" name="employee_phones[]" class="">
                 <a href="javascript:void(0)" class="remove"></a>
             </div>
             `).insertBefore( "#add-new-phone-btn" );
             applyPhoneMask();
+            $('select').niceSelect();
         };
         
         let addNewEmailButton = document.getElementById('add-new-email-btn');

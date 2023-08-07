@@ -18,7 +18,7 @@
     </div>
 
     <div class="personal-phones" id="personal-phones">
-        <x-array-input name="employee_phones" labelName="Телефон" type="tel" />
+        <x-phone-input-array name="employee_phones"/>
 
         <a id="add-new-phone-btn" href="javascript:void(0)" class="add-card"><span>Добавить</span><i></i></a>
     </div>
@@ -29,4 +29,4 @@
         <a id="add-new-email-btn" href="javascript:void(0)" class="add-card"><span>Добавить</span><i></i></a>
     </div>
 </div>
-@include('company.components.contacts-js')
+@include('company.components.contacts-js', ['phoneTypes' => $phoneTypes])

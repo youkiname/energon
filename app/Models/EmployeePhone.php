@@ -14,6 +14,12 @@ class EmployeePhone extends Model
     protected $fillable = [
         'company_id',
         'employee_id',
+        'phone_type_id',
         'phone',
     ];
+
+    public function phoneType()
+    {
+        return $this->belongsTo(EmployeePhoneType::class);
+    }
 }

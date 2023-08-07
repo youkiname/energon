@@ -7,8 +7,8 @@
         </div>
         <div class="elem-item-box__bottom">
             <div>
-                <span>Номер телефона</span>
                 @foreach($employee->phones as $phone)
+                <span>{{ $phone->phoneType->name }}</span>
                 <b><a href="tel:{{ $phone->phone }}">{{ $phone->phone }}</a></b>
                 @endforeach
             </div>

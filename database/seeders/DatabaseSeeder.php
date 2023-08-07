@@ -151,7 +151,7 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('132'),
         ]);
         User::create([
-            'name' => 'Fuka',
+            'name' => 'Vadim2',
             'role_id' => 3,
             'email' => 'vadimv10@mail.ru',
             'password' => Hash::make('132'),

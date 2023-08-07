@@ -193,6 +193,7 @@ class CompanyController extends Controller
             EmployeePhone::create([
                 'company_id' => $company->id,
                 'employee_id' => $employee->id,
+                'phone_type_id' => $request->input('phone_types')[$key],
                 'phone' => $phone,
             ]);
         }

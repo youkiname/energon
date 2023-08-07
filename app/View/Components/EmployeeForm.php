@@ -3,17 +3,15 @@
 namespace App\View\Components;
 
 use Illuminate\View\Component;
+use App\Models\EmployeePhoneType;
 
 class EmployeeForm extends Component
 {
-    /**
-     * Create a new component instance.
-     *
-     * @return void
-     */
+    public $phoneTypes = [];
+
     public function __construct()
     {
-        //
+        $this->phoneTypes = EmployeePhoneType::all();
     }
 
     /**
