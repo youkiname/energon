@@ -97,12 +97,9 @@
         }
 
         function showCheckSsnPopup() {
-            console.log("show")
             document.getElementById("check-ssn-popup").style.visibility='visible';
         }
         function hideCheckSsnPopup() {
-            console.log("hide")
-
             document.getElementById("check-ssn-popup").style.visibility='hidden';
         }
     </script>

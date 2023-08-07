@@ -91,22 +91,6 @@
         function onNotificationCloseButton(event) {
             event.parentElement.remove();
         }
-
-        function buildNotification(text) {
-            let notification = document.createElement('div');
-            notification.classList.add("notification");
-            notification.innerHTML = `
-            <p>${text}</p>
-            <button type="button" onclick='onNotificationCloseButton(this)'>X</button>
-            `;
-            return notification;
-        }
-
-        function displayNotification(text) {
-            const box = document.getElementById("notifications-box");
-            box.appendChild(buildNotification(text));
-        }
-        // displayNotification('textТстовое уведомление очень борлшое очень обхемное и очен сложеное');
     </script>
 
 </body>
