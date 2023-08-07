@@ -102,7 +102,7 @@ $(function () {
 
 
     $('.date-request').datepicker({
-
+        minDate: new Date(),
     });
 
     $('.date-new-event').datepicker({
