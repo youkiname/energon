@@ -20,7 +20,7 @@
         addNewPhoneButton.onclick = function() {
             $(`
             <div class="contragent-form__item">
-                <label for="employee_phones">Рабочий телефон</label>
+                <label for="employee_phones">Телефон</label>
                 <input type="tel" name="employee_phones[]" class="">
                 <a href="javascript:void(0)" class="remove"></a>
             </div>

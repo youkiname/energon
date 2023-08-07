@@ -12,7 +12,7 @@
         <span>{{ $company->employee->getFullName() }}</span>
     </div>
     <div class="table-td">
-        <b>Рабочий телефон</b>
+        <b>Телефон</b>
         <span><a href="tel:{{ $company->employee->phone() }}">{{ $company->employee->phone() }}</a></span>
     </div>
     <div class="table-td">

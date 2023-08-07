@@ -18,7 +18,7 @@
     </div>
 
     <div class="personal-phones" id="personal-phones">
-        <x-array-input name="employee_phones" labelName="Рабочий телефон" type="tel" />
+        <x-array-input name="employee_phones" labelName="Телефон" type="tel" />
 
         <a id="add-new-phone-btn" href="javascript:void(0)" class="add-card"><span>Добавить</span><i></i></a>
     </div>

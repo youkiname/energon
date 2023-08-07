@@ -31,7 +31,7 @@
             <div class="personal-phones" id="personal-phones">
                 @foreach ($employee->phones as $phone)
                     <div class="contragent-form__item">
-                        <label for="employee_phones">Рабочий телефон</label>
+                        <label for="employee_phones">Телефон</label>
                         <input type="tel" value="{{ $phone->phone }}" name="employee_phones[]">
                         <a href="javascript:void(0)" class="remove"></a>
                     </div>
