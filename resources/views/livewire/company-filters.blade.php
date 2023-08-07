@@ -1,8 +1,26 @@
 <div class="content-box__top-line">
+    <div class="check-ssn-popup" id="check-ssn-popup" wire:ignore.self>
+        <div class="controls">
+        <button onclick="hideCheckSsnPopup()" style="background: none;">x</button>
+        </div>
+        <h3>Проверить ИНН</h3>
+        <p>{{ $checkSsnInfo }}</p>
+        <input type="text" placeholder="Введите ИНН" wire:model="checkSsnValue" wire:keydown.enter="checkSsn">
+        <button class="btn-blue" wire:click="checkSsn">Проверить (enter)</button>
+    </div>
     <div class="container">
         <h1>Контрагенты</h1>
-        <a href="{{ route('companies.create') }}" class="btn-new-event"><span>Добавить контрагента</span><img
-                src="img/plus-blue.svg" alt=""></a>
+        <a href="{{ route('companies.create') }}" class="btn-new-event"
+        style="max-width: 120px">
+            <span>Добавить</span><img src="img/plus-blue.svg" alt="">
+        </a>
+
+        <button class="btn-new-event" style="margin-left: 10px; max-width: 120px"
+        onclick="showCheckSsnPopup()"
+        >
+            <span>Проверить</span><img src="img/small-blue-arr.svg" alt="">
+        </button>
+
         <div class="filters">
             <div class="search" style="min-width: 180px">
                 <input type="search" id="search" placeholder="Наименование/ИНН" wire:model="searchValue">
@@ -69,11 +87,23 @@
             $("#selected_manager").on('change', function() {
                 Livewire.emit('setSelectedManager', $("#selected_manager").val())
             });
+
+            hideCheckSsnPopup();
         });
 
         function setSearchValue(value) {
             $("#search").val(value)
             Livewire.emit('changeSearchValue', value)
+        }
+
+        function showCheckSsnPopup() {
+            console.log("show")
+            document.getElementById("check-ssn-popup").style.visibility='visible';
+        }
+        function hideCheckSsnPopup() {
+            console.log("hide")
+
+            document.getElementById("check-ssn-popup").style.visibility='hidden';
         }
     </script>
 </div>

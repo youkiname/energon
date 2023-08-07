@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\CompanyStatus;
 use App\Models\CompanyType;
+use App\Models\Company;
 use App\Models\User;
 
 class CompanyFilters extends Component
@@ -15,6 +16,9 @@ class CompanyFilters extends Component
     public $companyTypes = [];
     public $searchValue = "";
     public $regionValue = "";
+
+    public $checkSsnValue = "";
+    public $checkSsnInfo = "";
 
     public function mount()
     {
@@ -36,5 +40,13 @@ class CompanyFilters extends Component
 
     public function updatedRegionValue($value) {
         $this->emit('changeRegionValue', $value);
+    }
+
+    public function checkSsn() {
+        if (Company::where('ssn', $this->checkSsnValue)->count() > 0) {
+            $this->checkSsnInfo = "Данный контрагент уже добавлен в систему";
+        } else {
+            $this->checkSsnInfo = "Данный контрагент не внесен в систему";
+        }
     }
 }

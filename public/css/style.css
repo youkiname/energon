@@ -3480,6 +3480,46 @@ select {
     color: #fff;
 }
 
+.check-ssn-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    display: flex;
+    visibility: hidden;
+    background-color: white;
+    z-index: 10;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border: 1px solid #2E5BFF;
+    border-radius: 10px;
+}
+
+.check-ssn-popup h3 {
+    margin-top: 0;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 100%;
+    color: #424552;
+}
+
+.check-ssn-popup .btn-blue {
+    background: #2E5BFF;
+    border-radius: 10px;
+    color: #fff;
+    padding: 6px;
+}
+
+.check-ssn-popup .controls {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+}
+
 .is-invalid {
     border-color: red !important;
 }
