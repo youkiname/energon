@@ -1,21 +1,6 @@
 $(function () {
 
-    $(window).on('load', function () {
-        let phones = [
-            { 'mask': '+7 \\ \\ ###-###-##-##' }
-        ];
 
-        $('input[type=tel]').inputmask({
-            mask: phones,
-            greedy: false,
-            definitions: {
-                '#': {
-                    validator: '[0-9]',
-                    cardinality: 1
-                }
-            }
-        });
-    });
 
 
     $('#hamburger-icon').click(function () {
@@ -136,6 +121,23 @@ $(function () {
 function isHidden(el) {
     return (el.offsetParent === null)
 }
+
+$(window).on('load', function () {
+    let phones = [
+        { 'mask': '+7 \\ \\ ###-###-##-##' }
+    ];
+
+    $('input[type=tel]').inputmask({
+        mask: phones,
+        greedy: false,
+        definitions: {
+            '#': {
+                validator: '[0-9]',
+                cardinality: 1
+            }
+        }
+    });
+});
 
 $('.plans-request .btn-blue').click(function (e) {
     if ($('.plans-request-form').is(":visible")) {
