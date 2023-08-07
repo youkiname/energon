@@ -4,8 +4,11 @@
         <a href="{{ route('companies.create') }}" class="btn-new-event"><span>Добавить контрагента</span><img
                 src="img/plus-blue.svg" alt=""></a>
         <div class="filters">
-            <div class="search">
-                <input type="search" id="search" placeholder="Поиск" wire:model="searchValue">
+            <div class="search" style="min-width: 180px">
+                <input type="search" id="search" placeholder="Наименование/ИНН" wire:model="searchValue">
+            </div>
+            <div class="search"  style="min-width: 100px">
+                <input type="search" id="region_search" placeholder="Регион" wire:model="regionValue">
             </div>
             <div class="filters-right">
                 <div class="select-box" wire:ignore>
@@ -17,7 +20,15 @@
                         @endforeach
                     </select>
                 </div>
-
+                <div class="select-box" wire:ignore>
+                    <span>Тип клиента:</span>
+                    <select name="company_type" id="company_type">
+                        <option value="0">Все</option>
+                        @foreach ($companyTypes as $companyType)
+                            <option value="{{ $companyType->id }}">{{ $companyType->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
                 <div class="select-box" wire:ignore>
                     <span>Статус:</span>
                     <select name="company_status" id="company_status">
@@ -51,6 +62,9 @@
         document.addEventListener('DOMContentLoaded', function() {
             $("#company_status").on('change', function() {
                 Livewire.emit('changeStatusId', $("#company_status").val())
+            });
+            $("#company_type").on('change', function() {
+                Livewire.emit('changeCompanyTypeId', $("#company_type").val())
             });
             $("#selected_manager").on('change', function() {
                 Livewire.emit('setSelectedManager', $("#selected_manager").val())
