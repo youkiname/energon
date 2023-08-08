@@ -33,12 +33,16 @@
                     </div>
                 </form>
 
-                <div class="elem-item-title">Связанные организации</div>
+                <div class="elem-item-title" style="display: flex; align-items: center;">
+                    Связанные организации
+                    <a href="javascript:void(0)" class="add-card" id="add-new-bundle-btn" style="position: relative; top: 0px; margin-left: 10px;">
+                        <span>Добавить</span><i></i>
+                    </a>
+                </div>
                 <div class="elem-item-list">
                     @include('company.components.bundled-companies', 
                     ['companies'=>$company->bundledCompanies,
                      'mainCompany'=>$company])
-                    <a href="javascript:void(0)" class="add-card" id="add-new-bundle-btn"><span>Добавить</span><i></i></a>
                 </div>
                 <div style="display: none;" id="bundle-company-select">
                     <livewire:bundle-company-select :currentCompany="$company"/>

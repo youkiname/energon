@@ -3096,6 +3096,19 @@ select {
     margin-top: 42px;
 }
 
+.table-td .btn-blue {
+    display: block;
+    max-width: 100%;
+    width: 100%;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 100%;
+    padding: 16px 0 15px 0;
+    background: #2E5BFF;
+    border-radius: 10px;
+    color: #fff;
+}
+
 .foget-pass {
     display: block;
     width: -webkit-fit-content;

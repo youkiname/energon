@@ -3,6 +3,9 @@
         <span>Привязать компанию</span>
     </div>
     <div class="container">
+        <div class="elem-item-title">
+            <input type="search" placeholder="Поиск по Наименованию/ИНН" wire:model="searchValue">
+        </div>
         <div class="table">
             <div class="table-tr">
                 <div class="table-th">Компания</div>
@@ -34,7 +37,7 @@
                         @csrf
                         <input type="hidden" name="a_company_id" value="{{ $currentCompany->id }}">
                         <input type="hidden" name="b_company_id" value="{{ $company->id }}">
-                        <button type="submit" class="btn" 
+                        <button type="submit" class="btn-blue" 
                         @if($currentCompany->id == $company->id) disabled @endif>Привязать</button>
                     </form>
                 </div>
