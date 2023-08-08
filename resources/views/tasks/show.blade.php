@@ -68,6 +68,42 @@
                             </div>
                         </div>
                         @endif
+                        @if($task->company)
+                        <div class="request-messages-top" style="padding-bottom: 0px;">
+                            <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                                <b style="margin-bottom: 0px;">Контактные данные контрагента</b>
+                            </div>
+                            
+                            <div class="elem-item-list">
+                                @foreach($task->company->employees as $employee)
+                                <div class="elem-item-box" style="background-color: #f4f6f6; padding: 20px 20px 16px 20px;">
+                                    <div class="elem-item-box__top">
+                                        <span>{{ $employee->position }}</span>
+                                        <b>{{ $employee->getFullName() }}</b>
+                                    </div>
+                                    <div class="elem-item-box__bottom">
+                                        @if(count($employee->phones) > 0)
+                                        <div>
+                                            @foreach($employee->phones as $phone)
+                                            <span>{{ $phone->phoneType->name }}</span>
+                                            <b><a href="tel:{{ $phone->phone }}">{{ $phone->phone }}</a></b>
+                                            @endforeach
+                                        </div>
+                                        @endif
+                                        @if(count($employee->emails) > 0)
+                                        <div>
+                                            <span>Электронная почта</span>
+                                            @foreach($employee->emails as $email)
+                                            <b><a href="mailto:{{ $email->email }}">{{ $email->email }}</a></b>
+                                            @endforeach
+                                        </div>
+                                        @endif
+                                    </div>
+                                </div>
+                                @endforeach
+                            </div>
+                        </div>
+                        @endif
                     </div>
                     <livewire:chat :chatId="$task->id"/> 
                 </div>

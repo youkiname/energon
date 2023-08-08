@@ -1,4 +1,11 @@
 <div>
+    <h4 style="
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 140%;
+    color: #000000;
+    margin-bottom: 9px;
+    ">Чат</h4>
     <div class="messages-box" id="messages-box" wire:poll.10s="updateMessages">
         @if($messages->count() == 0)
             <div class="messages-box__empty">Пока что никто ничего не написал</div>
