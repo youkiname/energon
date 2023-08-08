@@ -14,6 +14,7 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\CompanyTypeController;
 use App\Http\Controllers\Admin\TaskController as PlannerController;
 use App\Http\Controllers\AlertController;
 use App\Http\Controllers\SettingController;
@@ -60,6 +61,8 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('users', UserController::class);
 
         Route::resource('roles', RoleController::class);
+
+        Route::resource('companyTypes', CompanyTypeController::class);
     });
 
     Route::middleware(['main_manager'])->group(function () {
