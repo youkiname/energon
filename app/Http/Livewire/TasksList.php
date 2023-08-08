@@ -14,10 +14,12 @@ class TasksList extends Component
 {
     public $selectedDate = "";
     public $companyId = null;
+    public $taskExpireStatus = "current";
     public $tasks = [];
 
     protected $listeners = [
         'changeTaskDateFilter' => 'onChangeTaskDateFilter',
+        'changeTaskExpireStatus' => 'onChangeTaskExpireStatus',
     ];
 
 
@@ -38,51 +40,51 @@ class TasksList extends Component
         $this->refreshTasks();
     }
 
+    public function onChangeTaskExpireStatus($newStatus) {
+        $this->taskExpireStatus = $newStatus;
+        $this->refreshTasks();
+    }
+
     private function refreshTasks() {
+        $tasks = [];
+        $today = date("Y-m-d");
+
         $dates = DB::table('tasks')
                 ->select('date');
         if ($this->selectedDate) {
             $dates = $dates->where('date', $this->selectedDate);
+            $humanDate = $this->getHumanDate($this->selectedDate);
+            $tasks = [
+                $humanDate => $this->getTasksByDate($this->selectedDate)
+            ];
+        } else {
+            // $tasks = [
+            //     'Сегодня' => $this->getTasksByDate($today)
+            // ];
         }
-        $dates = $dates->groupBy('date')->orderBy('date', "DESC")->get();
-
-        $today = date("Y-m-d");
-        $tasks = [
-            'Сегодня' => $this->getTasksByDate($today)
-        ];
+        $dates = $dates->groupBy('date')->orderBy('date', "ASC")->get();
 
         foreach($dates as $date) {
-            if ($date->date == $today) {
-                continue;
-            }
+            // if ($date->date == $today) {
+            //     continue;
+            // }
             $dailyTasks = $this->getTasksByDate($date->date);
             if(!$dailyTasks->isEmpty()) {
-                $humanDate = Carbon::create($date->date)->toFormattedDateString();
+                $humanDate = $this->getHumanDate($date->date);
                 $tasks[$humanDate] = $dailyTasks;
             }
         };
-        $tasks['Завершенные'] = $this->getCompletedTasks();
         $this->tasks = $tasks;
     }
 
     private function getTasksByDate($date) {
-        $tasks = Task::where('date', $date)->where("task_status_id", "!=", 4);
+        $query = Task::where('date', $date);
         if ($this->companyId) {
-            $tasks = $tasks->where('company_id', $this->companyId);
+            $query = $query->where('company_id', $this->companyId);
         }
-        $tasks = $this->applyRolePermissions($tasks);
-        $tasks = $tasks->get();
-        return $tasks;
-    }
-
-    private function getCompletedTasks() {
-        $tasks = Task::where("task_status_id", "=", 4);
-        if ($this->companyId) {
-            $tasks = $tasks->where('company_id', $this->companyId);
-        }
-        $tasks = $this->applyRolePermissions($tasks);
-        $tasks = $tasks->get();
-        return $tasks;
+        $query = $this->applyTaskExpireStatus($query);
+        $query = $this->applyRolePermissions($query);
+        return $query->get();
     }
 
     private function applyRolePermissions($query) {
@@ -92,5 +94,20 @@ class TasksList extends Component
             return $query->whereRaw('(creator_id = ? OR target_user_id = ?)', [$user->id, $user->id]);
         }
         return $query;
+    }
+
+    private function applyTaskExpireStatus($query) {
+        $today = date("Y-m-d");
+        if ($this->taskExpireStatus == "current") {
+            return $query->where('date', '>=', $today)->where("task_status_id", "!=", 4);
+        } else if ($this->taskExpireStatus == "expired") {
+            return $query->where('date', '<', $today)->where("task_status_id", "!=", 4);
+        }
+        // completed
+        return $query->where("task_status_id", "=", 4);
+    }
+
+    private function getHumanDate($date) {
+        return Carbon::create($date)->toFormattedDateString();
     }
 }

@@ -24,10 +24,8 @@
                 </div>
                 
             </div>
-            <div class="plans-box__right">
-                <a href="javascript:void(0)" class="add-card"><span>Добавить</span><i></i></a>
-                <livewire:tasks-list />
-            </div>
+            <a href="javascript:void(0)" class="add-card" style="margin-right: 16px;"><span>Добавить</span><i></i></a>
+            <livewire:tasks-list />
         </div>
     </div>
 </div>
