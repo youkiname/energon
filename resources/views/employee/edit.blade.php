@@ -50,7 +50,14 @@
             <div class="personal-mails" id="personal-mails">
                 @foreach ($employee->emails as $email)
                     <div class="contragent-form__item">
-                        <label for="employee_emails">Рабочий e-mail</label>
+                        <label for="employee_emails">Email</label>
+                        <select name="email_types[]">
+                            @foreach($emailTypes as $emailType)
+                            <option value="{{ $emailType->id }}"
+                            @if($email->email_type_id == $emailType->id) selected @endif
+                            >{{ $emailType->name }}</option>
+                            @endforeach
+                        </select>
                         <input type="email" value="{{ $email->email }}" name="employee_emails[]">
                         <a href="javascript:void(0)" class="remove"></a>
                     </div>
@@ -63,5 +70,5 @@
             </div>
         </form>
     </div>
-    @include('company.components.contacts-js', ['phoneTypes' => $phoneTypes])
+    @include('company.components.contacts-js', ['phoneTypes' => $phoneTypes, 'emailTypes' => $emailTypes])
 @endsection

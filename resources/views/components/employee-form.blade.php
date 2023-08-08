@@ -24,7 +24,7 @@
     </div>
 
     <div class="personal-mails" id="personal-mails">
-        <x-array-input name="employee_emails" labelName="Рабочий e-mail" type="email" />
+        <x-email-input-array name="employee_emails"/>
 
         <a id="add-new-email-btn" href="javascript:void(0)" class="add-card"><span>Добавить</span><i></i></a>
     </div>

@@ -13,8 +13,8 @@
                 @endforeach
             </div>
             <div>
-                <span>Электронная почта</span>
                 @foreach($employee->emails as $email)
+                <span>{{ $email->emailType->name }}</span>
                 <b><a href="mailto:{{ $email->email }}">{{ $email->email }}</a></b>
                 @endforeach
             </div>

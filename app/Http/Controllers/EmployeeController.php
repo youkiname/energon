@@ -10,13 +10,19 @@ use App\Models\Employee;
 use App\Models\EmployeePhone;
 use App\Models\EmployeeEmail;
 use App\Models\EmployeePhoneType;
+use App\Models\EmployeeEmailType;
 
 class EmployeeController extends Controller
 {
     public function edit(Employee $employee)
     {
         $phoneTypes = EmployeePhoneType::all();
-        return view('employee.edit', ['employee' => $employee, 'phoneTypes' => $phoneTypes]);
+        $emailTypes = EmployeeEmailType::all();
+        return view('employee.edit', [
+            'employee' => $employee, 
+            'phoneTypes' => $phoneTypes,
+            'emailTypes' => $emailTypes,
+        ]);
     }
 
     public function update(StoreEmployeeRequest $request, Employee $employee)
@@ -68,6 +74,7 @@ class EmployeeController extends Controller
             EmployeeEmail::create([
                 'company_id' => $company->id,
                 'employee_id' => $employee->id,
+                'email_type_id' => $request->input('email_types')[$key],
                 'email' => $email,
             ]);
         }
@@ -122,6 +129,7 @@ class EmployeeController extends Controller
             EmployeeEmail::create([
                 'company_id' => $employee->company->id,
                 'employee_id' => $employee->id,
+                'email_type_id' => $request->input('email_types')[$key],
                 'email' => $email,
             ]);
         }

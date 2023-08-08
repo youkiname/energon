@@ -3,27 +3,24 @@
 namespace App\View\Components;
 
 use Illuminate\View\Component;
-use App\Models\EmployeePhoneType;
 use App\Models\EmployeeEmailType;
 
-class EmployeeForm extends Component
+class EmailInputArray extends Component
 {
-    public $phoneTypes = [];
+    public $name;
     public $emailTypes = [];
 
-    public function __construct()
+    public function __construct($name)
     {
-        $this->phoneTypes = EmployeePhoneType::all();
+        $this->name = $name;
         $this->emailTypes = EmployeeEmailType::all();
     }
 
     /**
-     * Get the view / contents that represent the component.
-     *
      * @return \Illuminate\Contracts\View\View|\Closure|string
      */
     public function render()
     {
-        return view('components.employee-form');
+        return view('components.email-input-array');
     }
 }

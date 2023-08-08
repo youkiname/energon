@@ -38,11 +38,17 @@
         addNewEmailButton.onclick = function() {
             $(`
             <div class="contragent-form__item">
-                <label for="employee_emails[]">Рабочий e-mail</label>
+                <label>Email</label>
+                <select name="email_types[]">
+                    @foreach($emailTypes as $emailType)
+                    <option value="{{ $emailType->id }}">{{ $emailType->name }}</option>
+                    @endforeach
+                </select>
                 <input type="email" name="employee_emails[]">
                 <a href="javascript:void(0)" class="remove"></a>
             </div>
             `).insertBefore( "#add-new-email-btn" );
+            $('select').niceSelect();
         };
 
         $(document).on('click', '.remove', function () {

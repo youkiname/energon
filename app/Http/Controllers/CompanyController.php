@@ -205,6 +205,7 @@ class CompanyController extends Controller
             EmployeeEmail::create([
                 'company_id' => $company->id,
                 'employee_id' => $employee->id,
+                'email_type_id' => $request->input('email_types')[$key],
                 'email' => $email,
             ]);
         }

@@ -14,6 +14,12 @@ class EmployeeEmail extends Model
     protected $fillable = [
         'company_id',
         'employee_id',
+        'email_type_id',
         'email',
     ];
+
+    public function emailType()
+    {
+        return $this->belongsTo(EmployeeEmailType::class);
+    }
 }
