@@ -111,7 +111,8 @@ class Task extends Model
 
     public function deadline()
     {
-        return Carbon::create($this->date . ' ' . $this->end_time);
+        // поле end_time не используется по желанию заказчика.
+        return Carbon::create($this->date . ' ' . $this->start_time);
     }
 
     public function deadlineDiff()

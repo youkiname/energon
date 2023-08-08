@@ -99,9 +99,9 @@ class TasksList extends Component
     private function applyTaskExpireStatus($query) {
         $today = date("Y-m-d");
         if ($this->taskExpireStatus == "current") {
-            return $query->where('date', '>=', $today)->where("task_status_id", "!=", 4);
+            return $query->whereRaw("concat(date, concat(' ', start_time)) >= NOW()")->where("task_status_id", "!=", 4);
         } else if ($this->taskExpireStatus == "expired") {
-            return $query->where('date', '<', $today)->where("task_status_id", "!=", 4);
+            return $query->whereRaw("concat(date, concat(' ', start_time)) < NOW()")->where("task_status_id", "!=", 4);
         }
         // completed
         return $query->where("task_status_id", "=", 4);

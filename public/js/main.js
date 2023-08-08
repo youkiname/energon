@@ -94,12 +94,12 @@ $(function () {
 
     });
 
-
-    $('.dates-plans').scrollbar({
-        ignoreOverlay: false,
-        autoScrollSize: true,
-        autoUpdate: true
-    });
+    // not working after livewire page updates
+    // $('.dates-plans').scrollbar({
+    //     ignoreOverlay: false,
+    //     autoScrollSize: true,
+    //     autoUpdate: true
+    // });
 
     $('.plans-calendar').datepicker({});
 

@@ -21,7 +21,7 @@
         <div class="date-notes" style="
         @if($task->isCompleted())
         background: #ececec;
-        @elseif ($task->isExpired())
+        @elseif ($taskExpireStatus == 'expired')
         background: #ff000080;
         @endif
         

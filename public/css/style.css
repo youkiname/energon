@@ -2918,6 +2918,7 @@ select {
     width: 101%;
     padding: 0 25px 50px 0 !important;
     max-height: 878px;
+    overflow: auto;
 }
 
 .stats-box {
