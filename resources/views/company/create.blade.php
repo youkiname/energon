@@ -7,7 +7,7 @@
 <div class="form-contragent-wrap">
     <div class="container">
         <form action="{{ route('companies.store') }}" method="post" 
-                        id="createForm" class="contragent-form">
+                        id="createForm" class="contragent-form" enctype="multipart/form-data">
                     @csrf
                     <div class="btn-more-box">
                         <div class="btn-el-items" style="opacity: 0;">
@@ -17,12 +17,12 @@
                     </div>
 
                     <div class="contragent-form__item contragent-form__item50">
-                        <x-input name="name" labelName="Наименование организации"/>
+                        <x-input name="name" labelName="Наименование организации" />
                     </div>
                     <div class="contragent-form-box">
 
                         <div class="contragent-form__item">
-                            <x-input name="ssn" labelName="ИНН"/>
+                            <x-input name="ssn" labelName="ИНН" />
                         </div>
                         <div class="contragent-form__item">
                             <x-input name="legal" labelName="Правовая форма"/>
@@ -96,8 +96,18 @@
 
                         <x-employee-form />
 
+                        <div class="images-preview" id="images-preview">
+
+                        </div>
+                        <div class="image-drag-area" id="image-drag-area">
+                            <label>Перетащите сюда изображения</label>
+                            <span>или</span>
+                            <button type="button">Выбрать файл</button>
+                            <input type="file" multiple="multiple" name="images[]" hidden>
+                        </div>
+
                         <div class="form-btns">
-                            <button type="submit" class="btn-blue">Добавить</button>
+                            <button type="submit" class="btn-blue">Добавить контрагента</button>
                             @if ($errors->any())
                             <div class="message-form message-error">Ошибка</div>
                             @endif                            
@@ -107,5 +117,6 @@
             </div>
         </div>
     </div>
+    @include('company.components.image-drag-js')
 </div>
 @endsection

@@ -8,9 +8,11 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::table('employee_emails', function (Blueprint $table) {
-            $table->foreignId('email_type_id')->references('id')->on('employee_email_types')->onDelete('NO ACTION')->default(1);
-        });
+        if (!Schema::hasColumn('employee_emails', 'email_type_id')) {
+            Schema::table('employee_emails', function (Blueprint $table) {
+                $table->foreignId('email_type_id')->references('id')->on('employee_email_types')->onDelete('NO ACTION')->default(1);
+            });
+        }
     }
 
     public function down()

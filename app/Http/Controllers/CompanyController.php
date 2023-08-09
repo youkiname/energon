@@ -47,6 +47,9 @@ class CompanyController extends Controller
 
     public function store(CompanyCreateRequest $request)
     {
+        $this->storeCompanyImages($request);
+        return redirect()->back()->with('success', 'Image successfully upload.');
+
         if($this->isSsnExisting($request->ssn)) {
             $existedCompany = Company::where('ssn', $request->ssn)->first();
             $targetManagerName = $existedCompany->manager->name;
@@ -238,6 +241,10 @@ class CompanyController extends Controller
 
     private function isSsnExisting($ssn) {
         return Company::where('ssn', $ssn)->count() > 0;
+    }
+
+    private function storeCompanyImages(Request $request) {
+        dd($request);
     }
 
     private function createReassignConfirmation($ssn, $managerId) {

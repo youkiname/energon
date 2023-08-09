@@ -28,6 +28,9 @@ class CompanyCreateRequest extends FormRequest
             'employee_phones' => ['array'],
             'employee_emails' => ['array'],
             'employee_emails.*' => ['email:rfc'],
+
+            'images' => ['array', 'max:5'],
+            'images*' => ['mimes:jpg,jpeg,png'],
         ];
     }
 
@@ -51,6 +54,8 @@ class CompanyCreateRequest extends FormRequest
             'employee_phones.*.required' => 'Номер телефона не может быть пустым',
             'employee_emails.required' => 'Сотрудник должен имять хотя бы один email',
             'employee_emails.*.required' => 'Email не может быть пустым',
+            
+            'images' => 'Нельзя добавить больше пяти изображений. Поддерживаемый формат: jpg, jpeg, png',
         ];
     }
 

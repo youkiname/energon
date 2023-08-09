@@ -1873,6 +1873,72 @@ select {
     right: 68%;
 }
 
+.image-drag-area {
+    border: 2px dashed #2e5bff;
+    height: 275px;
+    width: 100%;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.image-drag-area .active {
+    border: 2px solid #fff;
+}
+
+.image-drag-area .icon {
+    font-size: 100px;
+    color: #fff;
+}
+
+.image-drag-area header {
+    font-size: 30px;
+    font-weight: 500;
+    color: #fff;
+}
+
+.image-drag-area span {
+    font-size: 25px;
+    font-weight: 500;
+    color: #000000;
+    margin: 10px 0 15px 0;
+}
+
+.image-drag-area button {
+    padding: 10px 25px;
+    font-size: 20px;
+    font-weight: 500;
+    border: none;
+    outline: none;
+    background: #fff;
+    color: #5256ad;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.image-drag-area img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.images-preview {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.upload-image-preview {
+    width: 170px;
+    height: auto;
+}
+
 .events-items {
     display: -webkit-box;
     display: -ms-flexbox;

@@ -95,6 +95,11 @@ class Company extends Model
         return $this->belongsTo(CompanyType::class);
     }
 
+    public function images()
+    {
+        return $this->hasMany(CompanyImage::class);
+    }
+
     public function purchase()
     {
         return $this->belongsTo(CompanyPurchase::class, 'company_purchase_id');
