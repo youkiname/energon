@@ -1,44 +1,33 @@
 <script>
 const imagesPreviewBox = document.getElementById("images-preview");
-const dropArea = document.getElementById("image-drag-area");
+const imagesInput = document.getElementById("imagesInput");
+let imagesCount;
 
-const dragText = dropArea.querySelector("label")
-const button = dropArea.querySelector("button")
-const input = dropArea.querySelector("input");
-let canShowAlert = true;
-let imagesCount = 0;
-
-button.onclick = () => {
-  input.click();
+function clearImageFiles() {
+    imagesPreviewBox.replaceChildren();
+    imagesInput.value = "";
 }
 
-input.addEventListener("change", function() {
-  dropArea.classList.add("active");
-  processFiles(this.files);
+imagesInput.addEventListener("change", function(event) {
+    imagesPreviewBox.replaceChildren();
+    if (this.files.length > 5) {
+        alert('Можно добавить максимум пять изображений!');
+        imagesInput.value = "";
+        return;
+    }
+    if (!checkFilesExtension(this.files)) {
+        alert('Для загрузки доступны только изображения в формате jpg, jpeg и png!');
+        imagesInput.value = "";
+        return;
+    }
+    processFiles(this.files);
 });
 
-
-dropArea.addEventListener("dragover", (event)=>{
-  event.preventDefault();
-  dropArea.classList.add("active");
-  dragText.textContent = "Отпустите, чтобы загрузить";
-});
-
-dropArea.addEventListener("dragleave", ()=>{
-  dropArea.classList.remove("active");
-  dragText.textContent = "Перетащите сюда изображения";
-});
-
-dropArea.addEventListener("drop", (event)=>{
-    event.preventDefault();
-    processFiles(event.dataTransfer.files);
-});
 
 function processFiles(files) {
     for (let i = 0; i < files.length; i++) {
-        tryShowFile(files[i])
+        showFile(files[i])
     }
-    canShowAlert = true;
 }
 
 function createImageTag(fileUrl) {
@@ -46,35 +35,23 @@ function createImageTag(fileUrl) {
     image.setAttribute('src', fileUrl);
     image.setAttribute('alt', 'preview-image');
     image.classList.add('upload-image-preview');
+    image.width = 200;
+    image.height = 160;
     return image;
 }
 
-function checkFile(file) {
+function checkFilesExtension(files) {
     let validExtensions = ["image/jpeg", "image/jpg", "image/png"];
-    if (!validExtensions.includes(file.type)) {
-        if (canShowAlert) {
-            alert("Для загрузки доступны только изображения в формате jpg, jpeg и png!");
-            canShowAlert = false;
+    for (let i = 0; i < files.length; i++) {
+        if (!validExtensions.includes(files[i].type)) {
+            return false;
         }
-        return false;
-    }
-    if (imagesCount >= 15) {
-        if (canShowAlert) {
-            alert("Можно добавить максимум пять изображений!");
-            canShowAlert = false;
-        }
-        return false;
     }
     return true;
 }
 
-function tryShowFile(file) {
-    if (!checkFile(file)) {
-        dropArea.classList.remove("active");
-        dragText.textContent = "Перетащите сюда изображения";
-        return;
-    }
 
+function showFile(file) {
     let fileReader = new FileReader();
     fileReader.onload = ()=>{
         let fileURL = fileReader.result;

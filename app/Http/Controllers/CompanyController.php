@@ -18,6 +18,7 @@ use App\Models\EmployeePhone;
 use App\Models\EmployeeEmail;
 use App\Models\Event;
 use App\Models\CompanyManagerConfirmation;
+use App\Models\CompanyImage;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -47,8 +48,6 @@ class CompanyController extends Controller
 
     public function store(CompanyCreateRequest $request)
     {
-        $this->storeCompanyImages($request);
-        return redirect()->back()->with('success', 'Image successfully upload.');
 
         if($this->isSsnExisting($request->ssn)) {
             $existedCompany = Company::where('ssn', $request->ssn)->first();
@@ -86,6 +85,8 @@ class CompanyController extends Controller
         ]);
 
         $this->storeEmployee($request, $newCompany);
+
+        $this->storeCompanyImages($request, $newCompany->id);
 
         return redirect()->route('companies.show', ['company' => $newCompany])->with([
             'success' => 'Организация добавлена в список ваших контрагентов.'
@@ -243,8 +244,21 @@ class CompanyController extends Controller
         return Company::where('ssn', $ssn)->count() > 0;
     }
 
-    private function storeCompanyImages(Request $request) {
-        dd($request);
+    private function storeCompanyImages(Request $request, $companyId) {
+        if(!$request->hasfile('images')) {
+            return;
+        }
+        foreach($request->file('images') as $key => $image)
+        {
+            $filename = uniqid(). '.' . $image->extension();
+            $path = $image->storeAs(
+                'company-images', $filename, 'public_uploads'
+            );
+            CompanyImage::create([
+                'company_id' => $companyId,
+                'filename' => $filename,
+            ]);
+        }
     }
 
     private function createReassignConfirmation($ssn, $managerId) {

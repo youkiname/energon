@@ -7,15 +7,9 @@
 <div class="form-contragent-wrap">
     <div class="container">
         <form action="{{ route('companies.store') }}" method="post" 
-                        id="createForm" class="contragent-form" enctype="multipart/form-data">
+        class="contragent-form dropzone" enctype="multipart/form-data"
+        >
                     @csrf
-                    <div class="btn-more-box">
-                        <div class="btn-el-items" style="opacity: 0;">
-                            <a href="#" class="btn-el btn-del"></a>
-                            <a href="#" class="btn-el btn-edit"></a>
-                        </div>
-                    </div>
-
                     <div class="contragent-form__item contragent-form__item50">
                         <x-input name="name" labelName="Наименование организации" />
                     </div>
@@ -99,11 +93,11 @@
                         <div class="images-preview" id="images-preview">
 
                         </div>
-                        <div class="image-drag-area" id="image-drag-area">
-                            <label>Перетащите сюда изображения</label>
-                            <span>или</span>
-                            <button type="button">Выбрать файл</button>
-                            <input type="file" multiple="multiple" name="images[]" hidden>
+                        <div class="contragent-form__item" style="width: 100%;">
+                            <label for="images[]">Добавить изображения (не обязательно)</label>
+                            <input type="file"  accept=".jpg,.jpeg,.png" multiple="multiple" name="images[]" id="imagesInput">
+                            <button type="button" class="btn-cancel" onclick="clearImageFiles()" 
+                            style="margin-top: 10px; padding: 10px 0 10px 0;">Очистить файлы</button>
                         </div>
 
                         <div class="form-btns">
