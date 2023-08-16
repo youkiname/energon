@@ -100,11 +100,11 @@ class TaskController extends Controller
     private function createEvent(Task $task)
     {
         Event::create([
-            'title' => 'Новая задача',
+            'title' => 'Добавлена задача',
             'creator_id' => Auth::user()->id,
             'description' => $task->description,
             'company_id' => $task->company->id,
-            'event_type_id' => 4  # тип комментарий
+            'event_type_id' => 6  # тип новая задача
         ]);
     }
 }

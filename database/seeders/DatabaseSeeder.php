@@ -117,6 +117,9 @@ class DatabaseSeeder extends Seeder
         EventType::create([
             'name' => 'Комментарий',
         ]);
+        EventType::create([
+            'name' => 'Новая задача',
+        ]);
 
         TaskStatus::create([
             'name' => 'В ожидании',
