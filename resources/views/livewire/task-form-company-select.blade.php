@@ -1,6 +1,6 @@
 <div class="centered-popup" id="centered-popup" wire:ignore.self>
     <div class="controls">
-    <button onclick="hideCompaniesListPopup()" style="background: none; color:black;">x</button>
+    <button onclick="hideCompaniesListPopup()" type="button" style="background: none; color:black;">x</button>
     </div>
     <h3>Привязать задачу к контрагенту</h3>
     <div
