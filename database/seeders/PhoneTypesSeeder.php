@@ -21,5 +21,8 @@ class PhoneTypesSeeder extends Seeder
         EmployeePhoneType::create([
             'name' => 'Городской'
         ]);
+        EmployeePhoneType::create([
+            'name' => 'Доб.'
+        ]);
     }
 }
