@@ -3567,12 +3567,12 @@ select {
     color: #fff;
 }
 
-.check-ssn-popup {
+.centered-popup {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 50%;
+    width: 70%;
     display: flex;
     visibility: hidden;
     background-color: white;
@@ -3586,7 +3586,7 @@ select {
     border-radius: 10px;
 }
 
-.check-ssn-popup h3 {
+.centered-popup h3 {
     margin-top: 0;
     font-weight: normal;
     font-size: 24px;
@@ -3594,14 +3594,14 @@ select {
     color: #424552;
 }
 
-.check-ssn-popup .btn-blue {
+.centered-popup .btn-blue {
     background: #2E5BFF;
     border-radius: 10px;
     color: #fff;
     padding: 6px;
 }
 
-.check-ssn-popup .controls {
+.centered-popup .controls {
     display: flex;
     width: 100%;
     justify-content: flex-end;

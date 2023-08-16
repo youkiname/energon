@@ -1,5 +1,5 @@
 <div class="content-box__top-line">
-    <div class="check-ssn-popup" id="check-ssn-popup" wire:ignore.self>
+    <div class="centered-popup" id="centered-popup" wire:ignore.self>
         <div class="controls">
         <button onclick="hideCheckSsnPopup()" style="background: none;">x</button>
         </div>
@@ -97,10 +97,10 @@
         }
 
         function showCheckSsnPopup() {
-            document.getElementById("check-ssn-popup").style.visibility='visible';
+            document.getElementById("centered-popup").style.visibility='visible';
         }
         function hideCheckSsnPopup() {
-            document.getElementById("check-ssn-popup").style.visibility='hidden';
+            document.getElementById("centered-popup").style.visibility='hidden';
         }
     </script>
 </div>

@@ -1,9 +1,6 @@
 <form action="{{ route('tasks.store') }}" method="POST" 
     id="new-task-form" class="form-request" enctype="multipart/form-data">
     @csrf
-    @if(isset($companyId))
-    <input type="hidden" name="company_id" value="{{ $companyId }}">
-    @endif
     <div class="form-request__item" style="margin-bottom: 60px;">
         <label for="">Заголовок</label>
         <select name="title" id="title"
@@ -70,5 +67,32 @@
     @error('end_time')
     <div class="text-danger">{{ $message }}</div>
     @enderror
+
+    @if(isset($companyId))
+    <input type="hidden" name="company_id" value="{{ $companyId }}">
+    @else
+    <div class="form-request__item">
+        <label id="linked_сompany_name"></label>
+        <input type="hidden" name="company_id" value="" id="company_id_input">
+        <button class="btn-blue" type="button" style="margin-bottom: 20px;"
+        onclick="showCompaniesListPopup()"
+        >Привязать контрагента</button>
+    </div>
+    @endif
+
     <button class="btn-blue" type="submit">Добавить</button>
+
+    <livewire:task-form-company-select /> 
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            hideCompaniesListPopup();
+        });
+        function showCompaniesListPopup() {
+            document.getElementById("centered-popup").style.visibility='visible';
+        }
+        function hideCompaniesListPopup() {
+            document.getElementById("centered-popup").style.visibility='hidden';
+        }
+    </script>
 </form>

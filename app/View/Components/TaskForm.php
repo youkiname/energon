@@ -5,6 +5,7 @@ namespace App\View\Components;
 use Illuminate\View\Component;
 use App\Models\User;
 use App\Models\TaskStatus;
+use App\Models\Company;
 
 class TaskForm extends Component
 {
