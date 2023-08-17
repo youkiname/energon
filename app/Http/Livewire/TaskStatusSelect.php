@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\TaskController;
 
 use App\Models\TaskStatus;
 use App\Models\Notification;
@@ -36,45 +37,15 @@ class TaskStatusSelect extends Component
 
     public function onChangeStatus($id) {
         if($id == $this->closingStatusId && !(Auth::user()->isMainManager())) {
-            $this->createTaskClosingRequest();
-            return;
+            return (new TaskController)->closeCompany($this->task);
         }
         $this->task->task_status_id = intval($id);
         $this->task->save();
-        $this->removeConfirmationRequest();
-    }
-
-    private function createTaskClosingRequest() {
-        if($this->isWaitingConfirmation()) {
-            return;
-        }
-        TaskClosingRequest::create([
-            'task_id' => $this->task->id,
-            'manager_id' => Auth::user()->id,
-        ]);
-        $this->showConfirmInfo = true;
-        $this->createTaskClosingNotification();
-    }
-
-    private function createTaskClosingNotification() {
-        Notification::create([
-            'user_id' => $this->task->creator->id,
-            'title' => 'Закрытие задачи для ' . Auth::user()->name,
-            'content' => $this->task->title,
-            'content' => " " . $this->task->title,
-            'link' => route('tasks.show', ['task' => $this->task]),
-        ]);
     }
 
     private function isWaitingConfirmation() {
         $request = TaskClosingRequest::where('task_id', $this->task->id)
         ->first();
         return $request;
-    }
-
-    private function removeConfirmationRequest() {
-        TaskClosingRequest::where('task_id', $this->task->id)
-        ->delete();
-        $this->showConfirmInfo = false;
     }
 }

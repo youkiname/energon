@@ -35,22 +35,42 @@
                             <p>Приоритет</p>
                             <b><i></i> {{ $task->priority->name }}</b>
                         </div>
-                        @if($displayEditButton)
                         <div class="request-info__item remove-task-box">
-                            <a href="{{ route('tasks.edit', ['task'=>$task]) }}" class="edit-task">Изменить</a>
-                            <p>или</p>
-                            <a href="javascrirpt:void(0)" class="remove-task" data-toggle="confirmation"
-                            onclick="adminConfirm(function() {
-                                document.getElementById('removeTask').submit();
-                            })">Удалить задачу</a>
+                            @if(!$task->isCompleted())
+                                <button class="edit-task"
+                                style="margin-bottom: 10px;"
+                                onclick="document.getElementById('').submit()"
+                                >Выполнить</button>
 
-                            <form action="{{ route('tasks.destroy', ['task' => $task]) }}"
-                                  method="post" id="removeTask">
+                            
+                                <button class="remove-task" data-toggle="confirmation"
+                                onclick="adminConfirm(function() {
+                                    document.getElementById('closeCompanyForm').submit();
+                                })">
+                                @if($isWaitingConfirmation)
+                                Подтвердить закрытие клиента
+                                @else
+                                Закрыть клиента
+                                @endif
+                                </button>
+                                @if($isWaitingConfirmation)
+                                <button class="remove-task" style="margin-top: 10px;"
+                                onclick="document.getElementById('rejectRequestForm').submit()"
+                                >Отклонить закрытие клиента</button>
+                                @endif
+                            @endif
+
+                            <form action="{{ route('tasks.closeCompany', ['task' => $task]) }}"
+                                  method="post" id="closeCompanyForm">
                                 @csrf
-                                @method('DELETE')
+                                @method('POST')
+                            </form>
+                            <form action="{{ route('tasks.rejectClosingRequest', ['task' => $task]) }}"
+                                  method="post" id="rejectRequestForm">
+                                @csrf
+                                @method('POST')
                             </form>
                         </div>
-                        @endif
                     </div>
                 </div>
 
@@ -71,7 +91,7 @@
                         @if($task->company)
                         <div class="request-messages-top" style="padding-bottom: 0px;">
                             <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                                <b style="margin-bottom: 0px;">Контактные данные контрагента</b>
+                                <b style="margin-bottom: 0px;">Контактные данные контрагента. Статус клиента - {{ $task->company->status->name }}</b>
                             </div>
                             
                             <div class="elem-item-list">

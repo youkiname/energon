@@ -44,6 +44,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/events/store', [EventController::class, 'store'])->name('events.store');
 
+    Route::post('/tasks/close_company/{task}', [TaskController::class, 'closeCompany'])->name('tasks.closeCompany')->middleware('role_rights:task');
+    Route::post('/tasks/reject_closing_request/{task}', [TaskController::class, 'rejectClosingRequest'])->name('tasks.rejectClosingRequest')->middleware('role_rights:task');
     Route::resource('tasks', TaskController::class)->middleware('role_rights:task');
 
     Route::get('stats', [StatsController::class, 'index'])->name('stats.index');

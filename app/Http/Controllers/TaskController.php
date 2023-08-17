@@ -8,6 +8,7 @@ use App\Models\Task;
 use App\Models\Notification;
 use App\Models\Event;
 use App\Models\User;
+use App\Models\TaskClosingRequest;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -23,11 +24,12 @@ class TaskController extends Controller
     }
 
     public function show(Task $task)
-    {
+    {        
         $user = Auth::user();
+        $isWaitingConfirmation = TaskClosingRequest::where('task_id', $task->id)->exists() && $user->isMainManager();
         return view('tasks.show', [
             "task" => $task,
-            "displayEditButton" => $user->role->id < 3 || $user->id == $task->creator_id,
+            "isWaitingConfirmation" => $isWaitingConfirmation, 
         ]);
     }
 
@@ -82,6 +84,37 @@ class TaskController extends Controller
             'success' => 'Задача успешно удалена.'
         ]);
     }
+
+    public function closeCompany(Task $task)
+    {
+        if (auth()->user()->isMainManager()) {
+            TaskClosingRequest::where('task_id', $task->id)->delete();
+            $task->task_status_id = 4; // статус Выполнена.
+            $task->save();
+            $company = $task->company;
+            $company->company_status_id = 5; // статус контрагента - Закрыт.
+            $company->save();
+            $this->createSuccessfulCompanyClosingNotification($task);
+            return redirect()->route('tasks.show', ['task' => $task])->with([
+                'success' => 'Клиент и задача успешно закрыты.'
+            ]);
+        }
+        
+        $this->createCompanyClosingRequest($task);
+        return redirect()->route('tasks.show', ['task' => $task])->with([
+            'success' => 'Клиент будет закрыт после подтверждения главным менеджером.'
+        ]);
+    }
+
+    public function rejectClosingRequest(Task $task)
+    {
+        TaskClosingRequest::where('task_id', $task->id)->delete();
+        $this->createFailedCompanyClosingNotification($task);
+        return redirect()->route('tasks.show', ['task' => $task])->with([
+            'success' => 'Запрос на закрытие клиента отклонён.'
+        ]);
+    }
+
     private function createNotification(Task $task)
     {
         $notification = Notification::create([
@@ -95,6 +128,55 @@ class TaskController extends Controller
         if ($targetUser->settings && $targetUser->settings['notification_email']) {
             Mail::to($task->company->manager->email)->send(new NotificationMail($notification));
         }
+    }
+
+    private function createCompanyClosingRequest(Task $task) {
+        if ($this->isTaskWaitingConfirmation($task)) {
+            return;
+        }
+        TaskClosingRequest::create([
+            'task_id' => $task->id,
+            'manager_id' => Auth::user()->id,
+        ]);
+        $this->createCompanyClosingNotification($task);
+    }
+
+    private function isTaskWaitingConfirmation(Task $task) {
+        $request = TaskClosingRequest::where('task_id', $task->id)
+        ->first();
+        return $request;
+    }
+
+    private function createCompanyClosingNotification(Task $task) {
+        $mainManagers = User::where('role_id', '<', 3)->get();
+        foreach($mainManagers as $mainManager) {
+            Notification::create([
+                'user_id' => $mainManager->id,
+                'title' => 'Запрос на закрытие клиента от ' . Auth::user()->name,
+                'content' => $task->title . '. ' . $task->description,
+                'link' => route('tasks.show', ['task' => $task]),
+            ]);
+        }
+    }
+
+    private function createSuccessfulCompanyClosingNotification(Task $task)
+    {
+        Notification::create([
+            'user_id' => $task->target_user_id,
+            'title' => 'Запрос на закрытие клиента подтверждён.',
+            'content' => $task->title . '. ' . $task->description,
+            'link' => route('tasks.show', ['task' => $task]),
+        ]);
+    }
+
+    private function createFailedCompanyClosingNotification(Task $task)
+    {
+        Notification::create([
+            'user_id' => $task->target_user_id,
+            'title' => 'Закрытие клиента - отклонено.',
+            'content' => $task->title . '. ' . $task->description,
+            'link' => route('tasks.show', ['task' => $task]),
+        ]);
     }
 
     private function createEvent(Task $task)
