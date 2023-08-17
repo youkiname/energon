@@ -1,4 +1,4 @@
-<form action="{{ route('tasks.store') }}" method="POST" 
+<form action="{{ route('tasks.store', ['previousTaskId' => $previousTask]) }}" method="POST" 
     id="new-task-form" class="form-request" enctype="multipart/form-data">
     @csrf
     <div class="form-request__item" style="margin-bottom: 60px;">
@@ -80,7 +80,13 @@
     </div>
     @endif
 
-    <button class="btn-blue" type="submit">Добавить</button>
+    <button class="btn-blue" type="submit">
+        @if($previousTask)
+        Обновить
+        @else
+        Добавить
+        @endif
+    </button>
 
     <livewire:task-form-company-select /> 
 

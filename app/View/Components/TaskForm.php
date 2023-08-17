@@ -11,12 +11,14 @@ class TaskForm extends Component
 {
 
     public $companyId;
+    public $previousTask;
     public $users;
     public $statuses;
 
-    public function __construct($companyId=null)
+    public function __construct($companyId=null, $previousTask=null)
     {
         $this->companyId = $companyId;
+        $this->previousTask = $previousTask;
         $this->users = User::where('deleted_at', NULL)->get();
         $this->statuses = TaskStatus::all();
     }

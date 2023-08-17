@@ -38,7 +38,7 @@ class TaskController extends Controller
         $date = Carbon::createFromFormat('d.m.Y', $request->date)->toDateString();
         $task = Task::create([
             'title' => $request->title,
-            'company_id' => $request->company_id,
+            'company_id' => intval($request->company_id) != 0 ? $request->company_id : null,
             'creator_id' => Auth::user()->id,
             'target_user_id' => $request->target_user_id ?? Auth::user()->id,
             'description' => $request->description ?? '',
@@ -51,6 +51,14 @@ class TaskController extends Controller
         if($task->company) {
             $this->createNotification($task);
             $this->createEvent($task);
+        }
+
+        if ($request->previousTaskId) {
+            // если задача обновляется, то устанавливаем 
+            // статус предыдущей задачи на выполнен.
+            $previousTask = Task::find($request->previousTaskId);
+            $previousTask->task_status_id = 4;
+            $previousTask->save();
         }
 
         return back()->with('success', 'Задача успешно добавлена');

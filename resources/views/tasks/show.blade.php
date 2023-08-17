@@ -7,7 +7,7 @@
         <div class="container">
             <div class="message-box">
                 <div class="message-box__left">
-                    <div class="request-info">
+                    <div class="request-info" id="task-info">
                         @if($task->company)
                             <div class="request-info__item">
                                 <p>Контрагент</p>
@@ -39,7 +39,7 @@
                             @if(!$task->isCompleted())
                                 <button class="edit-task"
                                 style="margin-bottom: 10px;"
-                                onclick="document.getElementById('').submit()"
+                                onclick="showNewTaskForm()"
                                 >Выполнить</button>
 
                             
@@ -71,6 +71,14 @@
                                 @method('POST')
                             </form>
                         </div>
+                    </div>
+                    <div id="new-task-form-box" class="plans-request-form" style="display: none;">
+                        <p>Обновление задачи</p>
+                        @if($task->company)
+                            <x-task-form :companyId="$task->company->id" :previousTask="$task"/>
+                        @else
+                            <x-task-form :previousTask="$task"/>
+                        @endif
                     </div>
                 </div>
 
@@ -130,4 +138,12 @@
             </div>
         </div>
     </div>
+    <script>
+        function showNewTaskForm() {
+            const taskInfoBox = document.getElementById('task-info');
+            const newTaskForm = document.getElementById('new-task-form-box');
+            taskInfoBox.style.display = "none";
+            newTaskForm.style.display = "block";
+        }
+    </script>
 @endsection
