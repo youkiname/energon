@@ -9,6 +9,7 @@ use App\Models\Notification;
 use App\Models\Event;
 use App\Models\User;
 use App\Models\TaskClosingRequest;
+use App\Models\Message;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -59,6 +60,7 @@ class TaskController extends Controller
             $previousTask = Task::find($request->previousTaskId);
             $previousTask->task_status_id = 4;
             $previousTask->save();
+            $this->transferMessages($previousTask->id, $task->id);
         }
 
         return back()->with('success', 'Задача успешно добавлена');
@@ -91,6 +93,11 @@ class TaskController extends Controller
         return redirect()->route('tasks.index')->with([
             'success' => 'Задача успешно удалена.'
         ]);
+    }
+
+    public function transferMessages($oldTaskId, $newTaskId) {
+        Message::where('chat_id', $oldTaskId)
+        ->update(['chat_id' => $newTaskId]);
     }
 
     public function closeCompany(Task $task)
