@@ -4,5 +4,5 @@
     <p>Имя пользователя: {{ $email }}</p>
     <p>Пароль: {{ $password }}</p>
 
-    <p><a href="{{ config('app.url') }}">{{ config('app.name') }}"</a></p>
+    <p><a href="{{ config('app.url') }}">{{ config('app.name') }}</a></p>
 </div>
