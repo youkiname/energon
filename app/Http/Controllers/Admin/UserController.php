@@ -11,6 +11,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\UserRegistrationMail;
+
 class UserController extends Controller
 {
     public $data;
@@ -64,6 +67,7 @@ class UserController extends Controller
 
 
         if ($request->send_email) {
+            Mail::to($request->email)->send(new UserRegistrationMail($request->email, $request->password));
             event(new Registered($user));
         }
 
