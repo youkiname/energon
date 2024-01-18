@@ -159,5 +159,10 @@ class DatabaseSeeder extends Seeder
             'email' => 'vadimv10@mail.ru',
             'password' => Hash::make('132'),
         ]);
+
+        $this->call([
+            EmailTypesSeeder::class,
+            PhoneTypesSeeder::class
+        ]);
     } 
 }

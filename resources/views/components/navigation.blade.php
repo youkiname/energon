@@ -1,7 +1,7 @@
 <header class="header">
     <div class="header-box">
         <a href="{{ url('/') }}" class="logo">
-            <x-application-logo alt="Zavod Energon CRM" />
+            <x-application-logo alt="{{ config('app.name') }}" style='max-height: 40px' />
         </a>
         <ul class="menu">
             <x-nav-link :href="route('companies.index')" :active="request()->routeIs(['companies.*'])">

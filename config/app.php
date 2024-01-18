@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Facade;
 
 return [
+    'icons_dir' => env('ICONS_DIR', 'energon'),
 
     /*
     |--------------------------------------------------------------------------

@@ -28,7 +28,7 @@
 <div class="wrapper">
     <div class="wrap-form">
         <a href="{{ url('/') }}" class="logo">
-            <img src="{{ asset('img/logo-forms.png') }}" alt="">
+            <img src="{{ asset('img/' . config('app.icons_dir') . '/logo-forms.png') }}" alt="">
         </a>
         @yield('content')
     </div>
